@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tag_categories">
+        <item>@string/sport_category</item>
+        <item>@string/art_category</item>
+        <item>@string/relax_category</item>
+        <item>@string/learning_category</item>
+    </string-array>
+    <string-array name="type_of_sort">
+        <item>@string/happy_feel_label</item>
+        <item>@string/neutral_feel_label</item>
+        <item>@string/sad_feel_label</item>
+        <item>@string/angry_feel_label</item>
+    </string-array>
+</resources>

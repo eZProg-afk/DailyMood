@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen tools:override="true"
+        name="design_navigation_separator_vertical_padding">40dp</dimen>
+    <dimen name="cardViewCornerRadius">16dp</dimen>
+    <dimen name="smallMargin">8dp</dimen>
+    <dimen name="mediumMargin">16dp</dimen>
+    <dimen name="bigMargin">30dp</dimen>
+    <dimen name="card_elevation_size">10dp</dimen>
+    <dimen name="default_padding">10dp</dimen>
+    <dimen name="big_text_size">22sp</dimen>
+    <dimen name="medium_image_view_size">40dp</dimen>
+    <dimen name="small_image_view_size">30dp</dimen>
+    <dimen name="tag_width">30dp</dimen>
+    <dimen name="tag_height">25dp</dimen>
+    <dimen name="medium_text_size">18sp</dimen>
+    <dimen name="mini_text_size">13sp</dimen>
+    <dimen name="small_text_size">15sp</dimen>
+    <dimen name="def_corner_radius_shapes">20dp</dimen>
+    <dimen name="big_image_view_size">60dp</dimen>
+    <dimen name="tag_size">70dp</dimen>
+    <dimen name="emotion_image_height">200dp</dimen>
+    <dimen name="recycler_height">200dp</dimen>
+    <dimen name="navigation_drawer_height">160dp</dimen>
+    <dimen name="drawer_right_bottom_corner_radius">100dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="margin_drawer_ava">50dp</dimen>
+</resources>

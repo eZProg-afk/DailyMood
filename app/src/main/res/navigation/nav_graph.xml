@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/registrationFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="spiral.bit.dev.dailymood.ui.main.MainFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_createEmotionFragment"
+            app:destination="@id/createEmotionFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailEmotionFragment"
+            app:destination="@id/detailEmotionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEmotionFragment"
+        android:name="spiral.bit.dev.dailymood.ui.create.CreateEmotionFragment"
+        android:label="@string/create_emotion_label"
+        tools:layout="@layout/fragment_create_emotion">
+        <action
+            android:id="@+id/action_createEmotionFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailEmotionFragment"
+        android:name="spiral.bit.dev.dailymood.ui.detail.DetailEmotionFragment"
+        android:label="@string/detail_emotion_label"
+        tools:layout="@layout/fragment_detail_emotion">
+        <argument
+            android:name="emotion"
+            app:argType="spiral.bit.dev.dailymood.data.Emotion" />
+        <action
+            android:id="@+id/action_detailEmotionFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="spiral.bit.dev.dailymood.ui.registration.RegistrationFragment"
+        android:label="@string/registration_label"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_emailRegFragment"
+            app:destination="@id/emailRegFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_emailAuthFragment"
+            app:destination="@id/emailAuthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailAuthFragment"
+        android:name="spiral.bit.dev.dailymood.ui.registration.EmailAuthFragment"
+        android:label="@string/email_auth_label"
+        tools:layout="@layout/fragment_email_auth" >
+        <action
+            android:id="@+id/action_emailAuthFragment_to_emailRegFragment"
+            app:destination="@id/emailRegFragment" />
+        <action
+            android:id="@+id/action_emailAuthFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailRegFragment"
+        android:name="spiral.bit.dev.dailymood.ui.registration.EmailRegFragment"
+        android:label="@string/email_reg_label"
+        tools:layout="@layout/fragment_email_reg" >
+        <action
+            android:id="@+id/action_emailRegFragment_to_emailAuthFragment"
+            app:destination="@id/emailAuthFragment" />
+        <action
+            android:id="@+id/action_emailRegFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>

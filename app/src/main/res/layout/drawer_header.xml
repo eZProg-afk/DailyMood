@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/navigation_drawer_height"
+    android:background="@drawable/back_header_drawer">
+
+    <ImageView
+        android:id="@+id/drawer_logo"
+        android:layout_width="@dimen/big_image_view_size"
+        android:layout_height="@dimen/big_image_view_size"
+        android:layout_marginStart="@dimen/mediumMargin"
+        android:layout_marginTop="@dimen/margin_drawer_ava"
+        android:src="@drawable/drawer_ava"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/drawer_logo_cd" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/smallMargin"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textColor="@color/white"
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintStart_toStartOf="@id/app_name_close_drawer_tv"
+        app:layout_constraintTop_toBottomOf="@id/app_name_close_drawer_tv"
+        android:text="SpiralBitDev" />
+
+    <TextView
+        android:id="@+id/my_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/smallMargin"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textColor="@color/white"
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintStart_toStartOf="@id/drawer_logo"
+        app:layout_constraintTop_toBottomOf="@id/drawer_logo"
+        tools:text="My Name" />
+
+    <TextView
+        android:id="@+id/app_name_close_drawer_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/bigMargin"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/big_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/drawer_logo"
+        app:drawableEndCompat="@drawable/arrow_right"
+        app:drawableTint="@color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

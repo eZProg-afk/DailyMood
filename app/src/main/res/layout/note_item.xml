@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/mediumMargin"
+    app:cardBackgroundColor="@color/mainAppCardViewColor"
+    app:cardCornerRadius="@dimen/cardViewCornerRadius"
+    app:cardElevation="@dimen/card_elevation_size"
+    app:contentPadding="@dimen/default_padding">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/note_iv_label"
+            android:layout_width="@dimen/medium_image_view_size"
+            android:layout_height="@dimen/medium_image_view_size"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_note"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/note_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/mainCardViewTextColor"
+            android:textSize="@dimen/medium_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/note_iv_label"
+            app:layout_constraintTop_toTopOf="@id/note_iv_label"
+            tools:text="22:03" />
+
+        <TextView
+            android:id="@+id/note_preview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="@color/mainCardViewTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/note_time"
+            app:layout_constraintStart_toStartOf="@id/note_time"
+            app:layout_constraintTop_toBottomOf="@id/note_time"
+            tools:text="Preview my own note today" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

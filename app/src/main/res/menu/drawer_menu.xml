@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainFragment"
+        android:icon="@drawable/ic_diary"
+        android:title="@string/diary_menu_option" />
+    <item
+        android:id="@+id/statisticFragment"
+        android:icon="@drawable/ic_analytics"
+        android:title="@string/statistics_label" />
+    <item android:title="">
+        <menu>
+            <group android:id="@+id/extra_menu_options">
+                <item
+                    android:id="@+id/proFragment"
+                    android:icon="@drawable/ic_pro"
+                    android:title="@string/pro_menu_option" />
+                <item
+                    android:id="@+id/settingsFragment"
+                    android:icon="@drawable/ic_settings"
+                    android:title="@string/settings_menu_option" />
+            </group>
+        </menu>
+    </item>
+</menu>
