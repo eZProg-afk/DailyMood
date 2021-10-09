@@ -56,7 +56,7 @@
     <string name="name_hint">Введите своё имя…</string>
     <string name="e_mail_hint">Введите ваш e-mail</string>
     <string name="password_hint">Придумайте пароль…</string>
-    <string name="submit_pass_hint">Подтвердите пароль…</string>
+    <string name="enter_phone_hint">Введите ваш телефон…</string>
     <string name="reg_label">Регистрация</string>
     <string name="authorization_label">Авторизация</string>
     <string name="enter_password_hint">Введите свой пароль…</string>
@@ -88,4 +88,13 @@
     <string name="sub_cancelled">Подписка отменена</string>
     <string name="test_ads_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="emotion_type_tv">Тип эмоции:</string>
+    <string name="statistic_label">Статистика</string>
+    <string name="sort_type_label">Выберите тип эмоции...</string>
+    <string name="icon_back_cd">Icon back</string>
+    <string name="icon_registration_label_cd">Icon registration label</string>
+    <string name="add_emotion_icon_cd">Add emotion icon</string>
+    <string name="save_emotion_icon_cd">Save emotion icon</string>
+    <string name="add_photo_icon_cd">Add photo icon</string>
+    <string name="email_is_should_be_smaller">Ваш E-mail слишком большой!</string>
+    <string name="search_emotion_hint">Поиск эмоции по заметке / дате...</string>
 </resources>

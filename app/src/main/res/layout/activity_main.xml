@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.feature.main.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu_bold"
                 android:textColor="@color/white"
-                android:background="@drawable/back_tv"
+                android:background="@drawable/shape_rounded_top_bottom_left_16"
                 android:textSize="@dimen/mini_text_size"
                 android:layout_gravity="end"
                 android:text="@string/try_label"

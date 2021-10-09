@@ -11,8 +11,10 @@ class EmotionRepository @Inject constructor(private val emotionDao: EmotionDao) 
     fun getEmotionsByDate(dayStart: Long, dayEnd: Long) =
         emotionDao.getEmotionsByDate(dayStart, dayEnd)
 
-    fun getAllHappyEmotions(monthDayStart: Long, monthDayEnd: Long) =
-        emotionDao.getAllHappyEmotions(monthDayStart, monthDayEnd)
+    fun getAllHappyEmotions() = emotionDao.getAllHappyEmotions()
+
+    fun getAllHappyEmotionsByDate(monthDayStart: Long, monthDayEnd: Long) =
+        emotionDao.getAllHappyEmotionsByDate(monthDayStart, monthDayEnd)
 
     fun getAllNeutralEmotions(monthDayStart: Long, monthDayEnd: Long) =
         emotionDao.getAllNeutralEmotions(monthDayStart, monthDayEnd)

@@ -6,74 +6,79 @@
     app:startDestination="@id/registrationFragment">
     <fragment
         android:id="@+id/mainFragment"
-        android:name="spiral.bit.dev.dailymood.ui.main.MainFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.main.MainFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_createEmotionFragment"
+            android:id="@+id/toCreateEmotion"
             app:destination="@id/createEmotionFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_detailEmotionFragment"
+            android:id="@+id/toDetail"
             app:destination="@id/detailEmotionFragment" />
     </fragment>
     <fragment
         android:id="@+id/createEmotionFragment"
-        android:name="spiral.bit.dev.dailymood.ui.create.CreateEmotionFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.create.CreateEmotionFragment"
         android:label="@string/create_emotion_label"
         tools:layout="@layout/fragment_create_emotion">
         <action
-            android:id="@+id/action_createEmotionFragment_to_mainFragment"
+            android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailEmotionFragment"
-        android:name="spiral.bit.dev.dailymood.ui.detail.DetailEmotionFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.detail.DetailEmotionFragment"
         android:label="@string/detail_emotion_label"
         tools:layout="@layout/fragment_detail_emotion">
         <argument
             android:name="emotion"
             app:argType="spiral.bit.dev.dailymood.data.Emotion" />
         <action
-            android:id="@+id/action_detailEmotionFragment_to_mainFragment"
+            android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="spiral.bit.dev.dailymood.ui.registration.RegistrationFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.registration.RegistrationFragment"
         android:label="@string/registration_label"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_registration">
         <action
-            android:id="@+id/action_registrationFragment_to_mainFragment"
+            android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
         <action
-            android:id="@+id/action_registrationFragment_to_emailRegFragment"
+            android:id="@+id/toEmailRegistration"
             app:destination="@id/emailRegFragment" />
         <action
-            android:id="@+id/action_registrationFragment_to_emailAuthFragment"
+            android:id="@+id/toEmailAuthenticate"
             app:destination="@id/emailAuthFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailAuthFragment"
-        android:name="spiral.bit.dev.dailymood.ui.registration.EmailAuthFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.registration.EmailAuthFragment"
         android:label="@string/email_auth_label"
-        tools:layout="@layout/fragment_email_auth" >
+        tools:layout="@layout/fragment_email_auth">
         <action
-            android:id="@+id/action_emailAuthFragment_to_emailRegFragment"
+            android:id="@+id/toEmailRegistration"
             app:destination="@id/emailRegFragment" />
         <action
-            android:id="@+id/action_emailAuthFragment_to_mainFragment"
+            android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailRegFragment"
-        android:name="spiral.bit.dev.dailymood.ui.registration.EmailRegFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.registration.EmailRegFragment"
         android:label="@string/email_reg_label"
-        tools:layout="@layout/fragment_email_reg" >
+        tools:layout="@layout/fragment_email_reg">
         <action
-            android:id="@+id/action_emailRegFragment_to_emailAuthFragment"
+            android:id="@+id/toEmailAuthenticate"
             app:destination="@id/emailAuthFragment" />
         <action
-            android:id="@+id/action_emailRegFragment_to_mainFragment"
+            android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/statisticFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.statistic.StatisticFragment"
+        android:label="fragment_statistic"
+        tools:layout="@layout/fragment_statistic" />
 </navigation>

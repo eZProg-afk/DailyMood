@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import spiral.bit.dev.dailymood.ui.main.models.other.EmotionType
+import spiral.bit.dev.dailymood.ui.feature.main.models.other.EmotionType
 import java.text.SimpleDateFormat
 
 @Parcelize

@@ -19,7 +19,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="MyTextStyle" parent="Theme.DailyMood">
+    <style name="DailyMoodDefaultTextStyle" parent="Theme.DailyMood">
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@color/mainAppBackColor</item>
     </style>

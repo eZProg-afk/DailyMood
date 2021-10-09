@@ -2,81 +2,71 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/DailyMoodDefaultBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.registration.RegistrationFragment">
+    tools:context=".ui.feature.registration.RegistrationFragment">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/icon_registration_label_cd"
+        android:src="@drawable/reg_label_img"
+        app:layout_constraintBottom_toTopOf="@id/facebookRegistrationButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fb_reg_btn"
-        android:src="@drawable/reg_label_img" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.facebook.login.widget.LoginButton
-        android:id="@+id/fb_reg_btn"
+        android:id="@+id/facebookRegistrationButton"
+        style="@style/DailyMoodLoginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bigMargin"
-        android:background="@drawable/btn_back_blue"
-        android:paddingLeft="11dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:paddingVertical="15dp"
+        android:paddingStart="11dp"
+        android:backgroundTint="?colorAccent"
         android:text="@string/reg_through_fb"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/email_reg_btn"
+        app:layout_constraintBottom_toTopOf="@id/emailRegistrationButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="RtlSymmetry" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/email_reg_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/fb_reg_btn"
-            app:layout_constraintEnd_toEndOf="@id/fb_reg_btn"
-            app:layout_constraintBottom_toTopOf="@id/reg_account_label_textview"
-            android:layout_marginTop="@dimen/bigMargin"
-            android:textColor="@color/white"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:background="@drawable/btn_back"
-            android:drawableStart="@drawable/ic_email"
-            android:drawableTint="@color/white"
-            android:layout_marginBottom="@dimen/bigMargin"
-            android:text="@string/reg_through_email"
-            android:textAllCaps="false" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/emailRegistrationButton"
+        style="@style/DailyMoodEmailRegistrationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/bigMargin"
+        android:layout_marginBottom="@dimen/bigMargin"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:text="@string/reg_through_email"
+        app:layout_constraintBottom_toTopOf="@id/alreadyHasAccountTextView"
+        app:layout_constraintEnd_toEndOf="@id/facebookRegistrationButton"
+        app:layout_constraintStart_toStartOf="@id/facebookRegistrationButton" />
 
     <TextView
-        android:id="@+id/reg_account_label_textview"
+        android:id="@+id/alreadyHasAccountTextView"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/already_have_an_account_label"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        android:fontFamily="@font/ubuntu_medium"
         android:layout_marginBottom="@dimen/mediumMargin"
+        android:text="@string/already_have_an_account_label"
+        app:layout_constraintBottom_toTopOf="@id/toggleLoginTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/reg_toggle_login_textview" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/reg_toggle_login_textview"
+        android:id="@+id/toggleLoginTextView"
+        style="@style/DailyMoodPurpleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_login_label"
-        android:textColor="@android:color/holo_purple"
-        android:textSize="12sp"
-        android:fontFamily="@font/ubuntu_bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="@dimen/bigMargin"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:text="@string/enter_login_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

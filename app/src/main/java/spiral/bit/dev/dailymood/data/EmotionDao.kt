@@ -14,8 +14,11 @@ interface EmotionDao {
     @Query("SELECT * FROM emotions WHERE createdTime BETWEEN :dayStart AND :dayEnd")
     fun getEmotionsByDate(dayStart: Long, dayEnd: Long): Flow<List<Emotion>>
 
+    @Query("SELECT * FROM emotions WHERE emotionType == 'Happy'")
+    fun getAllHappyEmotions(): Flow<List<Emotion>>
+
     @Query("SELECT * FROM emotions WHERE emotionType == 'Happy' AND createdTime BETWEEN :monthDayStart AND :monthDayEnd ")
-    fun getAllHappyEmotions(monthDayStart: Long, monthDayEnd: Long): Flow<List<Emotion>>
+    fun getAllHappyEmotionsByDate(monthDayStart: Long, monthDayEnd: Long): Flow<List<Emotion>>
 
     @Query("SELECT * FROM emotions WHERE emotionType == 'Neutral' AND createdTime BETWEEN :monthDayStart AND :monthDayEnd")
     fun getAllNeutralEmotions(monthDayStart: Long, monthDayEnd: Long): Flow<List<Emotion>>

@@ -2,168 +2,145 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/DailyMoodDefaultBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.registration.EmailRegFragment">
+    tools:context=".ui.feature.registration.EmailRegFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reg_name_layout"
+        android:id="@+id/registrationInputNameLayout"
+        style="@style/DailyMoodRegistrationSimpleInputTextLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="30dp"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_et_name"
+            android:id="@+id/user_name_input_edit_text"
+            style="@style/DailyMoodRegistrationInputEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edit_text_back"
-            android:fontFamily="@font/ubuntu_regular"
+            android:layout_height="wrap_content"
             android:hint="@string/name_hint"
             android:inputType="textEmailAddress"
             android:paddingStart="20dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/black"
+            android:paddingBottom="20dp"
             tools:ignore="RtlSymmetry" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reg_email_layout"
+        android:id="@+id/registrationInputEmailLayout"
+        style="@style/DailyMoodRegistrationSimpleInputTextLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="10dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_name_layout">
+        app:layout_constraintTop_toBottomOf="@+id/registrationInputNameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_et_email"
+            android:id="@+id/email_input_edit_text"
+            style="@style/DailyMoodRegistrationInputEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edit_text_back"
-            android:fontFamily="@font/ubuntu_regular"
+            android:layout_height="wrap_content"
             android:hint="@string/e_mail_hint"
             android:inputType="textEmailAddress"
             android:paddingStart="20dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/black"
+            android:paddingBottom="20dp"
             tools:ignore="RtlSymmetry" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reg_pass_layout"
+        android:id="@+id/registrationInputPasswordLayout"
+        style="@style/DailyMoodRegistrationPasswordInputTextLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:textColor="@android:color/black"
-        android:textColorHint="@color/black"
-        app:counterEnabled="true"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="10dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_email_layout"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@android:color/black">
+        app:layout_constraintTop_toBottomOf="@+id/registrationInputEmailLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_et_pass"
+            android:id="@+id/password_input_edit_text"
+            style="@style/DailyMoodRegistrationInputEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edit_text_back"
-            android:fontFamily="@font/ubuntu_regular"
+            android:layout_height="wrap_content"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
             android:paddingStart="20dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/black"
+            android:paddingBottom="20dp"
             tools:ignore="RtlSymmetry" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reg_pass_submit_layout"
+        android:id="@+id/registrationPhoneTextInputLayout"
+        style="@style/DailyMoodRegistrationSimpleInputTextLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:textColor="@android:color/black"
-        android:textColorHint="@color/black"
-        app:counterEnabled="true"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="10dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_pass_layout"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@android:color/black">
+        app:layout_constraintTop_toBottomOf="@+id/registrationInputPasswordLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_et_submit_pass"
+            android:id="@+id/phoneInputEditText"
+            style="@style/DailyMoodRegistrationInputEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edit_text_back"
-            android:fontFamily="@font/ubuntu_regular"
-            android:hint="@string/submit_pass_hint"
-            android:inputType="textPassword"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_phone_hint"
+            android:inputType="phone"
             android:paddingStart="20dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/black"
+            android:paddingBottom="20dp"
             tools:ignore="RtlSymmetry" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_reg"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRegistration"
+        style="@style/DailyMoodRegistrationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:background="@drawable/btn_back"
-        android:fontFamily="@font/ubuntu_bold"
-        android:gravity="center"
+        android:visibility="invisible"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="10dp"
         android:text="@string/reg_label"
-        android:textColor="@color/white"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/reg_pass_submit_layout" />
+        app:layout_constraintTop_toBottomOf="@id/registrationPhoneTextInputLayout" />
 
     <TextView
-        android:id="@+id/reg_account_label_textview"
+        android:id="@+id/alreadyHasAccountTextView"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:fontFamily="@font/ubuntu_medium"
         android:text="@string/already_have_an_account_label"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_reg" />
+        app:layout_constraintTop_toBottomOf="@id/buttonRegistration" />
 
     <TextView
-        android:id="@+id/reg_toggle_login_textview"
+        android:id="@+id/toggleLoginTextView"
+        style="@style/DailyMoodPurpleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/ubuntu_medium"
         android:text="@string/enter_login_label"
-        android:textColor="@android:color/holo_purple"
-        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/reg_account_label_textview" />
+        app:layout_constraintTop_toBottomOf="@id/alreadyHasAccountTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
