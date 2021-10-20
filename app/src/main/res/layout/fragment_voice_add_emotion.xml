@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.feature.add_emotion_types.voice_add_emotion.view.VoiceAddEmotionFragment">
+
+    <ImageView
+        android:id="@+id/questionImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/question_back_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/image_question_cd" />
+
+    <TextView
+        android:id="@+id/questionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:gravity="center"
+        tools:text="Сколько шоколадок ты сегодня ел?"
+        android:textSize="20sp"
+        android:maxLines="5"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/questionImageView" />
+
+    <Chronometer
+        android:id="@+id/recordChronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/questionImageView"
+        app:layout_constraintEnd_toEndOf="@id/questionImageView"
+        app:layout_constraintTop_toBottomOf="@id/questionImageView"
+        android:drawableStart="@drawable/record_indicator"
+        android:drawablePadding="5dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/questionTextView"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/questionTextView"
+        app:layout_constraintEnd_toEndOf="@id/questionTextView"
+        android:text="@string/voice_hint_label" />
+
+    <TextView
+        android:id="@+id/recordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tap_to_record_label"
+        app:layout_constraintBottom_toTopOf="@id/recordBtn"
+        app:layout_constraintStart_toStartOf="@id/recordBtn"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/recordBtn" />
+
+    <ImageView
+        android:id="@+id/recordBtn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_rounded_16"
+        android:backgroundTint="?colorPrimary"
+        android:contentDescription="@string/icon_voice_cd"
+        android:padding="20dp"
+        android:src="@drawable/ic_voice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

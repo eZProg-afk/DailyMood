@@ -5,7 +5,7 @@
     style="@style/DailyMoodDefaultBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.registration.EmailRegFragment">
+    tools:context=".ui.feature.registration.email_reg.view.EmailRegFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registrationInputNameLayout"

@@ -5,7 +5,7 @@
     style="@style/DailyMoodDefaultBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.registration.EmailAuthFragment">
+    tools:context=".ui.feature.registration.email_auth.view.EmailAuthFragment">
 
     <ImageView
         android:id="@+id/registrationLabelImageView"

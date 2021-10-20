@@ -5,7 +5,7 @@
     style="@style/DailyMoodDefaultBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.registration.RegistrationFragment">
+    tools:context=".ui.feature.registration.view.RegistrationFragment">
 
     <ImageView
         android:layout_width="wrap_content"

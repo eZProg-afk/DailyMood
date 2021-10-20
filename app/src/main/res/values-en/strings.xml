@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="diary_menu_option">Diary</string>
+    <string name="voice_hint_label">Постарайся ответить несколькими словами, чтобы мне легче было определить твоё настроение</string>
+    <string name="image_question_cd">Картинка вопроса</string>
+    <string name="record_begin">Идёт запись...</string>
+    <string name="too_quiet_toast">Пожалуйста, скажите четчё и внятнее :)</string>
+    <string name="your_face_not_visible_label">Вашего лица не видно!</string>
+    <string name="faces_too_many">Лиц слишком много! Распознавание работает только на одного человека</string>
+</resources>

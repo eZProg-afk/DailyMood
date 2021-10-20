@@ -24,14 +24,6 @@ inline fun View.snack(message: String, length: Int = Snackbar.LENGTH_LONG, f: Sn
     snack.show()
 }
 
-fun Snackbar.action(@StringRes actionRes: Int, listener: (View) -> Unit) {
-    action(view.resources.getString(actionRes), listener)
-}
-
-fun Snackbar.action(action: String, listener: (View) -> Unit) {
-    setAction(action, listener)
-}
-
 fun View.toast(msg: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, msg, duration).show()
 }

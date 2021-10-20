@@ -5,9 +5,9 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import spiral.bit.dev.dailymood.R
 
-fun ImageView.loadByUri(imageUri: String) =
+fun ImageView.loadByUri(imageUri: Uri?) =
     Glide.with(this)
-        .load(Uri.parse(imageUri))
+        .load(imageUri)
         .placeholder(R.drawable.ic_gallery)
         .into(this)
 

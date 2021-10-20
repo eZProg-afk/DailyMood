@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainAppBackColor"
-    tools:context=".ui.feature.create.CreateEmotionFragment">
+    tools:context=".ui.feature.create.view.CreateEmotionFragment">
 
     <TextView
         android:id="@+id/select_emotion_tv_label"
@@ -27,7 +27,6 @@
         android:layout_width="@dimen/big_image_view_size"
         android:layout_height="@dimen/big_image_view_size"
         android:layout_marginStart="10dp"
-        android:foreground="@drawable/ripple_effect_16"
         android:src="@drawable/arrow_left"
         app:layout_constraintBottom_toBottomOf="@id/carousel_view_pager"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +37,6 @@
         android:layout_width="@dimen/big_image_view_size"
         android:layout_height="@dimen/big_image_view_size"
         android:layout_marginEnd="10dp"
-        android:foreground="@drawable/ripple_effect_16"
         android:src="@drawable/arrow_right"
         app:layout_constraintBottom_toBottomOf="@id/carousel_view_pager"
         app:layout_constraintEnd_toEndOf="parent"

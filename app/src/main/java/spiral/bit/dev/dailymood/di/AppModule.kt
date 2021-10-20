@@ -10,8 +10,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import spiral.bit.dev.dailymood.data.AppDatabase
-import spiral.bit.dev.dailymood.data.EmotionDao
-import spiral.bit.dev.dailymood.data.EmotionRepository
+import spiral.bit.dev.dailymood.data.emotion.EmotionDao
+import spiral.bit.dev.dailymood.data.emotion.EmotionRepository
 import javax.inject.Singleton
 
 @Module
@@ -40,5 +40,4 @@ object AppModule {
     @Provides
     fun provideFirebaseAnalytics(@ApplicationContext context: Context) =
         FirebaseAnalytics.getInstance(context)
-
 }
