@@ -2,7 +2,7 @@ package spiral.bit.dev.dailymood.ui.feature.main.models
 
 import com.hsalf.smileyrating.SmileyRating
 
-enum class EmotionType(val translate: String, val smileyRating: SmileyRating.Type) {
+enum class MoodType(val translate: String, val smileyRating: SmileyRating.Type) {
     HAPPY("Я счастливый", SmileyRating.Type.GREAT),
     GOOD("Я радостный", SmileyRating.Type.GOOD),
     NEUTRAL("Я нейтрален", SmileyRating.Type.OKAY),

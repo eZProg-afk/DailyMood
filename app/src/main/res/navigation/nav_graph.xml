@@ -119,6 +119,12 @@
         <action
             android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/toEmotionCreationByRealtime"
+            app:destination="@id/emotionCreationByRealtimeFragment" />
+        <action
+            android:id="@+id/toEmotionCreationByCamera"
+            app:destination="@id/emotionCreationByCameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/surveyAddEmotionFragment"
@@ -134,4 +140,14 @@
             android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/emotionCreationByRealtimeFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.realtime.view.EmotionCreationByRealtimeFragment"
+        android:label="fragment_emotion_creation_by_realtime"
+        tools:layout="@layout/fragment_emotion_creation_by_realtime" />
+    <fragment
+        android:id="@+id/emotionCreationByCameraFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.camera.view.EmotionCreationByCameraFragment"
+        android:label="fragment_emotion_creation_by_camera"
+        tools:layout="@layout/fragment_emotion_creation_by_camera" />
 </navigation>

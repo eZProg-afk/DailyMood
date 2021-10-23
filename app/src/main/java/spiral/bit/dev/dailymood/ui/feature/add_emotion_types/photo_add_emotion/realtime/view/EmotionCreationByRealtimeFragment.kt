@@ -1,69 +1,48 @@
-package spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.view
+package spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.realtime.view
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.mlkit.vision.common.InputImage
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.mikepenz.fastadapter.binding.listeners.addClickListener
-import dagger.hilt.android.AndroidEntryPoint
 import spiral.bit.dev.dailymood.R
-import spiral.bit.dev.dailymood.databinding.FragmentEmotionCreationByPhotoBinding
-import spiral.bit.dev.dailymood.databinding.ItemAddByPhotoTypeBinding
+import spiral.bit.dev.dailymood.databinding.FragmentEmotionCreationByRealtimeBinding
 import spiral.bit.dev.dailymood.ui.base.*
-import spiral.bit.dev.dailymood.ui.base.Logger
+import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
 import spiral.bit.dev.dailymood.ui.common.resolvers.FaceMoodResolver
-import spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.models.PhotoTypeItem
 import spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.realtime.models.mvi.RealtimeEffect
 import spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.realtime.models.mvi.RealtimeState
-import spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.realtime.view.RealtimeViewModel
+import spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.view.EmotionCreationByPhotoFragmentDirections
 
-@AndroidEntryPoint
-class EmotionCreationByPhotoFragment :
-    BaseFragment<RealtimeState, RealtimeEffect, FragmentEmotionCreationByPhotoBinding>(
-        FragmentEmotionCreationByPhotoBinding::inflate
+class EmotionCreationByRealtimeFragment :
+    BaseFragment<RealtimeState, RealtimeEffect, FragmentEmotionCreationByRealtimeBinding>(
+        FragmentEmotionCreationByRealtimeBinding::inflate
     ) {
 
+    private val emotionTypeMapper = EmotionTypeMapper()
     private val faceMoodResolver = FaceMoodResolver()
     override val viewModel: RealtimeViewModel by hiltNavGraphViewModels(R.id.nav_graph)
-    private val cameraPermission = registerForActivityResult(RequestPermission()) { granted ->
+    private val permission = registerForActivityResult(RequestPermission()) { granted ->
         if (granted) setUpCamera()
-    }
-    private val galleryPermission = registerForActivityResult(RequestPermission()) { granted ->
-        if (granted) openGallery()
-    }
-
-    private fun openGallery() = binding {
-
-    }
-
-    private val itemAdapter = ItemAdapter<PhotoTypeItem>()
-    private val photoTypesAdapter = FastAdapter.with(itemAdapter).apply {
-        addClickListener<ItemAddByPhotoTypeBinding, PhotoTypeItem>({
-            it.iconPhotoFrameLayout
-        }) { _, _, _, item ->
-            viewModel.onPhotoTypeClicked(item.model.id)
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (handlePermissions()) setUpCamera()
-        setUpRecyclerView()
+        setUpClicks()
     }
 
-    private fun setUpRecyclerView() = binding {
-        addByPhotoTypesRecyclerView.apply {
-            setHasFixedSize(true)
-            adapter = photoTypesAdapter
+    private fun setUpClicks() = binding {
+        addEmotionButton.setOnClickListener {
+            viewModel.takeEmotion()
         }
     }
 
@@ -122,21 +101,13 @@ class EmotionCreationByPhotoFragment :
     }
 
     override fun renderState(state: RealtimeState) = binding {
-
+        val moodValue = faceMoodResolver.resolveEmotionType(state.smileProbability)
+        val emotionType = emotionTypeMapper.mapToEmotionType(moodValue)
+        smileyRatingView.setRating(emotionType.smileyRating)
     }
 
     override fun handleSideEffect(sideEffect: RealtimeEffect) = binding {
         when (sideEffect) {
-            is RealtimeEffect.AddEmotionByRealtime -> {
-                EmotionCreationByPhotoFragmentDirections.toEmotionCreationByRealtime().apply {
-                    findNavController().navigate(this)
-                }
-            }
-            is RealtimeEffect.AddEmotionByCamera -> {
-                EmotionCreationByPhotoFragmentDirections.toEmotionCreationByCamera().apply {
-                    findNavController().navigate(this)
-                }
-            }
             is RealtimeEffect.NavigateToMain -> {
                 EmotionCreationByPhotoFragmentDirections.toMain().apply {
                     findNavController().navigate(this)
@@ -147,9 +118,6 @@ class EmotionCreationByPhotoFragment :
             }
             is RealtimeEffect.ExceptionHappened -> {
                 Logger.logError(sideEffect.error)
-            }
-            is RealtimeEffect.AddEmotionByGallery -> {
-                //gallery
             }
         }
     }

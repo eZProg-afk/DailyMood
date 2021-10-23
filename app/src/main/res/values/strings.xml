@@ -129,4 +129,5 @@
     <string name="hint_photo_recognition_label">Чтобы распознавание получилось чётче, рекомендуем добавлять фото с одним человеком, где хорошо видно его лицо.</string>
     <string name="your_face_not_visible_label">Вашего лица не видно!</string>
     <string name="faces_too_many">Лиц слишком много! Распознавание работает только на одного человека</string>
+    <string name="hint_photo">Вы можете определить своё настроение (или другого человека) и сохранить его</string>
 </resources>

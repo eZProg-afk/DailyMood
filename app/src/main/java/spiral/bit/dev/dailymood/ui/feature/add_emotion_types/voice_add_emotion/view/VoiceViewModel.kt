@@ -9,24 +9,24 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import spiral.bit.dev.dailymood.R
-import spiral.bit.dev.dailymood.data.emotion.EmotionItem
-import spiral.bit.dev.dailymood.data.emotion.EmotionRepository
+import spiral.bit.dev.dailymood.data.emotion.MoodEntity
+import spiral.bit.dev.dailymood.data.emotion.MoodRepository
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
 import spiral.bit.dev.dailymood.ui.base.Logger
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
-import spiral.bit.dev.dailymood.ui.common.resolvers.VoiceMoodResolver
+import spiral.bit.dev.dailymood.ui.common.resolvers.VokaturiEmotionResolver
 import spiral.bit.dev.dailymood.ui.feature.add_emotion_types.voice_add_emotion.models.mvi.VoiceEffect
 import spiral.bit.dev.dailymood.ui.feature.add_emotion_types.voice_add_emotion.models.mvi.VoiceState
 import javax.inject.Inject
 
 @HiltViewModel
 class VoiceViewModel @Inject constructor(
-    private val emotionRepository: EmotionRepository,
+    private val moodRepository: MoodRepository,
     @ApplicationContext private val context: Context
 ) : BaseViewModel<VoiceState, VoiceEffect>() {
 
     private val emotionTypeMapper = EmotionTypeMapper()
-    private val emotionResolver = VoiceMoodResolver()
+    private val emotionResolver = VokaturiEmotionResolver()
     private var _vokaturiApi: Vokaturi? = null
     private val vokaturiApi: Vokaturi get() = checkNotNull(_vokaturiApi)
 
@@ -63,11 +63,11 @@ class VoiceViewModel @Inject constructor(
             vokaturiApi.stopListeningAndAnalyze()
         }.onSuccess { emotionProbabilities ->
             val recognizedEmotion = Vokaturi.extractEmotion(emotionProbabilities)
-            val emotionType = emotionResolver.toMyEmotionType(recognizedEmotion)
+            val emotionType = emotionResolver.toDailyMood(recognizedEmotion)
             val moodValue = emotionTypeMapper.mapToMoodValue(emotionType)
-            val emotion = EmotionItem(emotionType = moodValue)
+            val emotion = MoodEntity(emotionType = moodValue)
 
-            val emotionsList = state.resultEmotionItems
+            val emotionsList = state.resultMoodEntities
             emotionsList.add(emotion)
 
             var questionCount = state.questionCount
@@ -76,7 +76,7 @@ class VoiceViewModel @Inject constructor(
             reduce {
                 state.copy(
                     isRecorded = false,
-                    resultEmotionItems = emotionsList,
+                    resultMoodEntities = emotionsList,
                     questionCount = questionCount,
                     question = getRandomQuestion()
                 )
@@ -104,14 +104,14 @@ class VoiceViewModel @Inject constructor(
     }
 
     private fun calculateResultEmotion() = intent {
-        val emotionTypes = state.resultEmotionItems.map { it.emotionType }
+        val emotionTypes = state.resultMoodEntities.map { it.emotionType }
         val emotionType = emotionTypes.groupingBy { it }.eachCount().filter { it.value > 1 }
-        insertEmotion(EmotionItem(emotionType = emotionType.entries.first().key))
+        insertEmotion(MoodEntity(emotionType = emotionType.entries.first().key))
         //TODO THIS IS NOT WORK OR WORK?
     }
 
-    private fun insertEmotion(emotionItem: EmotionItem) = intent {
-        emotionRepository.insert(emotionItem)
+    private fun insertEmotion(moodEntity: MoodEntity) = intent {
+        moodRepository.insert(moodEntity)
         reduce { state.copy(questionCount = 1) }
         postSideEffect(VoiceEffect.NavigateToMain)
     }

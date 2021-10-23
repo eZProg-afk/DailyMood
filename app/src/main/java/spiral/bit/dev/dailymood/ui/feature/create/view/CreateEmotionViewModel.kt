@@ -7,8 +7,8 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import spiral.bit.dev.dailymood.R
-import spiral.bit.dev.dailymood.data.emotion.EmotionItem
-import spiral.bit.dev.dailymood.data.emotion.EmotionRepository
+import spiral.bit.dev.dailymood.data.emotion.MoodEntity
+import spiral.bit.dev.dailymood.data.emotion.MoodRepository
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
 import spiral.bit.dev.dailymood.ui.feature.create.models.mvi.CreateEmotionSideEffect
 import spiral.bit.dev.dailymood.ui.feature.create.models.mvi.CreateEmotionState
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateEmotionViewModel @Inject constructor(
-    private val emotionRepository: EmotionRepository
+    private val moodRepository: MoodRepository
     ) : BaseViewModel<CreateEmotionState, CreateEmotionSideEffect>() {
 
     override val container = container<CreateEmotionState, CreateEmotionSideEffect>(
@@ -28,12 +28,12 @@ class CreateEmotionViewModel @Inject constructor(
     )
 
     fun insert(moodValue: Float, note: String) = intent {
-        EmotionItem(
+        MoodEntity(
             note = note,
             emotionType = moodValue,
             photoPath = state.imageUri.toString()
         ).also { emotion ->
-            emotionRepository.insert(emotion)
+            moodRepository.insert(emotion)
             postSideEffect(CreateEmotionSideEffect.Toast(R.string.record_added_toast))
             postSideEffect(CreateEmotionSideEffect.NavigateToMain)
         }

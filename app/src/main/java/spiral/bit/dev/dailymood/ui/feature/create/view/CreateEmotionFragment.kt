@@ -20,7 +20,7 @@ import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
 import spiral.bit.dev.dailymood.ui.feature.create.models.SliderItem
 import spiral.bit.dev.dailymood.ui.feature.create.models.mvi.CreateEmotionSideEffect
 import spiral.bit.dev.dailymood.ui.feature.create.models.mvi.CreateEmotionState
-import spiral.bit.dev.dailymood.ui.feature.main.models.EmotionType
+import spiral.bit.dev.dailymood.ui.feature.main.models.MoodType
 import kotlin.math.abs
 
 @AndroidEntryPoint
@@ -51,11 +51,11 @@ class CreateEmotionFragment :
     private fun setUpClicks() = binding {
         fabSaveEmotion.setOnClickListener {
             val emotionType = when (carouselViewPager.currentItem) {
-                0 -> EmotionType.HAPPY
-                1 -> EmotionType.NEUTRAL
-                2 -> EmotionType.SAD
-                3 -> EmotionType.ANGRY
-                else -> EmotionType.HAPPY
+                0 -> MoodType.HAPPY
+                1 -> MoodType.NEUTRAL
+                2 -> MoodType.SAD
+                3 -> MoodType.ANGRY
+                else -> MoodType.HAPPY
             }
             val moodValue = emotionTypeMapper.mapToMoodValue(emotionType)
             viewModel.insert(moodValue, inputNoteEditText.text.toString())

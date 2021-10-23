@@ -40,7 +40,7 @@ import spiral.bit.dev.dailymood.databinding.FragmentMainBinding
 import spiral.bit.dev.dailymood.databinding.ItemCalendarBinding
 import spiral.bit.dev.dailymood.ui.base.*
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
-import spiral.bit.dev.dailymood.ui.feature.main.models.EmotionUiItem
+import spiral.bit.dev.dailymood.ui.feature.main.models.MoodItem
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionEffect
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionState
 import spiral.bit.dev.dailymood.ui.feature.user.view.UserViewModel
@@ -60,7 +60,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     private var selectedDate: LocalDate? = null
     private val today = LocalDate.now()
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
-    private val itemsAdapter = ItemAdapter<EmotionUiItem>()
+    private val itemsAdapter = ItemAdapter<MoodItem>()
     private val emotionsAdapter = FastItemAdapter(itemsAdapter)
     private val userViewModel: UserViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     override val viewModel: MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
@@ -80,7 +80,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     private fun setUpAdapter() = binding {
         emotionsAdapter.apply {
             onClickListener = { _, _, item, _ ->
-                viewModel.toDetail(item.emotionItemMainModel.emotionId)
+                viewModel.toDetail(item.moodEntity.emotionId)
                 true
             }
 
@@ -276,7 +276,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
             is EmotionEffect.ShowSnackbar ->
                 addEmotionManuallyFab.snack(effect.msg, Snackbar.LENGTH_LONG) {
                     action(R.string.cancel) {
-                        viewModel.onUndoDelete(effect.emotionItem)
+                        viewModel.onUndoDelete(effect.moodEntity)
                     }
                 }
             is EmotionEffect.NavigateToDetail -> {
@@ -300,7 +300,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
 
     override fun renderState(state: EmotionState) {
         val emotionTypeMapper = EmotionTypeMapper()
-        val emotionUiItems = emotionTypeMapper.toEmotionItems(state.emotionItems)
+        val emotionUiItems = emotionTypeMapper.toEmotionItems(state.moodEntities)
         FastAdapterDiffUtil[itemsAdapter] = emotionUiItems
     }
 

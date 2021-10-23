@@ -10,8 +10,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import spiral.bit.dev.dailymood.data.AppDatabase
-import spiral.bit.dev.dailymood.data.emotion.EmotionDao
-import spiral.bit.dev.dailymood.data.emotion.EmotionRepository
+import spiral.bit.dev.dailymood.data.emotion.MoodDao
+import spiral.bit.dev.dailymood.data.emotion.MoodRepository
 import javax.inject.Singleton
 
 @Module
@@ -31,8 +31,8 @@ object AppModule {
         appDatabase.emotionDao()
 
     @Provides
-    fun provideEmotionRepository(emotionDao: EmotionDao) =
-        EmotionRepository(emotionDao)
+    fun provideEmotionRepository(moodDao: MoodDao) =
+        MoodRepository(moodDao)
 
     @Provides
     fun provideFirebaseAuth() = FirebaseAuth.getInstance()

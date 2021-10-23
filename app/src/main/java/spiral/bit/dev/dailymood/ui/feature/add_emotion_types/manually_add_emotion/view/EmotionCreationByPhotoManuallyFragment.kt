@@ -7,7 +7,6 @@ import spiral.bit.dev.dailymood.R
 
 class EmotionCreationByPhotoManuallyFragment : Fragment(R.layout.fragment_emotion_creation_manually) {
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
