@@ -14,7 +14,7 @@ interface MoodDao {
     @Query("SELECT * FROM emotions WHERE createdTime BETWEEN :dayStart AND :dayEnd")
     fun getEmotionsByDate(dayStart: Long, dayEnd: Long): Flow<List<MoodEntity>>
 
-    @Query("SELECT * FROM emotions WHERE note LIKE '%' || :searchQuery || '%' ORDER BY emotion_id DESC, note")
+    @Query("SELECT * FROM emotions WHERE note LIKE '%' || :searchQuery || '%' ORDER BY emotionId DESC, note")
     fun getEmotionsBySearchQuery(searchQuery: String): Flow<List<MoodEntity>>
 
     @Query("SELECT * FROM emotions WHERE emotionType == 'HAPPY'")
@@ -29,6 +29,6 @@ interface MoodDao {
     @Query("SELECT * FROM emotions WHERE emotionType == 'ANGRY'")
     fun getAllAngryEmotions(): Flow<List<MoodEntity>>
 
-    @Query("SELECT * FROM emotions WHERE emotion_id == :emotionId")
+    @Query("SELECT * FROM emotions WHERE emotionId == :emotionId")
     fun getEmotionById(emotionId: Long): MoodEntity
 }

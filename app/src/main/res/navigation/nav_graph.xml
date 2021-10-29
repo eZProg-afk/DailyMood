@@ -83,14 +83,14 @@
         android:id="@+id/statisticFragment"
         android:name="spiral.bit.dev.dailymood.ui.feature.statistic.view.StatisticFragment"
         android:label="fragment_statistic"
-        tools:layout="@layout/fragment_statistic" >
+        tools:layout="@layout/fragment_statistic">
         <action
             android:id="@+id/toDetail"
             app:destination="@id/detailEmotionFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectionTypeCreatingEmotionFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.select_type_create.view.SelectionTypeCreatingEmotionFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.select_creation_type.view.SelectionTypeCreatingEmotionFragment"
         android:label="SelectionTypeCreatingEmotionFragment"
         tools:layout="@layout/fragment_selection_add_emotion_type">
         <action
@@ -108,14 +108,14 @@
     </fragment>
     <fragment
         android:id="@+id/manuallyAddEmotionFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.add_emotion_types.manually_add_emotion.view.EmotionCreationByPhotoManuallyFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.manually_add_mood.view.EmotionCreationByPhotoManuallyFragment"
         android:label="fragment_manually_add_emotion"
         tools:layout="@layout/fragment_emotion_creation_manually" />
     <fragment
         android:id="@+id/photoAddEmotionFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.view.EmotionCreationByPhotoFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.photo_add_mood.view.EmotionCreationByPhotoFragment"
         android:label="fragment_photo_add_emotion"
-        tools:layout="@layout/fragment_emotion_creation_by_photo" >
+        tools:layout="@layout/fragment_emotion_creation_by_photo">
         <action
             android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
@@ -125,29 +125,77 @@
         <action
             android:id="@+id/toEmotionCreationByCamera"
             app:destination="@id/emotionCreationByCameraFragment" />
+        <action
+            android:id="@+id/toShowMoodRatingCameraFragment"
+            app:destination="@id/showMoodRatingCameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/surveyAddEmotionFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.add_emotion_types.survey_add_emotion.view.EmotionCreationBySurveyFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.survey_add_mood.view.EmotionCreationBySurveyFragment"
         android:label="fragment_survey_add_emotion"
-        tools:layout="@layout/fragment_emotion_creation_by_survey" />
+        tools:layout="@layout/fragment_emotion_creation_by_survey" >
+        <action
+            android:id="@+id/toSurveyResultMoodFragment"
+            app:destination="@id/surveyResultMoodFragment" />
+    </fragment>
     <fragment
         android:id="@+id/voiceAddEmotionFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.add_emotion_types.voice_add_emotion.view.VoiceAddEmotionFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.voice_add_mood.view.VoiceAddEmotionFragment"
         android:label="fragment_voice_add_emotion"
-        tools:layout="@layout/fragment_voice_add_emotion" >
+        tools:layout="@layout/fragment_voice_add_emotion">
         <action
             android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/emotionCreationByRealtimeFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.realtime.view.EmotionCreationByRealtimeFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.realtime_add_mood.view.EmotionCreationByRealtimeFragment"
         android:label="fragment_emotion_creation_by_realtime"
-        tools:layout="@layout/fragment_emotion_creation_by_realtime" />
+        tools:layout="@layout/fragment_emotion_creation_by_realtime" >
+        <action
+            android:id="@+id/toMain"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/emotionCreationByCameraFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.add_emotion_types.photo_add_emotion.camera.view.EmotionCreationByCameraFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.camera_add_mood.view.EmotionCreationByCameraFragment"
         android:label="fragment_emotion_creation_by_camera"
-        tools:layout="@layout/fragment_emotion_creation_by_camera" />
+        tools:layout="@layout/fragment_emotion_creation_by_camera">
+        <action
+            android:id="@+id/toShowMoodRatingCameraFragment"
+            app:destination="@id/showMoodRatingCameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showMoodRatingCameraFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.camera_result_mood.view.ShowMoodRatingCameraFragment"
+        android:label="fragment_show_mood_rating_camera"
+        tools:layout="@layout/fragment_show_mood_rating_camera">
+        <action
+            android:id="@+id/toEmotionCreationByCameraFragment"
+            app:destination="@id/emotionCreationByCameraFragment" />
+        <action
+            android:id="@+id/toMain"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="smilingProbabilities"
+            app:argType="float" />
+        <argument
+            android:name="photoPath"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/surveyResultMoodFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.survey_result_mood.view.SurveyResultMoodFragment"
+        android:label="fragment_survey_result_mood"
+        tools:layout="@layout/fragment_survey_result_mood" >
+        <argument
+            android:name="scores"
+            app:argType="integer[]" />
+        <action
+            android:id="@+id/toSurveyAddEmotionFragment"
+            app:destination="@id/surveyAddEmotionFragment" />
+        <action
+            android:id="@+id/toMain"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

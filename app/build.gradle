@@ -86,10 +86,11 @@ dependencies {
     implementation("com.github.Egor-Blagochinnov:Validation:${textValidationVersion}")
     implementation("com.github.kizitonwose:CalendarView:${calendarVersion}")
     implementation("com.kirich1409.viewbindingpropertydelegate:viewbindingpropertydelegate:${viewBindingVersion}")
-    implementation("com.github.sujithkanna:smileyrating:${smileyRatingVersion}")
+    implementation("com.github.unaisulhadi:emojiratingbar:${emojiRatingBarVersion}")
     implementation("androidx.camera:camera-camera2:$cameraxVersion")
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:${cameraViewVersion}")
+    implementation("com.github.CanHub:Android-Image-Cropper:${cropperVersion}")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:${hiltVersion}")

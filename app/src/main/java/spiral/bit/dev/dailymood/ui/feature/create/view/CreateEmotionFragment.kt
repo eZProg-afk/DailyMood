@@ -16,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.databinding.FragmentCreateEmotionBinding
 import spiral.bit.dev.dailymood.ui.base.*
+import spiral.bit.dev.dailymood.ui.base.extensions.hasPermissions
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
 import spiral.bit.dev.dailymood.ui.feature.create.models.SliderItem
 import spiral.bit.dev.dailymood.ui.feature.create.models.mvi.CreateEmotionSideEffect

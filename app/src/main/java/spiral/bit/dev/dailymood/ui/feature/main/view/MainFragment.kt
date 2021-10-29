@@ -25,7 +25,6 @@ import com.kizitonwose.calendarview.ui.ViewContainer
 import com.kizitonwose.calendarview.utils.yearMonth
 import com.mikepenz.fastadapter.adapters.FastItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.mikepenz.fastadapter.swipe.SimpleSwipeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -47,6 +46,7 @@ import spiral.bit.dev.dailymood.ui.feature.user.view.UserViewModel
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import androidx.recyclerview.widget.RecyclerView
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -61,7 +61,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     private val today = LocalDate.now()
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
     private val itemsAdapter = ItemAdapter<MoodItem>()
-    private val emotionsAdapter = FastItemAdapter(itemsAdapter)
+    private val emotionsAdapter = FastItemAdapter(itemsAdapter).apply { setHasStableIds(true) }
     private val userViewModel: UserViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     override val viewModel: MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
 
@@ -267,20 +267,22 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     }
 
     override fun itemSwiped(position: Int, direction: Int) {
-        viewModel.emotionSwiped(itemsAdapter.adapterItems[position])
-        //emotionsAdapter.itemAdapter.remove(position)
+        if (position != RecyclerView.NO_POSITION) {
+            viewModel.emotionSwiped(itemsAdapter.adapterItems[position])
+            emotionsAdapter.remove(position)
+        }
     }
 
-    override fun handleSideEffect(effect: EmotionEffect) = binding {
-        when (effect) {
+    override fun handleSideEffect(sideEffect: EmotionEffect) = binding {
+        when (sideEffect) {
             is EmotionEffect.ShowSnackbar ->
-                addEmotionManuallyFab.snack(effect.msg, Snackbar.LENGTH_LONG) {
+                addEmotionManuallyFab.snack(sideEffect.msg, Snackbar.LENGTH_LONG) {
                     action(R.string.cancel) {
-                        viewModel.onUndoDelete(effect.moodEntity)
+                        viewModel.onUndoDelete(sideEffect.moodEntity)
                     }
                 }
             is EmotionEffect.NavigateToDetail -> {
-                MainFragmentDirections.toDetail(effect.emotionId)
+                MainFragmentDirections.toDetail(sideEffect.emotionId)
                     .apply {
                         findNavController().navigate(this)
                     }
@@ -291,7 +293,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
                 }
             }
             is EmotionEffect.Toast -> {
-                root.toast(effect.msg)
+                root.toast(sideEffect.msg)
             }
             is EmotionEffect.NavigateToMain -> {
             }
@@ -301,7 +303,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     override fun renderState(state: EmotionState) {
         val emotionTypeMapper = EmotionTypeMapper()
         val emotionUiItems = emotionTypeMapper.toEmotionItems(state.moodEntities)
-        FastAdapterDiffUtil[itemsAdapter] = emotionUiItems
+        itemsAdapter.set(emotionUiItems)
     }
 
     companion object {

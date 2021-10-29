@@ -18,15 +18,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, "app_db")
             .fallbackToDestructiveMigration()
             .build()
 
-    @Provides
     @Singleton
+    @Provides
     fun provideEmotionDao(appDatabase: AppDatabase) =
         appDatabase.emotionDao()
 

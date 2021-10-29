@@ -4,7 +4,7 @@
     style="@style/DailyMoodDefaultBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.select_type_create.view.SelectionTypeCreatingEmotionFragment">
+    tools:context=".ui.feature.select_creation_type.view.SelectionTypeCreatingEmotionFragment">
 
     <TextView
         android:id="@+id/chooseWayToAddEmotion"

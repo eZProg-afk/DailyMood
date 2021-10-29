@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.feature.add_emotion_types.photo_add_emotion.realtime.view.EmotionCreationByRealtimeFragment">
+    tools:context=".ui.feature.realtime_add_mood.view.EmotionCreationByRealtimeFragment">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
@@ -27,7 +27,7 @@
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="20dp" />
 
-    <com.hsalf.smileyrating.SmileyRating
+    <com.hadi.emojiratingbar.EmojiRatingBar
         android:id="@+id/smileyRatingView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

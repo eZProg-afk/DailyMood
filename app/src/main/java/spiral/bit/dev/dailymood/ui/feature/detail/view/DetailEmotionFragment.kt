@@ -11,7 +11,7 @@ import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.data.emotion.MoodEntity
 import spiral.bit.dev.dailymood.databinding.FragmentDetailEmotionBinding
 import spiral.bit.dev.dailymood.ui.base.*
-import spiral.bit.dev.dailymood.ui.common.formatters.Formatter
+import spiral.bit.dev.dailymood.ui.common.formatters.DateTimeFormatter
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
 import spiral.bit.dev.dailymood.ui.feature.detail.models.mvi.DetailEffect
 import spiral.bit.dev.dailymood.ui.feature.detail.models.mvi.DetailState
@@ -23,7 +23,7 @@ class DetailEmotionFragment :
         FragmentDetailEmotionBinding::inflate
     ) {
 
-    private val formatter = Formatter()
+    private val formatter = DateTimeFormatter()
     private val emotionTypeMapper = EmotionTypeMapper()
     private val args: DetailEmotionFragmentArgs by navArgs()
     override val viewModel: DetailViewModel by hiltNavGraphViewModels(R.id.nav_graph)
@@ -41,17 +41,17 @@ class DetailEmotionFragment :
     private fun setUpViews(moodEntity: MoodEntity) = binding {
         var emotionTypeFeel = ""
 
-        if (moodEntity.photoPath.isNotEmpty()) {
-            emotionImage.isVisible = true
+        moodEntity.photoPath?.let {
             emotionImage.loadByUri(moodEntity.photoPath.toUri())
-        } else {
+            emotionImage.isVisible = true
+        } ?: run {
             emotionImage.isVisible = false
         }
 
-        if (moodEntity.note.isNotEmpty()) {
-            emotionNote.isVisible = true
+        moodEntity.note?.let {
             emotionNote.text = String.format(getString(R.string.your_note, moodEntity.note))
-        } else {
+            emotionNote.isVisible = true
+        } ?: run {
             emotionNote.isVisible = false
         }
 

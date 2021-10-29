@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.add_emotion_types.photo_add_emotion.view.EmotionCreationByPhotoFragment">
+    tools:context=".ui.feature.photo_add_mood.view.EmotionCreationByPhotoFragment">
 
     <TextView
         android:id="@+id/moodHintTextView"
@@ -29,6 +29,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/moodHintTextView"
         tools:itemCount="3"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_add_by_photo_type" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.add_emotion_types.voice_add_emotion.view.VoiceAddEmotionFragment">
+    tools:context=".ui.feature.voice_add_mood.view.VoiceAddEmotionFragment">
 
     <ImageView
         android:id="@+id/questionImageView"

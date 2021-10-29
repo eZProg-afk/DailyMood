@@ -30,9 +30,10 @@ buildscript {
         textValidationVersion = "v1.0.0-alpha2"
         viewBindingVersion = "1.4.1"
         calendarVersion = "1.0.4"
-        smileyRatingVersion = "2.0.0"
+        emojiRatingBarVersion = "1.0.1"
         cameraxVersion = "1.0.2"
-        cameraViewVersion = "1.0.0-alpha27"
+        cameraViewVersion = "1.0.0-alpha30"
+        cropperVersion = "3.3.5"
 
         //Database (local)
         roomVersion = "2.3.0"

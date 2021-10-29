@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.add_emotion_types.manually_add_emotion.view.EmotionCreationByPhotoManuallyFragment">
+    tools:context=".ui.feature.manually_add_mood.view.EmotionCreationByPhotoManuallyFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

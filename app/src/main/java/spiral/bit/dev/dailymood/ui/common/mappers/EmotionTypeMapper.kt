@@ -7,12 +7,12 @@ import spiral.bit.dev.dailymood.ui.feature.main.models.MoodItem
 class EmotionTypeMapper {
 
     fun mapToEmotionType(moodValue: Float): MoodType {
-        return when (moodValue) {
-            -1.0F -> MoodType.ANGRY
-            -0.5F -> MoodType.SAD
-            0F -> MoodType.NEUTRAL
-            0.5F -> MoodType.GOOD
-            1.0F -> MoodType.HAPPY
+        return when  {
+            moodValue <= -0.7 -> MoodType.ANGRY
+            moodValue <= -0.3 -> MoodType.SAD
+            moodValue <= 0.3 -> MoodType.NEUTRAL
+            moodValue <= 0.7 -> MoodType.GOOD
+            moodValue <= 1.0 -> MoodType.HAPPY
             else -> MoodType.NOT_DEFINED
         }
     }

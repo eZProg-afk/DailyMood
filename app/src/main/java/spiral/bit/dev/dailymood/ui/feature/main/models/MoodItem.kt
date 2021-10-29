@@ -6,13 +6,14 @@ import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.data.emotion.MoodEntity
 import spiral.bit.dev.dailymood.databinding.ItemEmotionBinding
-import spiral.bit.dev.dailymood.ui.common.formatters.Formatter
+import spiral.bit.dev.dailymood.ui.common.formatters.DateTimeFormatter
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
 
 class MoodItem(val moodEntity: MoodEntity) : AbstractBindingItem<ItemEmotionBinding>() {
 
     override val type: Int = R.layout.item_emotion
-    private val formatter = Formatter()
+    override var identifier: Long = moodEntity.emotionId
+    private val formatter = DateTimeFormatter()
     private val emotionTypeMapper = EmotionTypeMapper()
 
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemEmotionBinding {
