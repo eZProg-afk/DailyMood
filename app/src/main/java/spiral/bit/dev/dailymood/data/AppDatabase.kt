@@ -6,7 +6,7 @@ import spiral.bit.dev.dailymood.data.emotion.MoodEntity
 import spiral.bit.dev.dailymood.data.emotion.MoodDao
 
 //TODO CHANGE BD VERSION TO 1
-@Database(entities = [MoodEntity::class], version = 6, exportSchema = false)
+@Database(entities = [MoodEntity::class], version = 8, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun emotionDao(): MoodDao
 }

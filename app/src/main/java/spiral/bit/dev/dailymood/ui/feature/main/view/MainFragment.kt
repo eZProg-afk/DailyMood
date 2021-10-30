@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,18 +13,17 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.model.InDateStyle
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
 import com.kizitonwose.calendarview.utils.yearMonth
-import com.mikepenz.fastadapter.adapters.FastItemAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.mikepenz.fastadapter.swipe.SimpleSwipeCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -40,36 +38,39 @@ import spiral.bit.dev.dailymood.databinding.ItemCalendarBinding
 import spiral.bit.dev.dailymood.ui.base.*
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
 import spiral.bit.dev.dailymood.ui.feature.main.models.MoodItem
+import spiral.bit.dev.dailymood.ui.feature.main.models.diffCallback
+import spiral.bit.dev.dailymood.ui.feature.main.models.moodItemDelegate
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionEffect
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionState
 import spiral.bit.dev.dailymood.ui.feature.user.view.UserViewModel
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
-import androidx.recyclerview.widget.RecyclerView
+
 
 @FlowPreview
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBinding>(
     FragmentMainBinding::inflate
-), SimpleSwipeCallback.ItemSwipeCallback {
+) {
 
+    override val viewModel: MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private val headerBinding: DrawerHeaderBinding by viewBinding(createMethod = CreateMethod.INFLATE)
     private val navController: NavController by lazy { findNavController() }
     private var selectedDate: LocalDate? = null
     private val today = LocalDate.now()
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
-    private val itemsAdapter = ItemAdapter<MoodItem>()
-    private val emotionsAdapter = FastItemAdapter(itemsAdapter).apply { setHasStableIds(true) }
     private val userViewModel: UserViewModel by hiltNavGraphViewModels(R.id.nav_graph)
-    override val viewModel: MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
+    private val moodAdapter =
+        AsyncListDifferDelegationAdapter(diffCallback, moodItemDelegate { moodItem ->
+            viewModel.toDetail(moodItem.moodEntity.id)
+        })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
         setUpCalendar()
-        setUpAdapter()
         setUpListeners()
         setUpNavigation()
         setUpDrawerHeader()
@@ -77,30 +78,6 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
         subscribeToObservers()
     }
 
-    private fun setUpAdapter() = binding {
-        emotionsAdapter.apply {
-            onClickListener = { _, _, item, _ ->
-                viewModel.toDetail(item.moodEntity.emotionId)
-                true
-            }
-
-            val touchCallback = SimpleSwipeCallback(
-                this@MainFragment,
-                swipeDirs = ItemTouchHelper.LEFT,
-                leaveBehindDrawableLeft = null
-            )
-                .withSensitivity(10f)
-                .withBackgroundSwipeLeft(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.main_app_background
-                    )
-                ).withSurfaceThreshold(0.3f)
-
-            val touchHelper = ItemTouchHelper(touchCallback)
-            touchHelper.attachToRecyclerView(daysRecyclerView)
-        }
-    }
 
     private fun setUpDrawerHeader() = binding {
         navView.addHeaderView(headerBinding.root)
@@ -126,10 +103,29 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     }
 
     private fun setUpRecyclerView() = binding {
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ) = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = moodAdapter.items[position]
+                    viewModel.emotionSwiped(item)
+                }
+            }
+        })
         daysRecyclerView.apply {
-            adapter = emotionsAdapter
-            setHasFixedSize(true)
+            itemTouchHelper.attachToRecyclerView(this)
+            adapter = moodAdapter
         }
+
     }
 
     private fun setUpNavigation() = binding {
@@ -266,13 +262,6 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
-    override fun itemSwiped(position: Int, direction: Int) {
-        if (position != RecyclerView.NO_POSITION) {
-            viewModel.emotionSwiped(itemsAdapter.adapterItems[position])
-            emotionsAdapter.remove(position)
-        }
-    }
-
     override fun handleSideEffect(sideEffect: EmotionEffect) = binding {
         when (sideEffect) {
             is EmotionEffect.ShowSnackbar ->
@@ -303,7 +292,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     override fun renderState(state: EmotionState) {
         val emotionTypeMapper = EmotionTypeMapper()
         val emotionUiItems = emotionTypeMapper.toEmotionItems(state.moodEntities)
-        itemsAdapter.set(emotionUiItems)
+        moodAdapter.items = emotionUiItems
     }
 
     companion object {

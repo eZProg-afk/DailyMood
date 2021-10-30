@@ -15,7 +15,6 @@ import spiral.bit.dev.dailymood.ui.base.BaseViewModel
 import spiral.bit.dev.dailymood.ui.base.Logger
 import spiral.bit.dev.dailymood.ui.base.listenAwait
 import spiral.bit.dev.dailymood.ui.feature.photo_add_mood.models.PhotoTypeItem
-import spiral.bit.dev.dailymood.ui.feature.photo_add_mood.models.PhotoTypeModel
 import spiral.bit.dev.dailymood.ui.feature.photo_add_mood.models.mvi.PhotoEffect
 import spiral.bit.dev.dailymood.ui.feature.photo_add_mood.models.mvi.PhotoState
 import javax.inject.Inject
@@ -29,22 +28,16 @@ class PhotoViewModel @Inject constructor(
         PhotoState(
             photoTypes = listOf(
                 PhotoTypeItem(
-                    PhotoTypeModel(
-                        0, R.drawable.ic_camera, R.string.camera_type_title,
-                        R.string.camera_type_descripion
-                    )
+                    0, R.drawable.ic_camera, R.string.camera_type_title,
+                    R.string.camera_type_descripion
                 ),
                 PhotoTypeItem(
-                    PhotoTypeModel(
-                        1, R.drawable.ic_gallery, R.string.gallery_type_title,
-                        R.string.gallery_type_descripion
-                    )
+                    1, R.drawable.ic_gallery, R.string.gallery_type_title,
+                    R.string.gallery_type_descripion
                 ),
                 PhotoTypeItem(
-                    PhotoTypeModel(
-                        2, R.drawable.ic_realtime, R.string.realtime_type_title,
-                        R.string.realtime_type_descripion
-                    )
+                    2, R.drawable.ic_realtime, R.string.realtime_type_title,
+                    R.string.realtime_type_descripion
                 ),
             ),
             galleryImage = null,

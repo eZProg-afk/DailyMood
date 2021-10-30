@@ -1,36 +1,32 @@
-package spiral.bit.dev.dailymood.ui.feature.select_creation_type.models.mvi
+package spiral.bit.dev.dailymood.ui.feature.select_creation_type.models
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.annotation.StringRes
-import com.mikepenz.fastadapter.binding.ModelAbstractBindingItem
-import spiral.bit.dev.dailymood.R
+import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import spiral.bit.dev.dailymood.databinding.ItemSelectAddEmotionTypeBinding
+import spiral.bit.dev.dailymood.ui.common.adapter.ListItem
 
-class SelectionTypeItem(
-    override var model: SelectionTypeModel,
-    override val type: Int = R.layout.item_select_add_emotion_type
-) : ModelAbstractBindingItem<SelectionTypeModel, ItemSelectAddEmotionTypeBinding>(model) {
+fun selectionTypeDelegate(onItemClickListener: (SelectionTypeItem) -> Unit) =
+    adapterDelegateViewBinding<SelectionTypeItem, ListItem, ItemSelectAddEmotionTypeBinding>({ inflater, container ->
+        ItemSelectAddEmotionTypeBinding.inflate(inflater, container, false)
+    }) {
+        binding.iconNextFrameLayout.setOnClickListener {
+            onItemClickListener.invoke(item)
+        }
+        bind {
+            with(binding) {
+                manuallyAddEmotionTitleTextView.apply {
+                    text = context?.getString(item.title)
+                }
 
-    override fun createBinding(
-        inflater: LayoutInflater,
-        parent: ViewGroup?
-    ): ItemSelectAddEmotionTypeBinding {
-        return ItemSelectAddEmotionTypeBinding.inflate(inflater, parent, false)
-    }
-
-    override fun bindView(binding: ItemSelectAddEmotionTypeBinding, payloads: List<Any>) {
-        super.bindView(binding, payloads)
-        with(binding) {
-            manuallyAddEmotionTitleTextView.apply {
-                text = context?.getString(model.title)
-            }
-
-            manuallyAddEmotionDescriptionTextView.apply {
-                text = context?.getString(model.description)
+                manuallyAddEmotionDescriptionTextView.apply {
+                    text = context?.getString(item.description)
+                }
             }
         }
     }
-}
 
-data class SelectionTypeModel(val id: Int, @StringRes val title: Int, @StringRes val description: Int)
+data class SelectionTypeItem(
+    val id: Int,
+    @StringRes val title: Int,
+    @StringRes val description: Int
+) : ListItem

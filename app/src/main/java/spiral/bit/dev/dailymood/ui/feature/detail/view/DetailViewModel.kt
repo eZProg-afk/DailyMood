@@ -16,7 +16,7 @@ class DetailViewModel @Inject constructor(
     private val moodRepository: MoodRepository
 ) : BaseViewModel<DetailState, DetailEffect>() {
 
-    override val container = container<DetailState, DetailEffect>(DetailState(MoodEntity(emotionType = 0.5F)))
+    override val container = container<DetailState, DetailEffect>(DetailState(MoodEntity(moodType = 0.5F)))
 
     fun getEmotionById(emotionId: Long) = intent {
         val emotion = moodRepository.getEmotionById(emotionId)

@@ -67,7 +67,7 @@ class VoiceViewModel @SuppressLint("StaticFieldLeak") //this is application cont
             val recognizedEmotion = Vokaturi.extractEmotion(emotionProbabilities)
             val emotionType = emotionResolver.toDailyMood(recognizedEmotion)
             val moodValue = emotionTypeMapper.mapToMoodValue(emotionType)
-            val emotion = MoodEntity(emotionType = moodValue)
+            val emotion = MoodEntity(moodType = moodValue)
 
             val emotionsList = state.resultMoodEntities
             emotionsList.add(emotion)
@@ -106,9 +106,9 @@ class VoiceViewModel @SuppressLint("StaticFieldLeak") //this is application cont
     }
 
     private fun calculateResultEmotion() = intent {
-        val emotionTypes = state.resultMoodEntities.map { it.emotionType }
+        val emotionTypes = state.resultMoodEntities.map { it.moodType }
         val emotionType = emotionTypes.groupingBy { it }.eachCount().filter { it.value > 1 }
-        insertEmotion(MoodEntity(emotionType = emotionType.entries.first().key))
+        insertEmotion(MoodEntity(moodType = emotionType.entries.first().key))
         //TODO THIS IS NOT WORK OR WORK?
     }
 

@@ -6,8 +6,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "emotions")
 data class MoodEntity(
     @PrimaryKey(autoGenerate = true)
-    val emotionId: Long = 0,
-    val emotionType: Float,
+    val id: Long = 0,
+    val moodType: Float,
+    val reason: String? = null,
     val note: String? = null,
     val photoPath: String? = null,
     val createdTime: Long = System.currentTimeMillis()

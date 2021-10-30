@@ -47,15 +47,9 @@ android {
 
 dependencies {
 
-    // Fast Adapter
-    implementation("com.mikepenz:fastadapter:${fastAdapterVersion}")
-    implementation("com.mikepenz:fastadapter-extensions-binding:${fastAdapterVersion}")
-    implementation("com.mikepenz:fastadapter-extensions-diff:${fastAdapterVersion}")
-    implementation("com.mikepenz:fastadapter-extensions-drag:${fastAdapterVersion}")
-    implementation("com.mikepenz:fastadapter-extensions-scroll:${fastAdapterVersion}")
-    implementation("com.mikepenz:fastadapter-extensions-swipe:${fastAdapterVersion}")
-    implementation("com.mikepenz:fastadapter-extensions-utils:${fastAdapterVersion}")
-    implementation("com.google.android.material:material:${materialVersion}")
+    // Adapter Delegates
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:${adapterDelegatesVersion}")
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:${adapterDelegatesVersion}")
 
     //TODO УБРАТЬ ИЛИ УЗНАТЬ ЧТО ЭТО
     implementation "androidx.startup:startup-runtime:1.1.0"
@@ -66,10 +60,6 @@ dependencies {
     // Photo emotion recognition
     implementation("com.google.mlkit:face-detection:${faceDetectionMlKitVersion}")
     implementation("com.google.android.gms:play-services-mlkit-face-detection:${playServicesFaceDetectionVersion}")
-
-    // Iconics
-    implementation("com.mikepenz:iconics-core:${iconicsVersion}")
-    implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.8-kotlin@aar'
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesCoreVersion}")

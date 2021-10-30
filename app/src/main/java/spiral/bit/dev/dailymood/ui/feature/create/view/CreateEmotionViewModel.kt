@@ -30,7 +30,7 @@ class CreateEmotionViewModel @Inject constructor(
     fun insert(moodValue: Float, note: String) = intent {
         MoodEntity(
             note = note,
-            emotionType = moodValue,
+            moodType = moodValue,
             photoPath = state.imageUri.toString()
         ).also { emotion ->
             moodRepository.insert(emotion)

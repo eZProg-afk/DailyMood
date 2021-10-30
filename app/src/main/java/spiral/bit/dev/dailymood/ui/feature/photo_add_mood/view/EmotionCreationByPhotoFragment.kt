@@ -11,21 +11,18 @@ import androidx.navigation.fragment.findNavController
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.mikepenz.fastadapter.binding.listeners.addClickListener
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.databinding.FragmentEmotionCreationByPhotoBinding
-import spiral.bit.dev.dailymood.databinding.ItemAddByPhotoTypeBinding
 import spiral.bit.dev.dailymood.ui.base.BaseFragment
 import spiral.bit.dev.dailymood.ui.base.binding
 import spiral.bit.dev.dailymood.ui.base.extensions.hasPermissions
 import spiral.bit.dev.dailymood.ui.base.extensions.safeLet
 import spiral.bit.dev.dailymood.ui.base.toast
-import spiral.bit.dev.dailymood.ui.feature.photo_add_mood.models.PhotoTypeItem
 import spiral.bit.dev.dailymood.ui.feature.photo_add_mood.models.mvi.PhotoEffect
 import spiral.bit.dev.dailymood.ui.feature.photo_add_mood.models.mvi.PhotoState
+import spiral.bit.dev.dailymood.ui.feature.photo_add_mood.models.photoTypesDelegate
 
 @AndroidEntryPoint
 class EmotionCreationByPhotoFragment :
@@ -34,6 +31,10 @@ class EmotionCreationByPhotoFragment :
     ) {
 
     override val viewModel: PhotoViewModel by hiltNavGraphViewModels(R.id.nav_graph)
+    private val photoTypesAdapter = ListDelegationAdapter(photoTypesDelegate { photoTypeItem ->
+        viewModel.onPhotoTypeClicked(photoTypeItem.id)
+    })
+
     private val galleryPermission = registerForActivityResult(RequestPermission()) { granted ->
         if (granted) analyzeFromGallery.launch(IMAGE_MIME_TYPE)
     }
@@ -58,15 +59,6 @@ class EmotionCreationByPhotoFragment :
         )
     }
 
-    private val itemAdapter = ItemAdapter<PhotoTypeItem>()
-    private val photoTypesAdapter = FastAdapter.with(itemAdapter).apply {
-        addClickListener<ItemAddByPhotoTypeBinding, PhotoTypeItem>({
-            it.iconPhotoFrameLayout
-        }) { _, _, _, item ->
-            viewModel.onPhotoTypeClicked(item.model.id)
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
@@ -89,7 +81,7 @@ class EmotionCreationByPhotoFragment :
     }
 
     override fun renderState(state: PhotoState) = binding {
-        itemAdapter.set(state.photoTypes)
+        photoTypesAdapter.items = state.photoTypes
         state.galleryImage?.let { inputImage -> viewModel.detectFace(inputImage) }
         safeLet(state.galleryImageUri, state.smileProbability) { _, _ ->
             viewModel.showResultPhoto()

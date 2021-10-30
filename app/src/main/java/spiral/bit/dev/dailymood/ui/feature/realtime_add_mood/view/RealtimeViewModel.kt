@@ -55,7 +55,7 @@ class RealtimeViewModel @Inject constructor(
 
     fun takeEmotion() = intent {
         val moodValue = faceDetectionMoodResolver.resolveEmotionType(state.smileProbability)
-        val emotionItem = MoodEntity(emotionType = moodValue)
+        val emotionItem = MoodEntity(moodType = moodValue)
         insertEmotion(emotionItem)
     }
 }

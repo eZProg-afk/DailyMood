@@ -10,17 +10,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.databinding.FragmentCreateEmotionBinding
 import spiral.bit.dev.dailymood.ui.base.*
 import spiral.bit.dev.dailymood.ui.base.extensions.hasPermissions
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
-import spiral.bit.dev.dailymood.ui.feature.create.models.SliderItem
 import spiral.bit.dev.dailymood.ui.feature.create.models.mvi.CreateEmotionSideEffect
 import spiral.bit.dev.dailymood.ui.feature.create.models.mvi.CreateEmotionState
+import spiral.bit.dev.dailymood.ui.feature.create.models.sliderDelegate
 import spiral.bit.dev.dailymood.ui.feature.main.models.MoodType
 import kotlin.math.abs
 
@@ -31,8 +30,7 @@ class CreateEmotionFragment :
     ) {
 
     override val viewModel: CreateEmotionViewModel by hiltNavGraphViewModels(R.id.nav_graph)
-    private val itemsAdapter = ItemAdapter<SliderItem>()
-    private val sliderAdapter = FastAdapter.with(itemsAdapter)
+    private val sliderAdapter = ListDelegationAdapter(sliderDelegate)
     private val emotionTypeMapper = EmotionTypeMapper()
 
     private val getPermissions = registerForActivityResult(RequestPermission()) { granted ->
@@ -119,7 +117,7 @@ class CreateEmotionFragment :
 
     override fun renderState(state: CreateEmotionState) = binding {
         addPhotoImageView.loadByUri(state.imageUri)
-        itemsAdapter.set(state.sliderItems)
+        sliderAdapter.items = state.sliderItems
     }
 
     companion object {

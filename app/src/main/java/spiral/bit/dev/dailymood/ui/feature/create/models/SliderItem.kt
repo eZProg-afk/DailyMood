@@ -1,25 +1,16 @@
 package spiral.bit.dev.dailymood.ui.feature.create.models
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.annotation.DrawableRes
-import com.mikepenz.fastadapter.binding.AbstractBindingItem
-import spiral.bit.dev.dailymood.R
+import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import spiral.bit.dev.dailymood.databinding.ViewSliderImageBinding
+import spiral.bit.dev.dailymood.ui.common.adapter.ListItem
 
-class SliderItem(@DrawableRes val imageResource: Int) : AbstractBindingItem<ViewSliderImageBinding>() {
-
-    override val type: Int = R.layout.view_slider_image
-
-    override fun createBinding(
-        inflater: LayoutInflater,
-        parent: ViewGroup?
-    ): ViewSliderImageBinding {
-        return ViewSliderImageBinding.inflate(inflater, parent, false)
-    }
-
-    override fun bindView(binding: ViewSliderImageBinding, payloads: List<Any>) {
-        super.bindView(binding, payloads)
-        binding.sliderImageView.setImageResource(imageResource)
+val sliderDelegate = adapterDelegateViewBinding<SliderItem, ListItem, ViewSliderImageBinding>({ inflater, container ->
+    ViewSliderImageBinding.inflate(inflater, container, false)
+}) {
+    bind {
+        binding.sliderImageView.setImageResource(item.imageResource)
     }
 }
+
+class SliderItem(@DrawableRes val imageResource: Int) : ListItem

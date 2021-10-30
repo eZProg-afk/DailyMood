@@ -32,7 +32,7 @@ class ShowMoodRatingViewModel @Inject constructor(
 
     fun saveMoodEntity(smilingProbabilities: Float) = intent {
         val moodValue = faceMoodResolver.resolveEmotionType(smilingProbabilities)
-        val moodEntity = MoodEntity(emotionType = moodValue)
+        val moodEntity = MoodEntity(moodType = moodValue)
         moodRepository.insert(moodEntity)
         postSideEffect(MoodCameraEffect.NavigateToMain)
     }

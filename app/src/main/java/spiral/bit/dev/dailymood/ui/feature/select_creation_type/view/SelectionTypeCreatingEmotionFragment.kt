@@ -4,19 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.mikepenz.fastadapter.binding.listeners.addClickListener
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.databinding.FragmentSelectionAddEmotionTypeBinding
-import spiral.bit.dev.dailymood.databinding.ItemSelectAddEmotionTypeBinding
 import spiral.bit.dev.dailymood.ui.base.BaseFragment
 import spiral.bit.dev.dailymood.ui.base.binding
 import spiral.bit.dev.dailymood.ui.base.observe
 import spiral.bit.dev.dailymood.ui.feature.select_creation_type.models.mvi.SelectEffect
 import spiral.bit.dev.dailymood.ui.feature.select_creation_type.models.mvi.SelectState
-import spiral.bit.dev.dailymood.ui.feature.select_creation_type.models.mvi.SelectionTypeItem
+import spiral.bit.dev.dailymood.ui.feature.select_creation_type.models.selectionTypeDelegate
 
 @AndroidEntryPoint
 class SelectionTypeCreatingEmotionFragment :
@@ -25,14 +22,9 @@ class SelectionTypeCreatingEmotionFragment :
     ) {
 
     override val viewModel: SelectionTypeViewModel by hiltNavGraphViewModels(R.id.nav_graph)
-    private val itemsAdapter = ItemAdapter<SelectionTypeItem>()
-    private val selectionTypesAdapter = FastAdapter.with(itemsAdapter).apply {
-        addClickListener<ItemSelectAddEmotionTypeBinding, SelectionTypeItem>({
-            it.iconNextFrameLayout
-        }) { _, _, _, item ->
-            viewModel.handleClickByItemId(item.model.id)
-        }
-    }
+    private val selectionTypesAdapter = ListDelegationAdapter(selectionTypeDelegate { item ->
+        viewModel.handleClickByItemId(item.id)
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,6 +69,6 @@ class SelectionTypeCreatingEmotionFragment :
     }
 
     override fun renderState(state: SelectState) {
-        itemsAdapter.set(state.selectionTypeItems)
+        selectionTypesAdapter.items = state.selectionTypeItems
     }
 }

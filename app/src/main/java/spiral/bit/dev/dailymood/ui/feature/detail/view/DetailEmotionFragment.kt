@@ -55,7 +55,7 @@ class DetailEmotionFragment :
             emotionNote.isVisible = false
         }
 
-        when (emotionTypeMapper.mapToEmotionType(moodEntity.emotionType)) {
+        when (emotionTypeMapper.mapToEmotionType(moodEntity.moodType)) {
             MoodType.HAPPY -> {
                 emotionPhoto.loadByDrawable(R.drawable.ic_emotion_happy)
                 emotionTypeFeel = getString(R.string.happy_feel_label)

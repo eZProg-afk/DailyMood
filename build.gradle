@@ -10,11 +10,8 @@ buildscript {
         appVersionCode = 4
         appVersionName = "4.0"
 
-        //Fast Adapter
-        fastAdapterVersion = "5.3.2"
-
-        //Iconics
-        iconicsVersion = "2.0.0"
+        //Adapter Delegates
+        adapterDelegatesVersion = "4.3.0"
 
         //Coroutines
         coroutinesCoreVersion = "1.5.0"
