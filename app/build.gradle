@@ -81,6 +81,7 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:${cameraViewVersion}")
     implementation("com.github.CanHub:Android-Image-Cropper:${cropperVersion}")
+    implementation("com.airbnb.android:lottie:$lottieVersion")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:${hiltVersion}")

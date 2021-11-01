@@ -4,8 +4,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import spiral.bit.dev.dailymood.data.emotion.MoodEntity
-import spiral.bit.dev.dailymood.data.emotion.MoodRepository
+import spiral.bit.dev.dailymood.data.mood.MoodEntity
+import spiral.bit.dev.dailymood.data.mood.MoodRepository
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
 import spiral.bit.dev.dailymood.ui.feature.detail.models.mvi.DetailEffect
 import spiral.bit.dev.dailymood.ui.feature.detail.models.mvi.DetailState

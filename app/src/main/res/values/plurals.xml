@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="scores">
+        <item quantity="one">%d очко</item>
+        <item quantity="two">%d очка</item>
+        <item quantity="few">%d очка</item>
+        <item quantity="many">%d очков</item>
+        <item quantity="zero">%d очков</item>
+        <item quantity="other">%d очков</item>
+    </plurals>
+</resources>

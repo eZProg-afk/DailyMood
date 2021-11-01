@@ -1,4 +1,4 @@
-package spiral.bit.dev.dailymood.ui.base
+package spiral.bit.dev.dailymood.ui.base.extensions
 
 import android.annotation.SuppressLint
 import android.view.MotionEvent
@@ -11,7 +11,6 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import spiral.bit.dev.dailymood.R
-import spiral.bit.dev.dailymood.ui.base.extensions.hideKeyboard
 
 @ExperimentalCoroutinesApi
 fun EditText.textChanges(editTextConfig: EditTextConfig? = null): Flow<CharSequence?> {

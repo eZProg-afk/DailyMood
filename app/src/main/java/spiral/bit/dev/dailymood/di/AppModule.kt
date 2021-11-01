@@ -10,8 +10,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import spiral.bit.dev.dailymood.data.AppDatabase
-import spiral.bit.dev.dailymood.data.emotion.MoodDao
-import spiral.bit.dev.dailymood.data.emotion.MoodRepository
+import spiral.bit.dev.dailymood.data.mood.MoodDao
+import spiral.bit.dev.dailymood.data.mood.MoodRepository
 import javax.inject.Singleton
 
 @Module

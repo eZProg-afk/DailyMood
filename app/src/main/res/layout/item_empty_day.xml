@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/emptyDayTitleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/emptyDayLottieAnimationView"
+        app:layout_constraintStart_toStartOf="@id/emptyDayLottieAnimationView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Этот день был пропущен!" />
+
+    <TextView
+        android:id="@+id/emptyDayHintTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/emptyDayLottieAnimationView"
+        app:layout_constraintStart_toStartOf="@id/emptyDayLottieAnimationView"
+        app:layout_constraintTop_toBottomOf="@id/emptyDayTitleTextView"
+        tools:text="Когда вы пропускаете день, вы не ведёте никаких записей! Старайтесь возвращаться сюда каждый день :)" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/emptyDayLottieAnimationView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emptyDayHintTextView"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/lottie_not_filled_day" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

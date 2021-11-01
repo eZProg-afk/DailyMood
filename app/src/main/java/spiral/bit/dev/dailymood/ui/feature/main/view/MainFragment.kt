@@ -1,9 +1,11 @@
 package spiral.bit.dev.dailymood.ui.feature.main.view
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
@@ -36,17 +38,19 @@ import spiral.bit.dev.dailymood.databinding.DrawerHeaderBinding
 import spiral.bit.dev.dailymood.databinding.FragmentMainBinding
 import spiral.bit.dev.dailymood.databinding.ItemCalendarBinding
 import spiral.bit.dev.dailymood.ui.base.*
-import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
+import spiral.bit.dev.dailymood.ui.base.extensions.DrawableGravity
+import spiral.bit.dev.dailymood.ui.base.extensions.EditTextConfig
+import spiral.bit.dev.dailymood.ui.base.extensions.textChanges
+import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
 import spiral.bit.dev.dailymood.ui.feature.main.models.MoodItem
 import spiral.bit.dev.dailymood.ui.feature.main.models.diffCallback
+import spiral.bit.dev.dailymood.ui.feature.main.models.emptyDayDelegate
 import spiral.bit.dev.dailymood.ui.feature.main.models.moodItemDelegate
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionEffect
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionState
 import spiral.bit.dev.dailymood.ui.feature.user.view.UserViewModel
 import java.time.LocalDate
 import java.time.YearMonth
-import java.time.format.DateTimeFormatter
-
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -56,14 +60,14 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
 ) {
 
     override val viewModel: MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
+    private val userViewModel: UserViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private val headerBinding: DrawerHeaderBinding by viewBinding(createMethod = CreateMethod.INFLATE)
     private val navController: NavController by lazy { findNavController() }
     private var selectedDate: LocalDate? = null
     private val today = LocalDate.now()
-    private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
-    private val userViewModel: UserViewModel by hiltNavGraphViewModels(R.id.nav_graph)
-    private val moodAdapter =
-        AsyncListDifferDelegationAdapter(diffCallback, moodItemDelegate { moodItem ->
+    private val appDateTimeFormatter = AppDateTimeFormatter()
+    private val moodAdapter = AsyncListDifferDelegationAdapter(diffCallback, emptyDayDelegate,
+        moodItemDelegate { moodItem ->
             viewModel.toDetail(moodItem.moodEntity.id)
         })
 
@@ -77,7 +81,6 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
         setUpClicks()
         subscribeToObservers()
     }
-
 
     private fun setUpDrawerHeader() = binding {
         navView.addHeaderView(headerBinding.root)
@@ -98,7 +101,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
             editTextConfig = EditTextConfig(DrawableGravity.END, R.drawable.ic_close)
         ).map { it.toString() }
             .debounce(DEBOUNCE_TIMEOUT)
-            .onEach { viewModel.searchByQuery(it) }
+            .onEach { if (it.isNotEmpty()) viewModel.searchByQuery(it) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
@@ -117,7 +120,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
                 val position = viewHolder.bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val item = moodAdapter.items[position]
-                    viewModel.emotionSwiped(item)
+                    if (item is MoodItem) viewModel.emotionSwiped(item)
                 }
             }
         })
@@ -125,7 +128,6 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
             itemTouchHelper.attachToRecyclerView(this)
             adapter = moodAdapter
         }
-
     }
 
     private fun setUpNavigation() = binding {
@@ -213,17 +215,32 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
                     if (day.owner == DayOwner.THIS_MONTH) {
                         when (day.date) {
                             selectedDate -> {
-                                container.background.setBackgroundResource(R.drawable.selected_calendar_item_back)
+                                container.background.backgroundTintList = ColorStateList.valueOf(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.purple
+                                    )
+                                )
                                 tvDay.setTextColor(Color.WHITE)
                                 tvDayName.setTextColor(Color.WHITE)
                             }
                             today -> {
-                                container.background.setBackgroundResource(R.drawable.selected_today_calendar_item_back)
+                                container.background.backgroundTintList = ColorStateList.valueOf(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.yellow
+                                    )
+                                )
                                 tvDay.setTextColor(Color.BLACK)
                                 tvDayName.setTextColor(Color.BLACK)
                             }
                             else -> {
-                                container.background.setBackgroundResource(R.drawable.calendar_item_back)
+                                container.background.backgroundTintList = ColorStateList.valueOf(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.veryLightGrey
+                                    )
+                                )
                                 tvDay.setTextColor(Color.DKGRAY)
                                 tvDayName.setTextColor(Color.DKGRAY)
                             }
@@ -237,17 +254,17 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
                 val lastDate = month.weekDays.last().last().date
                 if (firstDate.yearMonth == lastDate.yearMonth) {
                     dateTextView.text = firstDate.yearMonth.year.toString()
-                    monthTextView.text = monthTitleFormatter.format(firstDate)
+                    monthTextView.text = appDateTimeFormatter.formatCalendar(firstDate)
                 } else {
                     monthTextView.text = context?.getString(
                         R.string.date_string_pattern,
-                        monthTitleFormatter.format(firstDate),
-                        monthTitleFormatter.format(lastDate)
+                        appDateTimeFormatter.formatCalendar(firstDate),
+                        appDateTimeFormatter.formatCalendar(lastDate)
                     )
-                    if (firstDate.year == lastDate.year) {
-                        dateTextView.text = firstDate.yearMonth.year.toString()
+                    dateTextView.text = if (firstDate.year == lastDate.year) {
+                        firstDate.yearMonth.year.toString()
                     } else {
-                        dateTextView.text = context?.getString(
+                        context?.getString(
                             R.string.date_string_pattern,
                             firstDate.yearMonth.year.toString(),
                             lastDate.yearMonth.year.toString()
@@ -262,11 +279,16 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
+    override fun onResume() = binding {
+        super.onResume()
+        calendarView.scrollToDate(today)
+    }
+
     override fun handleSideEffect(sideEffect: EmotionEffect) = binding {
         when (sideEffect) {
             is EmotionEffect.ShowSnackbar ->
                 addEmotionManuallyFab.snack(sideEffect.msg, Snackbar.LENGTH_LONG) {
-                    action(R.string.cancel) {
+                    action(R.string.cancel_label) {
                         viewModel.onUndoDelete(sideEffect.moodEntity)
                     }
                 }
@@ -290,9 +312,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     }
 
     override fun renderState(state: EmotionState) {
-        val emotionTypeMapper = EmotionTypeMapper()
-        val emotionUiItems = emotionTypeMapper.toEmotionItems(state.moodEntities)
-        moodAdapter.items = emotionUiItems
+        moodAdapter.items = state.moodEntities
     }
 
     companion object {

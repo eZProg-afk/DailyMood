@@ -31,7 +31,7 @@ class RegistrationViewModel @Inject constructor(
                     postSideEffect(RegEffect.ToMainScreen)
                     reduce { state.copy(regScreenState = RegScreenState.SuccessAuthorized) }
                 } else {
-                    postSideEffect(RegEffect.Toast(R.string.error_fb_reg_try_later))
+                    postSideEffect(RegEffect.Toast(R.string.error_fb_reg_try_later_toast))
                     reduce { state.copy(regScreenState = RegScreenState.ErrorAuthorized(task.exception!!)) }
                 }
             }
@@ -47,7 +47,7 @@ class RegistrationViewModel @Inject constructor(
     }
 
     fun errorRegisterCallback() = intent {
-        postSideEffect(RegEffect.Toast(R.string.error_fb_reg_try_later))
+        postSideEffect(RegEffect.Toast(R.string.error_fb_reg_try_later_toast))
     }
 
     fun checkIsAlreadyAuthorized() = intent {

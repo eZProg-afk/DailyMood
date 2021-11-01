@@ -18,7 +18,7 @@ import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.databinding.FragmentEmailRegBinding
 import spiral.bit.dev.dailymood.ui.base.BaseFragment
 import spiral.bit.dev.dailymood.ui.base.binding
-import spiral.bit.dev.dailymood.ui.base.textChanges
+import spiral.bit.dev.dailymood.ui.base.extensions.textChanges
 import spiral.bit.dev.dailymood.ui.base.toast
 import spiral.bit.dev.dailymood.ui.common.utils.Animations
 import spiral.bit.dev.dailymood.ui.common.view.LoadingDialogFragment
@@ -99,10 +99,10 @@ class EmailRegFragment : BaseFragment<RegState, RegEffect, FragmentEmailRegBindi
         }
     }
 
-    override fun handleSideEffect(effect: RegEffect) = binding {
-        when (effect) {
+    override fun handleSideEffect(sideEffect: RegEffect) = binding {
+        when (sideEffect) {
             is RegEffect.Toast -> {
-                root.toast(effect.msg)
+                root.toast(sideEffect.msg)
             }
             is RegEffect.NavigateToLogin -> {
                 EmailRegFragmentDirections.toEmailAuthenticate().apply {

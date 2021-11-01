@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.camera_result_mood.view.ShowMoodRatingCameraFragment">
+    tools:context=".ui.feature.creationResult.cameraResultMood.view.ShowMoodRatingCameraFragment">
 
     <ImageView
         android:id="@+id/resultPhotoImageView"

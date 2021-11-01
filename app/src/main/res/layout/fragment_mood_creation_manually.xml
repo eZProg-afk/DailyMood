@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainAppBackColor"
+    tools:context=".ui.feature.creationMood.manuallyAddMood.view.EmotionCreationManuallyFragment">
+
+    <TextView
+        android:id="@+id/select_emotion_tv_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumMargin"
+        android:fontFamily="@font/ubuntu_bold"
+        android:gravity="center"
+        android:text="@string/select_emotion_label"
+        android:textColor="@color/mainAppTextColor"
+        android:textSize="@dimen/medium_text_size"
+        ads:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_left"
+        android:layout_width="@dimen/big_image_view_size"
+        android:layout_height="@dimen/big_image_view_size"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintBottom_toBottomOf="@id/carousel_view_pager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/carousel_view_pager" />
+
+    <ImageView
+        android:id="@+id/btn_right"
+        android:layout_width="@dimen/big_image_view_size"
+        android:layout_height="@dimen/big_image_view_size"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/arrow_right"
+        app:layout_constraintBottom_toBottomOf="@id/carousel_view_pager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/carousel_view_pager" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/carousel_view_pager"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toStartOf="@id/btn_right"
+        app:layout_constraintStart_toEndOf="@id/btn_left"
+        app:layout_constraintTop_toBottomOf="@id/select_emotion_tv_label" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/inputNoteEditText"
+        style="@style/DailyMoodScrollEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/type_note_here_hint"
+        android:inputType="textMultiLine"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/carousel_view_pager" />
+
+    <TextView
+        android:id="@+id/addPhotoTextView"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/bigMargin"
+        android:text="@string/you_may_add_photos_label"
+        app:layout_constraintStart_toStartOf="@id/inputNoteEditText"
+        app:layout_constraintTop_toBottomOf="@id/inputNoteEditText" />
+
+    <ImageView
+        android:id="@+id/add_photo_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/mediumMargin"
+        android:background="@drawable/shape_rounded_16"
+        android:backgroundTint="?colorSecondary"
+        android:contentDescription="@string/add_photo_icon_cd"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_gallery"
+        app:layout_constraintStart_toStartOf="@id/addPhotoTextView"
+        app:layout_constraintTop_toBottomOf="@id/addPhotoTextView" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSaveEmotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/save_emotion_icon_cd"
+        android:src="@drawable/ic_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

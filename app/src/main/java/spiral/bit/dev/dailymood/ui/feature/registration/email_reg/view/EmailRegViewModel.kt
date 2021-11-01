@@ -51,6 +51,8 @@ class EmailRegViewModel @Inject constructor(
         addCondition(Conditions.RequiredField(errorText = "Это поле обязательное!"))
     }
 
+    //TODO I MISSED THIS, FCKN HARDCODE
+
     val muxValidator = MuxLiveDataValidator(
         textEmailValidator,
         textUsernameValidator,

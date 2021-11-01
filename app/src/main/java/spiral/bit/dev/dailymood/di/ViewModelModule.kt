@@ -7,13 +7,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import spiral.bit.dev.dailymood.ui.common.formatters.DateTimeFormatter
+import spiral.bit.dev.dailymood.ui.common.adapter.mappers.AdapterTypeMapper
+import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
 import spiral.bit.dev.dailymood.ui.common.resolvers.FaceMoodResolver
 import spiral.bit.dev.dailymood.ui.common.resolvers.SurveyResolver
-import spiral.bit.dev.dailymood.ui.feature.survey_add_mood.providers.AnswerProvider
-import spiral.bit.dev.dailymood.ui.feature.survey_add_mood.providers.QuestionProvider
-import spiral.bit.dev.dailymood.ui.feature.survey_add_mood.providers.ScoreProvider
+import spiral.bit.dev.dailymood.ui.feature.creationMood.surveyAddMood.providers.AnswerProvider
+import spiral.bit.dev.dailymood.ui.feature.creationMood.surveyAddMood.providers.QuestionProvider
+import spiral.bit.dev.dailymood.ui.feature.creationMood.surveyAddMood.providers.ScoreProvider
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -62,7 +63,7 @@ object ViewModelModule {
 
     @ViewModelScoped
     @Provides
-    fun provideDateTimeFormatter() = DateTimeFormatter()
+    fun provideDateTimeFormatter() = AppDateTimeFormatter()
 
     @ViewModelScoped
     @Provides
@@ -75,4 +76,8 @@ object ViewModelModule {
     @ViewModelScoped
     @Provides
     fun provideScoreProvider() = ScoreProvider()
+
+    @ViewModelScoped
+    @Provides
+    fun provideAdapterTypeMapper() = AdapterTypeMapper()
 }

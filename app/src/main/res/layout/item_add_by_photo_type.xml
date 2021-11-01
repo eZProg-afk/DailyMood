@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:fontFamily="@font/ubuntu_bold"
-            android:text="@string/manually_label"
+            android:text="@string/manually_option"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

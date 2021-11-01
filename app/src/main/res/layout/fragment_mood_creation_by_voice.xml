@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.feature.creationMood.voiceAddMood.view.VoiceAddEmotionFragment">
+
+    <include
+        android:id="@+id/voiceToolbar"
+        layout="@layout/view_simple_toolbar" />
+
+    <ImageView
+        android:id="@+id/questionImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/image_question_cd"
+        android:src="@drawable/question_back_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/voiceToolbar" />
+
+    <TextView
+        android:id="@+id/questionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/ubuntu_bold"
+        android:gravity="center"
+        android:maxLines="5"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/questionImageView"
+        tools:text="Сколько шоколадок ты сегодня ел?" />
+
+    <Chronometer
+        android:id="@+id/recordChronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/record_indicator"
+        android:drawablePadding="5dp"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/questionImageView"
+        app:layout_constraintStart_toStartOf="@id/questionImageView"
+        app:layout_constraintTop_toBottomOf="@id/questionImageView"
+        tools:visibility="visible" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/voice_label"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/questionTextView"
+        app:layout_constraintStart_toStartOf="@id/questionTextView"
+        app:layout_constraintTop_toBottomOf="@id/questionTextView" />
+
+    <TextView
+        android:id="@+id/recordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:text="@string/tap_to_record_label"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/recordBtn"
+        app:layout_constraintEnd_toEndOf="@id/recordBtn"
+        app:layout_constraintStart_toStartOf="@id/recordBtn" />
+
+    <ImageView
+        android:id="@+id/recordBtn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_rounded_16"
+        android:backgroundTint="?colorPrimary"
+        android:contentDescription="@string/icon_voice_cd"
+        android:padding="20dp"
+        android:src="@drawable/ic_voice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

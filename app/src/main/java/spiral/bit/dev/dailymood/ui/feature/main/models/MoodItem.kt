@@ -3,24 +3,24 @@ package spiral.bit.dev.dailymood.ui.feature.main.models
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import spiral.bit.dev.dailymood.R
-import spiral.bit.dev.dailymood.data.emotion.MoodEntity
-import spiral.bit.dev.dailymood.databinding.ItemEmotionBinding
-import spiral.bit.dev.dailymood.ui.common.adapter.ListItem
-import spiral.bit.dev.dailymood.ui.common.formatters.DateTimeFormatter
+import spiral.bit.dev.dailymood.data.mood.MoodEntity
+import spiral.bit.dev.dailymood.databinding.ItemMoodBinding
+import spiral.bit.dev.dailymood.ui.common.adapter.models.ListItem
+import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
 
-private val formatter = DateTimeFormatter()
+private val formatter = AppDateTimeFormatter()
 private val emotionTypeMapper = EmotionTypeMapper()
 
 fun moodItemDelegate(onItemClickListener: (MoodItem) -> Unit) =
-    adapterDelegateViewBinding<MoodItem, MoodItem, ItemEmotionBinding>({ inflater, container ->
-        ItemEmotionBinding.inflate(inflater, container, false)
+    adapterDelegateViewBinding<MoodItem, ListItem, ItemMoodBinding>({ inflater, container ->
+        ItemMoodBinding.inflate(inflater, container, false)
     }) {
         binding.root.setOnClickListener { onItemClickListener.invoke(item) }
         bind {
             val emotionType = emotionTypeMapper.mapToEmotionType(item.moodEntity.moodType)
             with(binding) {
-                createdTimeTextView.text = formatter.format(item.moodEntity.createdTime)
+                createdTimeTextView.text = formatter.formatMoodItem(item.moodEntity.createdTime)
                 feelLabelTextView.text = emotionType.translate
                 when (emotionType) {
                     MoodType.HAPPY -> iconMoodImageView.setImageResource(R.drawable.ic_emotion_happy)
@@ -34,12 +34,12 @@ fun moodItemDelegate(onItemClickListener: (MoodItem) -> Unit) =
         }
     }
 
-val diffCallback = object : DiffUtil.ItemCallback<MoodItem>() {
-    override fun areItemsTheSame(oldItem: MoodItem, newItem: MoodItem) =
-        oldItem::class == newItem::class && oldItem.moodEntity.id == newItem.moodEntity.id
+val diffCallback = object : DiffUtil.ItemCallback<ListItem>() {
+    override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem) =
+        oldItem::class == newItem::class
 
-    override fun areContentsTheSame(oldItem: MoodItem, newItem: MoodItem) =
-        oldItem.moodEntity.createdTime == newItem.moodEntity.createdTime
+    override fun areContentsTheSame(oldItem: ListItem, newItem: ListItem) =
+        oldItem.hashCode() == newItem.hashCode()
 }
 
 data class MoodItem(

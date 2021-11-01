@@ -13,6 +13,7 @@
     <color name="veryLightGrey">#f0f0f0</color>
     <color name="purple">#7d64e6</color>
     <color name="yellow">#ffee00</color>
+    <color name="light_purple">#ef8cf2</color>
 
     <!-- Theming -->
     <color name="mainAppCardViewColor">#A4A4A4</color>

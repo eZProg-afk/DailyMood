@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/mediumMargin"
-        android:contentDescription="@string/icon_registration_label_cd"
+        android:contentDescription="@string/icon_registration_cd"
         android:src="@drawable/reg_label_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

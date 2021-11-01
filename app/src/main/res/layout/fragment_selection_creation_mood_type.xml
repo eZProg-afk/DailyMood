@@ -1,0 +1,25 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/DailyMoodDefaultBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.feature.selectCreationType.view.SelectionTypeCreatingEmotionFragment">
+
+    <include layout="@layout/view_simple_toolbar" android:id="@+id/selectionToolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/selectionTypesRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selectionToolbar"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_select_creation_mood_type" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

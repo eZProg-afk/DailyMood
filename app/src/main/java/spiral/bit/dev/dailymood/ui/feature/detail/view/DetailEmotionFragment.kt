@@ -8,10 +8,10 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import spiral.bit.dev.dailymood.R
-import spiral.bit.dev.dailymood.data.emotion.MoodEntity
-import spiral.bit.dev.dailymood.databinding.FragmentDetailEmotionBinding
+import spiral.bit.dev.dailymood.data.mood.MoodEntity
+import spiral.bit.dev.dailymood.databinding.FragmentDetailMoodBinding
 import spiral.bit.dev.dailymood.ui.base.*
-import spiral.bit.dev.dailymood.ui.common.formatters.DateTimeFormatter
+import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
 import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
 import spiral.bit.dev.dailymood.ui.feature.detail.models.mvi.DetailEffect
 import spiral.bit.dev.dailymood.ui.feature.detail.models.mvi.DetailState
@@ -19,11 +19,11 @@ import spiral.bit.dev.dailymood.ui.feature.main.models.MoodType
 
 @AndroidEntryPoint
 class DetailEmotionFragment :
-    BaseFragment<DetailState, DetailEffect, FragmentDetailEmotionBinding>(
-        FragmentDetailEmotionBinding::inflate
+    BaseFragment<DetailState, DetailEffect, FragmentDetailMoodBinding>(
+        FragmentDetailMoodBinding::inflate
     ) {
 
-    private val formatter = DateTimeFormatter()
+    private val formatter = AppDateTimeFormatter()
     private val emotionTypeMapper = EmotionTypeMapper()
     private val args: DetailEmotionFragmentArgs by navArgs()
     override val viewModel: DetailViewModel by hiltNavGraphViewModels(R.id.nav_graph)
@@ -60,6 +60,10 @@ class DetailEmotionFragment :
                 emotionPhoto.loadByDrawable(R.drawable.ic_emotion_happy)
                 emotionTypeFeel = getString(R.string.happy_feel_label)
             }
+            MoodType.GOOD -> {
+                emotionPhoto.loadByDrawable(R.drawable.ic_emotion_happy)
+                emotionTypeFeel = getString(R.string.good_feel_label)
+            }
             MoodType.NEUTRAL -> {
                 emotionPhoto.loadByDrawable(R.drawable.ic_emotion_neutral)
                 emotionTypeFeel = getString(R.string.neutral_feel_label)
@@ -77,7 +81,7 @@ class DetailEmotionFragment :
         emotionInfoTypeDateTv.text = getString(
             R.string.you_feel_yourself,
             emotionTypeFeel,
-            formatter.format(moodEntity.createdTime)
+            formatter.formatMoodItem(moodEntity.createdTime)
         )
     }
 

@@ -31,6 +31,7 @@ buildscript {
         cameraxVersion = "1.0.2"
         cameraViewVersion = "1.0.0-alpha30"
         cropperVersion = "3.3.5"
+        lottieVersion = "4.2.0"
 
         //Database (local)
         roomVersion = "2.3.0"

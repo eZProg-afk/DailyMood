@@ -1,30 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Titles begin -->
+
+    <string name="realtime_type_title">In real time</string>
+    <string name="empty_day_title">This day has been missed!</string>
+    <string name="gallery_type_title">From gallery</string>
+    <string name="camera_type_title">Camera</string>
+
+    <!-- Titles ended -->
+
+    <!-- Descriptions begin -->
+
+    <string name="camera_type_description">Take a photo of yourself or your friend on camera, and analyze the mood</string>
+    <string name="realtime_type_description">Analyze your or a friend\'s emotions in real time. More suitable for adjusting to your mood</string>
+    <string name="gallery_type_description">Analyze your own or someone else\'s emotions using photos from your gallery.</string>
+    <string name="remove_add_description">For only 100 rubles a month you will use this application without hindrance, including the absence of annoying ads :)</string>
+    <string name="sub_pro_description">For only 300 rubles a month you will get access to the following functions: analysis of mood by voice, complete disabling of ads, as well as statistics</string>
+    <string name="manually_description">Add your own note and photo. Suitable when you want to do everything yourself and customize it as much as possible.</string>
+    <string name="voice_description">Add emotion by answering the questions asked with voice and subsequent automatic recognition. It doesn\'t work perfectly, but sometimes it\'s easier and faster.</string>
+    <string name="survey_description">Take a simple questionnaire and we will determine your mood. If in doubt, this is the best way.</string>
+    <string name="photo_description">Give your (or someone else\'s) photo, and we will analyze what mood this person is.</string>
+
+    <!-- Descriptions ended -->
+
+    <!-- Options begin -->
+
     <string name="diary_menu_option">Diary</string>
-    <string name="voice_hint_label">Постарайся ответить несколькими словами, чтобы мне легче было определить твоё настроение</string>
-    <string name="image_question_cd">Картинка вопроса</string>
-    <string name="record_begin">Идёт запись…</string>
-    <string name="too_quiet_toast">Пожалуйста, скажите четчё и внятнее :)</string>
-    <string name="your_face_not_visible_label">Вашего лица не видно!</string>
-    <string name="faces_too_many">Лиц слишком много! Распознавание работает только на одного человека</string>
-    <string name="camera_type_descripion">Сфотографируйте себя или своего друга на камеру, и проанализируйте настроение</string>
-    <string name="realtime_type_title">В реальном времени</string>
-    <string name="realtime_type_descripion">Анализируйте эмоции свои или друга в режиме реального времени. Больше подходит для того, чтобы подстроиться под своё настроение</string>
-    <string name="gallery_type_descripion">Анализируйте свои или чужие эмоции с помощью фото из вашей галереи.</string>
-    <string name="retake_photo_label">Переснять фото</string>
-    <string name="next_question_label">Следующий вопрос</string>
-    <string name="result_survey_label">Результат вашего теста</string>
-    <string name="save_mood_label">Сохранить настроение</string>
-    <string name="repeat_survey_label">Повторить тест</string>
-    <string name="scores_format">Вы набрали %s очков</string>
-    <string name="depression_reason">Вопросы 1-8 оценивали симптомы депрессии.</string>
-    <string name="depression_advices">Если вы набрали больше 11 баллов, то это может указывать на депрессию. В случае депрессии человек обычно страдает от сниженного настроения, потери интереса и жизнерадостности, уменьшения энергии, что в свою очередь приводит к повышенной усталости и снижению активности. Также люди могут ощущать снижение внимания и способности сосредоточиться, нарушение сна и изменение аппетита. Также можно испытывать чувство вины и неполноценности, заниженную самооценку и самоуверенность; человек может проявлять пессимизм и безнадежность в отношении будущего, может уменьшиться воля к жизни.  В случае мыслей о смерти ознакомьтесь с контактами по оказанию быстрой помощи и обязательно свяжитесь с одним из них, чтобы не оставаться одному!</string>
-    <string name="neurosis_reason">Вопросы 9-14 оценивали симптомы генерализованного тревожного невроза.</string>
-    <string name="neurosis_advices">Если вы набрали больше 11 баллов, то это может указывать на тревожный невроз. Генерализованный тревожный невроз проявляется в виде генерализованной, постоянной, так сказать, неустойчивой тревоги, которая существенно не связана с определенными ситуациями. Наиболее частыми жалобами являются тревога ожидания и чрезмерная озабоченность, нервозность, напряжение в мышцах, головная боль, вызванная напряжением, дрожь, усталость, слабость, сухость во рту и другие признаки чрезмерной активности вегетативной нервной системы, также человеку трудно расслабиться.</string>
-    <string name="social_phobia_reason">Вопросы 15 и 16 оценивали симптомы социофобии, то есть тревожное расстройство, связанное с общением.</string>
-    <string name="social_phobia_advices">"Если вы набрали больше 3 баллов, то это может указывать на социофобию. Социофобия связана со страхом находиться в центре внимания в составе маленькой группы. Зачастую социофобия связана также с низкой самооценкой и боязнью критики. В ситуациях, связанных с фобией, люди испытывают соматические симптомы тревоги, такие как, покраснение, дрожь в руках, тошноту или учащенное сердцебиение, которые приносят сильный дискомфорт, поэтому люди стараются избегать различных социальных ситуаций. "</string>
-    <string name="asthenia_reason">Вопросы 17-20 оценивали симптомы астении, то есть усталости.</string>
-    <string name="asthenia_advices">"Если вы набрали больше 6 баллов, то это может указывать на синдром усталости, в случае которого человек изнурен как физически, так и морально, и чувствует общую усталость, на которую существенно не может повлиять отдых. Характерно пониженное внимание и способность сосредоточиться, и даже после небольшого напряжения человек быстро устает. "</string>
-    <string name="insomnia_reason">Вопросы 21-23 оценивали симптомы бессонницы.</string>
-    <string name="insomnia_advices">"Если вы набрали больше 6 баллов, то это может указывать на расстройства сна. Расстройства сна могут проявляться в трудностях с засыпанием, в беспокойном прерывистом сне и чрезмерно раннем пробуждении. Расстройства сна могут быть связаны со многими другими проблемами со здоровьем. "</string>
+    <string name="advices_menu_option">Advices</string>
+    <string name="progress_menu_option">Statistics</string>
+    <string name="settings_menu_option">Settings</string>
+    <string name="pro_menu_option">Pro - version</string>
+    <string name="conversation_option">Conversation</string>
+    <string name="photo_option">By photo</string>
+    <string name="voice_option">By voice</string>
+    <string name="manually_option">Manually</string>
+    <string name="survey_option">By survey</string>
+
+    <!-- Options ended -->
+
+    <!-- Hints begin -->
+
+    <string name="empty_day_hint">When you miss a day, you don\'t keep any records! Try to come back here every day :)</string>
+    <string name="type_note_here_hint">If you want, write a note here</string>
+    <string name="name_hint">Enter your name…</string>
+    <string name="e_mail_hint">Enter your e-mail…</string>
+    <string name="password_hint">Pick a password…</string>
+    <string name="enter_phone_hint">Enter your phone number…</string>
+    <string name="enter_password_hint">Enter your password…</string>
+    <string name="enter_tag_name_hint">Enter the name of the lesson</string>
+    <string name="search_emotion_hint">Search for emotion by note / date …</string>
+    <string name="hint_photo">You can define your mood (or another person\'s) and keep it</string>
+    <string name="hint_photo_recognition_label">To make the recognition clearer, we recommend adding a photo with one person, where his face is clearly visible.</string>
+
+    <!-- Hints ended -->
+
+    <!-- Labels begin -->
+
+    <string name="your_face_not_visible_label">Your face is not visible!</string>
+    <string name="retake_photo_label">Remake photo</string>
+    <string name="next_question_label">Next question</string>
+    <string name="result_survey_label">Result of survey</string>
+    <string name="save_mood_label">Save mood</string>
+    <string name="repeat_survey_label">Repeat survey</string>
+    <string name="mood_detection_label">Definition of mood</string>
+    <string name="interrupt_survey_label">Interrupt survey</string>
+    <string name="previous_question_label">Previous question</string>
+    <string name="select_emotion_label">Select mood</string>
+    <string name="select_date_label">Select date</string>
+    <string name="today_label">Today</string>
+    <string name="cancel_label">Cancel</string>
+    <string name="add_emotion_label">Add mood</string>
+    <string name="add_note_label">Add note</string>
+    <string name="or_use_this_label">Or use</string>
+    <string name="you_may_add_photos_label">You can add a photo</string>
+    <string name="emotion_label">Your mood</string>
+    <string name="create_my_tag_label">Create your own tag</string>
+    <string name="happy_feel_label">happy</string>
+    <string name="good_feel_label">good</string>
+    <string name="neutral_feel_label">neutral</string>
+    <string name="sad_feel_label">sad</string>
+    <string name="angry_feel_label">angry</string>
+    <string name="select_tag_category_label">Select tag\'s category</string>
+    <string name="create_emotion_label">Mood creation</string>
+    <string name="pro_sub_label">Pro subscription</string>
+    <string name="settings_label">Settings</string>
+    <string name="detail_emotion_label">View mood</string>
+    <string name="select_icon_label">Select icon</string>
+    <string name="select_month_label">Select month</string>
+    <string name="full_analysis_label">Full report</string>
+    <string name="already_have_an_account_label">Already have an account?</string>
+    <string name="enter_login_label">Sign in</string>
+    <string name="reg_label">Registration</string>
+    <string name="authorization_label">Authorization</string>
+    <string name="create_account_label">Create account</string>
+    <string name="save_result_label">Save result</string>
+    <string name="subscribe_label">Confirm</string>
+    <string name="loading_label">Loading…</string>
+    <string name="add_tags_label">Adding tags</string>
+    <string name="close_label">Close</string>
+    <string name="survey_label">Survey</string>
+    <string name="sort_type_label">Select mood type</string>
+    <string name="registration_label">Registration</string>
+    <string name="tap_to_record_label">Tap to record</string>
+    <string name="statistics_label">Statistics</string>
+    <string name="advices_label">Advices</string>
+    <string name="remove_ad_label">Remove ads in this application (subscription)</string>
+    <string name="welcome_pro_label">Here you can familiarize yourself with all the subscriptions, and, if you wish, issue them.</string>
+    <string name="email_reg_label">Registration by e-mail</string>
+    <string name="email_auth_label">Login by e-mail</string>
+    <string name="statistic_label">Statistics</string>
+    <string name="voice_label">Try to answer with a few words, so that it would be easier for me to determine your mood</string>
+
+    <!-- Labels ended -->
+
+    <!-- Content descriptions -->
+
+    <string name="icon_registration_cd">Icon registration</string>
+    <string name="image_question_cd">Question icon</string>
+    <string name="open_drawer_cd">Open menu</string>
+    <string name="close_drawer_cd">Close menu</string>
+    <string name="mood_icon_cd">Mood icon</string>
+    <string name="icon_text_cd">Icon next</string>
+    <string name="icon_menu_cd">Menu icon</string>
+    <string name="result_photo_cd">Result of photo</string>
+    <string name="flash_toggle_cd">Turn on / off flash</string>
+    <string name="switch_camera_cd">Switch cameras</string>
+    <string name="make_photo_cd">Make photo</string>
+    <string name="emotion_icon_cd">Mood icon</string>
+    <string name="icon_back_cd">Icon menu back</string>
+    <string name="icon_voice_cd">Icon voice</string>
+    <string name="add_photo_icon_cd">Add photo icon</string>
+    <string name="save_emotion_icon_cd">Save mood icon</string>
+    <string name="add_emotion_icon_cd">Add emotion icon</string>
+    <string name="drawer_logo_cd">Drawer logo</string>
+
+    <!-- Content descriptions -->
+
+    <!-- Toasts begin -->
+
+    <string name="too_quiet_toast">Please, be clear and understandable :)</string>
+    <string name="record_added_toast">Entry added!</string>
+    <string name="emotion_deleted_toast">Mood deleted!</string>
+    <string name="error_fb_reg_try_later_toast">An error occurred, please try again later :(</string>
+    <string name="cant_go_to_previous_question_toast">You cannot go back to the previous question!</string>
+
+    <!-- Toasts ended -->
+
+    <!-- Other begin -->
+
+    <string name="record_begin">Recording in progress …</string>
+    <string name="depression_reason">Questions 1–8 assessed the symptoms of depression.</string>
+    <string name="depression_advices">If you scored more than 11 points, then this may indicate depression. In the case of depression, the person usually suffers from low mood, loss of interest and cheerfulness, decreased energy, which in turn leads to increased fatigue and decreased activity. People may also experience decreased attention and concentration, sleep disturbances, and changes in appetite. You can also experience feelings of guilt and inferiority, low self-esteem and self-confidence; a person may show pessimism and hopelessness in relation to the future, the will to live may diminish. If you are thinking about death, check out our quick help contacts and be sure to contact one of them so as not to be left alone!</string>
+    <string name="neurosis_reason">Questions 9–14 assessed the symptoms of generalized anxiety neurosis.</string>
+    <string name="neurosis_advices">If you scored more than 11 points, then this may indicate an anxiety neurosis. Generalized anxiety neurosis manifests itself in the form of generalized, constant, so to speak, unstable anxiety, which is not significantly associated with certain situations. The most common complaints are anticipatory anxiety and anxiety, nervousness, muscle tension, tension headache, tremors, fatigue, weakness, dry mouth and other signs of overactive autonomic nervous system, and it is also difficult for a person to relax.</string>
+    <string name="social_phobia_reason">Questions 15 and 16 assessed symptoms of social phobia, which is an anxiety disorder associated with communication.</string>
+    <string name="social_phobia_advices">If you scored more than 3 points, then this may indicate social anxiety. Social phobia is associated with the fear of being the center of attention in a small group. Often, social phobia is also associated with low self-esteem and fear of criticism. In phobic situations, people experience somatic anxiety symptoms such as redness, shaking hands, nausea, or heart palpitations, which are very uncomfortable, so people try to avoid various social situations.</string>
+    <string name="asthenia_reason">Questions 17–20 assessed the symptoms of asthenia, that is, fatigue.</string>
+    <string name="asthenia_advices">If you scored more than 6 points, then this may indicate fatigue syndrome, in which a person is exhausted both physically and mentally, and feels general fatigue, which cannot be significantly affected by rest. Low attention and the ability to concentrate are characteristic, and even after a little exertion, a person quickly gets tired.</string>
+    <string name="insomnia_reason">Questions 21–23 assessed the symptoms of insomnia.</string>
+    <string name="insomnia_advices">If you scored more than 6 points, then this may indicate a sleep disorder. Sleep disorders can manifest as difficulty falling asleep, restless intermittent sleep, and waking up too early. Sleep disorders can be associated with many other health problems.</string>
+    <string name="create_emotion">Create mood</string>
+    <string name="you_may_add_tags">Here you can choose what you \\n did from the suggested \\n options, or add your own \\n option, or \\n skip it altogether.</string>
+    <string name="create_tag">Creation of tag</string>
+    <string name="sport_category">Sport</string>
+    <string name="art_category">Art</string>
+    <string name="relax_category">Relax</string>
+    <string name="learning_category">Learning</string>
+    <string name="already_not_have_account">Don\'t have an account yet?</string>
+    <string name="invalid_email_error">The entered mail must be valid!</string>
+    <string name="password_not_enough_large_error">Password must be more than 7 characters</string>
+    <string name="passwords_must_be_equals_error">Passwords must match!</string>
+    <string name="and_submit_password_error">And confirm it!</string>
+    <string name="you_get_scores_format">You typed% s in this section</string>
+    <string name="question_number_format">Question %s of 23</string>
+    <string name="your_note">Your note: %s</string>
+    <string name="def_sub_status">Current subscription status</string>
+    <string name="sub_not_found">Subscription not found</string>
+    <string name="subs_not_supported">Subscriptions are not supported on your device! (</string>
+    <string name="error_invalid_sub">Subscription is not valid</string>
+    <string name="user_default_username">User</string>
+    <string name="emotion_type_tv">Mood type</string>
+    <string name="you_not_answer">Please answer the question</string>
+    <string name="scores_format">You got %s</string>
+    <string name="select_image_for_emotion_recognition">Choose a picture for emotion recognition</string>
+    <string name="you_feel_yourself">You felt like% s in% s</string>
+    <string name="how_you_want_to_add_emotion">How do you want to add mood?</string>
+    <string name="sub_cancelled">Subscription cancelled</string>
+    <string name="sub_in_process">Subscription in process…</string>
+    <string name="sub_confirmed">Subscription confirmed!</string>
+    <string name="password_empty_error">Pick a password</string>
+    <string name="faces_too_many">Too many faces! Recognition only works for one person</string>
+    <string name="email_is_should_be_smaller">Your email is too long!</string>
+    <string name="make_pro_sub">Confirm pro subscription in this app</string>
+    <string name="reg_through_fb">Registration via Facebook</string>
+    <string name="reg_through_email">Registration via E-mail</string>
+    <string name="add_mood_by_photo">Add mood by photo</string>
+
+    <!-- Other ended -->
+
 </resources>

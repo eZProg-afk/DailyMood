@@ -64,9 +64,9 @@ class EmailAuthFragment : BaseFragment<RegState, RegEffect, FragmentEmailAuthBin
         passwordInputEditText.validateBy(viewLifecycleOwner, viewModel.textPasswordValidator)
     }
 
-    override fun handleSideEffect(effect: RegEffect) = binding {
-        when (effect) {
-            is RegEffect.Toast -> root.toast(effect.msg)
+    override fun handleSideEffect(sideEffect: RegEffect) = binding {
+        when (sideEffect) {
+            is RegEffect.Toast -> root.toast(sideEffect.msg)
             RegEffect.NavigateToReg -> {
                 EmailAuthFragmentDirections.toEmailRegistration()
                     .apply {

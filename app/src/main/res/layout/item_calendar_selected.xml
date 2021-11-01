@@ -7,7 +7,7 @@
     android:layout_marginStart="4dp"
     android:layout_marginEnd="4dp"
     tools:layout_marginTop="10dp"
-    android:background="@drawable/selected_calendar_item_back"
+    android:background="@drawable/shape_rounded_16"
     android:orientation="vertical"
     android:padding="10dp">
 
