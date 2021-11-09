@@ -17,20 +17,6 @@ interface MoodDao {
     @Query("SELECT * FROM emotions WHERE note LIKE '%' || :searchQuery || '%' ORDER BY id DESC, note")
     fun getEmotionsBySearchQuery(searchQuery: String): Flow<List<MoodEntity>>
 
-    //TODO 'MOOD TYPE'
-
-    @Query("SELECT * FROM emotions WHERE moodType == 'HAPPY'")
-    fun getAllHappyEmotions(): Flow<List<MoodEntity>>
-
-    @Query("SELECT * FROM emotions WHERE moodType == 'NEUTRAL'")
-    fun getAllNeutralEmotions(): Flow<List<MoodEntity>>
-
-    @Query("SELECT * FROM emotions WHERE moodType == 'SAD'")
-    fun getAllSadEmotions(): Flow<List<MoodEntity>>
-
-    @Query("SELECT * FROM emotions WHERE moodType == 'ANGRY'")
-    fun getAllAngryEmotions(): Flow<List<MoodEntity>>
-
     @Query("SELECT * FROM emotions WHERE id == :emotionId")
     fun getEmotionById(emotionId: Long): MoodEntity
 }

@@ -14,13 +14,5 @@ class MoodRepository @Inject constructor(private val moodDao: MoodDao) {
     fun getEmotionsBySearchQuery(searchQuery: String) =
         moodDao.getEmotionsBySearchQuery(searchQuery)
 
-    fun getAllHappyEmotions() = moodDao.getAllHappyEmotions()
-
-    fun getAllNeutralEmotions() = moodDao.getAllNeutralEmotions()
-
-    fun getAllSadEmotions() = moodDao.getAllSadEmotions()
-
-    fun getAllAngryEmotions() = moodDao.getAllAngryEmotions()
-
     fun getEmotionById(emotionId: Long) = moodDao.getEmotionById(emotionId)
 }

@@ -9,14 +9,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import com.egorblagochinnov.validators.validateBy
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.databinding.FragmentMoodCreationManuallyBinding
 import spiral.bit.dev.dailymood.ui.base.*
 import spiral.bit.dev.dailymood.ui.base.extensions.hasPermissions
-import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
-import spiral.bit.dev.dailymood.ui.feature.main.models.MoodType
+import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
 import spiral.bit.dev.dailymood.ui.feature.creationMood.manuallyAddMood.models.mvi.ManuallyEffect
 import spiral.bit.dev.dailymood.ui.feature.creationMood.manuallyAddMood.models.mvi.ManuallyState
 import spiral.bit.dev.dailymood.ui.feature.creationMood.manuallyAddMood.models.sliderDelegate
@@ -30,7 +30,7 @@ class EmotionCreationManuallyFragment :
 
     override val viewModel: ManuallyViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private val sliderAdapter = ListDelegationAdapter(sliderDelegate)
-    private val emotionTypeMapper = EmotionTypeMapper()
+    private val moodTypeMapper = MoodTypeMapper()
 
     private val getPermissions =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -46,19 +46,24 @@ class EmotionCreationManuallyFragment :
         super.onViewCreated(view, savedInstanceState)
         setUpClicks()
         setUpViewPager()
+        bindValidators()
+    }
+
+    private fun bindValidators() = binding {
+        reasonEditText.validateBy(viewLifecycleOwner, viewModel.reasonInputValidator)
     }
 
     private fun setUpClicks() = binding {
         fabSaveEmotion.setOnClickListener {
-            val emotionType = when (carouselViewPager.currentItem) {
-                0 -> MoodType.HAPPY
-                1 -> MoodType.NEUTRAL
-                2 -> MoodType.SAD
-                3 -> MoodType.ANGRY
-                else -> MoodType.HAPPY
-            } //TODO MAKE MAPPER FOR THIS
-            val moodValue = emotionTypeMapper.mapToMoodValue(emotionType)
-            viewModel.insert(moodValue, inputNoteEditText.text.toString())
+            val moodType = moodTypeMapper.mapToMoodType(carouselViewPager.currentItem)
+            val moodValue = moodTypeMapper.mapToMoodValue(moodType)
+            if (reasonEditText.text.toString().isNotEmpty()) {
+                viewModel.insert(
+                    moodValue,
+                    inputNoteEditText.text.toString(),
+                    reasonEditText.text.toString()
+                )
+            }
         }
 
         btnLeft.setOnClickListener {

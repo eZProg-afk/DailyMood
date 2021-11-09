@@ -8,7 +8,7 @@ import java.util.*
 
 class AppDateTimeFormatter {
 
-    fun formatMoodItem(createdTime: Long): String? {
+    fun formatItemTime(createdTime: Long): String? {
         return SimpleDateFormat.getInstance().format(createdTime)
     }
 

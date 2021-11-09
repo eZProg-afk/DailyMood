@@ -12,7 +12,7 @@ import spiral.bit.dev.dailymood.data.mood.MoodEntity
 import spiral.bit.dev.dailymood.databinding.FragmentDetailMoodBinding
 import spiral.bit.dev.dailymood.ui.base.*
 import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
-import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
+import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
 import spiral.bit.dev.dailymood.ui.feature.detail.models.mvi.DetailEffect
 import spiral.bit.dev.dailymood.ui.feature.detail.models.mvi.DetailState
 import spiral.bit.dev.dailymood.ui.feature.main.models.MoodType
@@ -24,7 +24,7 @@ class DetailEmotionFragment :
     ) {
 
     private val formatter = AppDateTimeFormatter()
-    private val emotionTypeMapper = EmotionTypeMapper()
+    private val emotionTypeMapper = MoodTypeMapper()
     private val args: DetailEmotionFragmentArgs by navArgs()
     override val viewModel: DetailViewModel by hiltNavGraphViewModels(R.id.nav_graph)
 
@@ -41,21 +41,21 @@ class DetailEmotionFragment :
     private fun setUpViews(moodEntity: MoodEntity) = binding {
         var emotionTypeFeel = ""
 
-        moodEntity.photoPath?.let {
-            emotionImage.loadByUri(moodEntity.photoPath.toUri())
+        moodEntity.manuallyData?.manuallyAddedPhotoPath?.let { photoPath ->
+            emotionImage.loadByUri(photoPath.toUri())
             emotionImage.isVisible = true
         } ?: run {
             emotionImage.isVisible = false
         }
 
-        moodEntity.note?.let {
-            emotionNote.text = String.format(getString(R.string.your_note, moodEntity.note))
+        moodEntity.manuallyData?.note?.let { note ->
+            emotionNote.text = String.format(getString(R.string.your_note, note))
             emotionNote.isVisible = true
         } ?: run {
             emotionNote.isVisible = false
         }
 
-        when (emotionTypeMapper.mapToEmotionType(moodEntity.moodType)) {
+        when (emotionTypeMapper.mapToMoodType(moodEntity.moodValue)) {
             MoodType.HAPPY -> {
                 emotionPhoto.loadByDrawable(R.drawable.ic_emotion_happy)
                 emotionTypeFeel = getString(R.string.happy_feel_label)
@@ -81,12 +81,12 @@ class DetailEmotionFragment :
         emotionInfoTypeDateTv.text = getString(
             R.string.you_feel_yourself,
             emotionTypeFeel,
-            formatter.formatMoodItem(moodEntity.createdTime)
+            formatter.formatItemTime(moodEntity.createdTime)
         )
     }
 
     override fun renderState(state: DetailState) {
-        setUpViews(state.moodEntity)
+        state.moodEntity?.let { setUpViews(it) }
     }
 
     override fun handleSideEffect(sideEffect: DetailEffect) {

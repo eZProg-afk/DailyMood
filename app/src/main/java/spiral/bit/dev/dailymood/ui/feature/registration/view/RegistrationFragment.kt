@@ -79,9 +79,9 @@ class RegistrationFragment : BaseFragment<RegState, RegEffect, FragmentRegistrat
         callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun handleSideEffect(effect: RegEffect) = binding {
-        when (effect) {
-            is RegEffect.Toast -> root.toast(effect.msg)
+    override fun handleSideEffect(sideEffect: RegEffect) = binding {
+        when (sideEffect) {
+            is RegEffect.Toast -> root.toast(sideEffect.msg)
             RegEffect.NavigateToLogin -> {
                 RegistrationFragmentDirections.toEmailAuthenticate()
                     .apply {

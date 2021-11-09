@@ -1,5 +1,9 @@
 package spiral.bit.dev.dailymood.ui.feature.creationMood.realtimeAddMood.view
 
+import androidx.camera.core.ImageCapture
+import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
+import androidx.fragment.app.FragmentActivity
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceDetector
@@ -9,11 +13,16 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import spiral.bit.dev.dailymood.R
+import spiral.bit.dev.dailymood.data.models.CreationType
+import spiral.bit.dev.dailymood.data.models.PhotoData
 import spiral.bit.dev.dailymood.data.mood.MoodEntity
 import spiral.bit.dev.dailymood.data.mood.MoodRepository
 import spiral.bit.dev.dailymood.di.FaceDetectorOptionsRealtime
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
+import spiral.bit.dev.dailymood.ui.base.extensions.safeLet
+import spiral.bit.dev.dailymood.ui.base.extensions.takePictureAwait
 import spiral.bit.dev.dailymood.ui.base.listenAwait
+import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
 import spiral.bit.dev.dailymood.ui.common.resolvers.FaceMoodResolver
 import spiral.bit.dev.dailymood.ui.feature.creationMood.realtimeAddMood.models.mvi.RealtimeEffect
 import spiral.bit.dev.dailymood.ui.feature.creationMood.realtimeAddMood.models.mvi.RealtimeState
@@ -22,14 +31,30 @@ import javax.inject.Inject
 @HiltViewModel
 class RealtimeViewModel @Inject constructor(
     private val moodRepository: MoodRepository,
-    @FaceDetectorOptionsRealtime private val faceDetector: FaceDetector
+    @FaceDetectorOptionsRealtime private val faceDetector: FaceDetector,
+    private val faceDetectionMoodResolver: FaceMoodResolver,
+    private val appDateTimeFormatter: AppDateTimeFormatter
 ) : BaseViewModel<RealtimeState, RealtimeEffect>() {
 
-    override val container = container<RealtimeState, RealtimeEffect>(RealtimeState(0F))
+    override val container = container<RealtimeState, RealtimeEffect>(
+        RealtimeState(
+            smileProbability = null,
+            currentInputImage = null
+        )
+    )
 
-    private val faceDetectionMoodResolver = FaceMoodResolver()
+    fun detectFace(
+        activity: FragmentActivity,
+        imageCapture: ImageCapture,
+        image: InputImage,
+        listener: () -> Unit
+    ) = intent {
+        val photoFile = appDateTimeFormatter.formatFile(activity.filesDir)
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
-    fun detectFace(image: InputImage, listener: () -> Unit) = intent {
+        imageCapture.takePictureAwait(outputOptions, ContextCompat.getMainExecutor(activity))
+        val savedUri = photoFile.toUri()
+
         runCatching {
             return@runCatching faceDetector.process(image).listenAwait()
                 .also<List<Face>> { listener.invoke() }
@@ -41,7 +66,12 @@ class RealtimeViewModel @Inject constructor(
                 faces.isEmpty() -> postSideEffect(RealtimeEffect.Toast(R.string.your_face_not_visible_label))
                 else -> {
                     faces.first().smilingProbability?.let { smilingProbability ->
-                        reduce { state.copy(smileProbability = smilingProbability) }
+                        reduce {
+                            state.copy(
+                                smileProbability = smilingProbability,
+                                currentInputImage = savedUri
+                            )
+                        }
                     }
                 }
             }
@@ -55,8 +85,14 @@ class RealtimeViewModel @Inject constructor(
 
     fun takeEmotion() = intent {
         val moodValue = faceDetectionMoodResolver.resolveEmotionType(state.smileProbability)
-        val emotionItem = MoodEntity(moodType = moodValue)
-        insertEmotion(emotionItem)
+        safeLet(moodValue, state.currentInputImage) { nonNullMoodValue, inputImage ->
+            val emotionItem = MoodEntity(
+                moodValue = nonNullMoodValue,
+                photoData = PhotoData(photoPath = inputImage.toString()),
+                creationType = CreationType.BY_PHOTO
+            )
+            insertEmotion(emotionItem)
+        }
     }
 }
 

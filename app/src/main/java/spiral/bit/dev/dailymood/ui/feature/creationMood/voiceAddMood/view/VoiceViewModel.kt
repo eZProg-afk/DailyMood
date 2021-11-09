@@ -10,11 +10,15 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import spiral.bit.dev.dailymood.R
+import spiral.bit.dev.dailymood.data.models.Question
+import spiral.bit.dev.dailymood.data.models.Audio
+import spiral.bit.dev.dailymood.data.models.AudioData
+import spiral.bit.dev.dailymood.data.models.CreationType
 import spiral.bit.dev.dailymood.data.mood.MoodEntity
 import spiral.bit.dev.dailymood.data.mood.MoodRepository
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
 import spiral.bit.dev.dailymood.ui.base.Logger
-import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
+import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
 import spiral.bit.dev.dailymood.ui.common.resolvers.VokaturiEmotionResolver
 import spiral.bit.dev.dailymood.ui.feature.creationMood.voiceAddMood.models.mvi.VoiceEffect
 import spiral.bit.dev.dailymood.ui.feature.creationMood.voiceAddMood.models.mvi.VoiceState
@@ -27,7 +31,7 @@ class VoiceViewModel @SuppressLint("StaticFieldLeak") //this is application cont
     @ApplicationContext private val context: Context
 ) : BaseViewModel<VoiceState, VoiceEffect>() {
 
-    private val emotionTypeMapper = EmotionTypeMapper()
+    private val emotionTypeMapper = MoodTypeMapper()
     private val emotionResolver = VokaturiEmotionResolver()
     private var _vokaturiApi: Vokaturi? = null
     private val vokaturiApi: Vokaturi get() = checkNotNull(_vokaturiApi)
@@ -38,7 +42,8 @@ class VoiceViewModel @SuppressLint("StaticFieldLeak") //this is application cont
                 question = getRandomQuestion(),
                 questionCount = 0,
                 isRecorded = false,
-                arrayListOf()
+                resultMoodEntities = arrayListOf(),
+                audioData = null
             )
         )
 
@@ -50,7 +55,7 @@ class VoiceViewModel @SuppressLint("StaticFieldLeak") //this is application cont
 
     private fun getRandomQuestion(): String {
         val randomNumber = (0..QUESTION_ARRAY_SIZE).random()
-        val questions = context.resources.getStringArray(R.array.questions)
+        val questions = context.resources.getStringArray(R.array.voice_questions)
         return questions[randomNumber]
     }
 
@@ -65,22 +70,40 @@ class VoiceViewModel @SuppressLint("StaticFieldLeak") //this is application cont
             vokaturiApi.stopListeningAndAnalyze()
         }.onSuccess { emotionProbabilities ->
             val recognizedEmotion = Vokaturi.extractEmotion(emotionProbabilities)
-            val emotionType = emotionResolver.toDailyMood(recognizedEmotion)
-            val moodValue = emotionTypeMapper.mapToMoodValue(emotionType)
-            val emotion = MoodEntity(moodType = moodValue)
+            val moodType = emotionResolver.toDailyMood(recognizedEmotion)
 
-            val emotionsList = state.resultMoodEntities
-            emotionsList.add(emotion)
+            val questionsItemsList = state.audioData?.questions?.toMutableList() ?: mutableListOf()
+            val questionItem = Question(moodType = moodType, question = state.question)
+            questionsItemsList.add(questionItem)
+            val audioItemsList =
+                state.audioData?.answersAudioPaths?.toMutableList() ?: mutableListOf()
+            val audioItem =
+                Audio(id = state.questionCount, path = vokaturiApi.recordedAudio.absolutePath)
+            audioItemsList.add(audioItem)
 
             var questionCount = state.questionCount
             questionCount++
 
+            val audioData =
+                AudioData(answersAudioPaths = audioItemsList, questions = questionsItemsList)
+
+            val moodValue = emotionTypeMapper.mapToMoodValue(moodType)
+            val moodEntity = MoodEntity(
+                moodValue = moodValue,
+                audioData = audioData,
+                creationType = CreationType.BY_VOICE
+            )
+
+            val moodEntitiesList = state.resultMoodEntities
+            moodEntitiesList.add(moodEntity)
+
             reduce {
                 state.copy(
                     isRecorded = false,
-                    resultMoodEntities = emotionsList,
+                    resultMoodEntities = moodEntitiesList,
                     questionCount = questionCount,
-                    question = getRandomQuestion()
+                    question = getRandomQuestion(),
+                    audioData = audioData
                 )
             }.also {
                 isNeedToAsk(state.questionCount)
@@ -99,21 +122,23 @@ class VoiceViewModel @SuppressLint("StaticFieldLeak") //this is application cont
     }
 
     private fun isNeedToAsk(questionCount: Int) = intent {
-        Logger.logDebug(state.questionCount.toString())
         if (questionCount == QUESTION_SUMMARY_COUNT) {
             calculateResultEmotion()
         }
     }
 
     private fun calculateResultEmotion() = intent {
-        val emotionTypes = state.resultMoodEntities.map { it.moodType }
+        val resultMoodEntities = state.resultMoodEntities
+        val audioData = state.audioData
+        val emotionTypes = resultMoodEntities.map { it.moodValue }
         val emotionType = emotionTypes.groupingBy { it }.eachCount().filter { it.value > 1 }
-        insertEmotion(MoodEntity(moodType = emotionType.entries.first().key))
-        //TODO THIS IS NOT WORK OR WORK?
-    }
-
-    private fun insertEmotion(moodEntity: MoodEntity) = intent {
-        moodRepository.insert(moodEntity)
+        MoodEntity(
+            moodValue = emotionType.entries.first().key,
+            audioData = audioData,
+            creationType = CreationType.BY_VOICE
+        ).apply {
+            moodRepository.insert(this)
+        }
         reduce { state.copy(questionCount = 1) }
         postSideEffect(VoiceEffect.NavigateToMain)
     }

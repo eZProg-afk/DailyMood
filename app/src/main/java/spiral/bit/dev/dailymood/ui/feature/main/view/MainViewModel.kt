@@ -13,13 +13,14 @@ import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.data.mood.MoodEntity
 import spiral.bit.dev.dailymood.data.mood.MoodRepository
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
+import spiral.bit.dev.dailymood.ui.base.Logger
 import spiral.bit.dev.dailymood.ui.base.getEndOfDay
 import spiral.bit.dev.dailymood.ui.base.getStartOfDay
 import spiral.bit.dev.dailymood.ui.common.adapter.mappers.AdapterTypeMapper
-import spiral.bit.dev.dailymood.ui.feature.main.models.EmptyDayItem
-import spiral.bit.dev.dailymood.ui.feature.main.models.MoodItem
+import spiral.bit.dev.dailymood.ui.common.adapter.models.ListItem
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionEffect
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionState
+import spiral.bit.dev.dailymood.ui.feature.main.models.ui.EmptyDayItem
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
@@ -46,12 +47,13 @@ class MainViewModel @Inject constructor(
 
     fun getAllEmotionsByDate(dayStart: Long, dayEnd: Long) = intent {
         moodRepository.getEmotionsByDate(dayStart, dayEnd)
-            .onEach { emotions ->
-                if (emotions.isEmpty()) {
+            .onEach { moodEntities ->
+                if (moodEntities.isEmpty()) {
                     reduce {
                         state.copy(
                             moodEntities = listOf(
                                 EmptyDayItem(
+                                    R.string.empty_day_assets_path,
                                     R.string.empty_day_title,
                                     R.string.empty_day_hint
                                 )
@@ -59,7 +61,7 @@ class MainViewModel @Inject constructor(
                         )
                     }
                 } else {
-                    val moodItems = adapterTypeMapper.toMoodItems(emotions)
+                    val moodItems = adapterTypeMapper.resolveMoodItem(moodEntities)
                     reduce { state.copy(moodEntities = moodItems) }
                 }
             }.launchIn(viewModelScope)
@@ -67,7 +69,7 @@ class MainViewModel @Inject constructor(
 
     fun searchByQuery(searchQuery: String) = intent {
         moodRepository.getEmotionsBySearchQuery(searchQuery).collect { emotions ->
-            val moodItems = adapterTypeMapper.toMoodItems(emotions)
+            val moodItems = adapterTypeMapper.resolveMoodItem(emotions)
             reduce { state.copy(moodEntities = moodItems) }
         }
     }
@@ -76,14 +78,22 @@ class MainViewModel @Inject constructor(
         moodRepository.insert(moodEntity)
     }
 
-    fun emotionSwiped(emotion: MoodItem) = intent {
-        moodRepository.delete(emotion.moodEntity)
-        postSideEffect(
-            EmotionEffect.ShowSnackbar(
-                msg = R.string.emotion_deleted_toast,
-                emotion.moodEntity
-            )
-        )
+    fun emotionSwiped(emotion: ListItem) = intent {
+        runCatching {
+            adapterTypeMapper.resolveListItem(emotion)
+        }.onSuccess { moodResult ->
+            moodResult.getOrNull()?.let { moodEntity ->
+                moodRepository.delete(moodEntity)
+                postSideEffect(
+                    EmotionEffect.ShowSnackbar(
+                        msg = R.string.emotion_deleted_toast,
+                        moodEntity
+                    )
+                )
+            }
+        }.onFailure { throwable ->
+            Logger.logError(throwable)
+        }
     }
 
     fun toSelectEmotion() = intent {

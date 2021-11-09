@@ -7,12 +7,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import spiral.bit.dev.dailymood.R
+import spiral.bit.dev.dailymood.data.models.SurveyData
 import spiral.bit.dev.dailymood.databinding.FragmentSurveyResultMoodBinding
 import spiral.bit.dev.dailymood.ui.base.BaseFragment
 import spiral.bit.dev.dailymood.ui.base.binding
 import spiral.bit.dev.dailymood.ui.feature.creationResult.surveyResultMood.models.mvi.MoodSurveyEffect
 import spiral.bit.dev.dailymood.ui.feature.creationResult.surveyResultMood.models.mvi.MoodSurveyState
 import spiral.bit.dev.dailymood.ui.feature.creationResult.surveyResultMood.models.surveyResultDelegate
+import java.lang.Double.sum
 
 class SurveyResultMoodFragment :
     BaseFragment<MoodSurveyState, MoodSurveyEffect, FragmentSurveyResultMoodBinding>(
@@ -45,18 +47,22 @@ class SurveyResultMoodFragment :
     }
 
     private fun setUpRecyclerView() = binding {
-        val totalScores = args.scores.toList()
-        val depressionSectionItems = totalScores.subList(0, 7).sum()
-        val neurosisSectionItems = totalScores.subList(7, 14).sum()
-        val socialPhobiaSectionItems = totalScores.subList(14, 16).sum()
-        val astheniaSectionItems = totalScores.subList(16, 18).sum()
-        val insomniaSectionItems = totalScores.subList(18, 20).sum()
+        val totalScoresList = args.scores.toList()
+        val summaryScores = totalScoresList.sum()
+        val depressionSectionItems = totalScoresList.subList(0, 7).sum()
+        val neurosisSectionItems = totalScoresList.subList(7, 14).sum()
+        val socialPhobiaSectionItems = totalScoresList.subList(14, 16).sum()
+        val astheniaSectionItems = totalScoresList.subList(16, 18).sum()
+        val insomniaSectionItems = totalScoresList.subList(18, 20).sum()
         viewModel.createDataForRecyclerView(
-            depressionSectionItems,
-            neurosisSectionItems,
-            socialPhobiaSectionItems,
-            astheniaSectionItems,
-            insomniaSectionItems
+            SurveyData(
+                summaryScores,
+                depressionSectionItems,
+                neurosisSectionItems,
+                socialPhobiaSectionItems,
+                astheniaSectionItems,
+                insomniaSectionItems,
+            )
         )
         surveyResultsRecyclerView.apply {
             adapter = surveyAdapter

@@ -39,7 +39,7 @@ class SelectionTypeCreatingEmotionFragment :
     }
 
     private fun setUpToolbar() = binding {
-        selectionToolbar.titleTextView.text = getString(R.string.how_you_want_to_add_emotion)
+        selectionToolbar.titleTextView.text = getString(R.string.creation_type)
     }
 
     private fun setUpRecyclerView() = binding {

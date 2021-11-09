@@ -7,6 +7,7 @@
     <string name="empty_day_title">This day has been missed!</string>
     <string name="gallery_type_title">From gallery</string>
     <string name="camera_type_title">Camera</string>
+    <string name="empty_day_analytics_title">During this period, no analytics were conducted!</string>
 
     <!-- Titles ended -->
 
@@ -26,7 +27,7 @@
 
     <!-- Options begin -->
 
-    <string name="diary_menu_option">Diary</string>
+    <string name="diary_option">Diary</string>
     <string name="advices_menu_option">Advices</string>
     <string name="progress_menu_option">Statistics</string>
     <string name="settings_menu_option">Settings</string>
@@ -36,6 +37,11 @@
     <string name="voice_option">By voice</string>
     <string name="manually_option">Manually</string>
     <string name="survey_option">By survey</string>
+    <string name="last_ten_days_option">Last 10 days</string>
+    <string name="last_month_option">Last month</string>
+    <string name="half_year_option">Last six months</string>
+    <string name="year_option">Last year</string>
+    <string name="select_own_period_option">Specify your period</string>
 
     <!-- Options ended -->
 
@@ -52,11 +58,13 @@
     <string name="search_emotion_hint">Search for emotion by note / date …</string>
     <string name="hint_photo">You can define your mood (or another person\'s) and keep it</string>
     <string name="hint_photo_recognition_label">To make the recognition clearer, we recommend adding a photo with one person, where his face is clearly visible.</string>
+    <string name="empty_day_analytics_hint">Try to keep your mood diary constantly :)</string>
 
     <!-- Hints ended -->
 
     <!-- Labels begin -->
 
+    <string name="mood_analytics_label">Mood analytics</string>
     <string name="your_face_not_visible_label">Your face is not visible!</string>
     <string name="retake_photo_label">Remake photo</string>
     <string name="next_question_label">Next question</string>
@@ -103,7 +111,7 @@
     <string name="sort_type_label">Select mood type</string>
     <string name="registration_label">Registration</string>
     <string name="tap_to_record_label">Tap to record</string>
-    <string name="statistics_label">Statistics</string>
+    <string name="statistics_option">Statistics</string>
     <string name="advices_label">Advices</string>
     <string name="remove_ad_label">Remove ads in this application (subscription)</string>
     <string name="welcome_pro_label">Here you can familiarize yourself with all the subscriptions, and, if you wish, issue them.</string>
@@ -111,6 +119,8 @@
     <string name="email_auth_label">Login by e-mail</string>
     <string name="statistic_label">Statistics</string>
     <string name="voice_label">Try to answer with a few words, so that it would be easier for me to determine your mood</string>
+    <string name="get_analytics_for_label">Get analytics for:</string>
+    <string name="detailed_information_label">Detailed information</string>
 
     <!-- Labels ended -->
 
@@ -172,7 +182,7 @@
     <string name="password_not_enough_large_error">Password must be more than 7 characters</string>
     <string name="passwords_must_be_equals_error">Passwords must match!</string>
     <string name="and_submit_password_error">And confirm it!</string>
-    <string name="you_get_scores_format">You typed% s in this section</string>
+    <string name="you_get_scores_format">You typed %s in this section</string>
     <string name="question_number_format">Question %s of 23</string>
     <string name="your_note">Your note: %s</string>
     <string name="def_sub_status">Current subscription status</string>
@@ -196,7 +206,165 @@
     <string name="reg_through_fb">Registration via Facebook</string>
     <string name="reg_through_email">Registration via E-mail</string>
     <string name="add_mood_by_photo">Add mood by photo</string>
+    <string name="mood_items">Mood list</string>
 
     <!-- Other ended -->
+
+    <!-- Voice questions begin -->
+
+    <string name="voice_question_1">What is your favorite music?</string>
+    <string name="voice_question_2">How many hours do you usually sleep?</string>
+    <string name="voice_question_3">Do you like sweets? Which?</string>
+    <string name="voice_question_4">Who is your favourite actor?</string>
+    <string name="voice_question_5">Who is your favorite writer?</string>
+    <string name="voice_question_6">Do you love your job?</string>
+    <string name="voice_question_7">How do you feel about betrayal?</string>
+    <string name="voice_question_8">Is it true that it is worth doing everything today and not putting it off until tomorrow?</string>
+    <string name="voice_question_9">Do you want to start your own business?</string>
+    <string name="voice_question_10">How do you feel about video games?</string>
+    <string name="voice_question_11">Do you have a pet?</string>
+    <string name="voice_question_12">How often do you fight?</string>
+    <string name="voice_question_13">IPhone or Android?</string>
+    <string name="voice_question_14">What is your outlook on life?</string>
+    <string name="voice_question_15">Do you have any bad habits? Which?</string>
+    <string name="voice_question_16">Do you like to play sports? How?</string>
+    <string name="voice_question_17">Do you like creative activity?</string>
+    <string name="voice_question_18">Do you believe in God?</string>
+    <string name="voice_question_19">Would you like to change jobs? If so, which one?</string>
+    <string name="voice_question_20">Do you like to fight or do you solve conflicts with words?</string>
+    <string name="voice_question_21">What won\'t you do for anything in the world?</string>
+    <string name="voice_question_22">Are you a gambling person?</string>
+    <string name="voice_question_23">What qualities do you value most in people?</string>
+    <string name="voice_question_24">What do you think about internet addiction?</string>
+    <string name="voice_question_25">What do you like more: winter or summer?</string>
+    <string name="voice_question_26">Do you most often relax with friends or with your family?</string>
+    <string name="voice_question_27">How was your day?</string>
+    <string name="voice_question_28">How do you plan to spend the rest of your day?</string>
+    <string name="voice_question_29">How do you like to spend your free time?</string>
+    <string name="voice_question_30">What do you think about your childhood most often?</string>
+    <string name="voice_question_31">Do you want to be like someone?</string>
+    <string name="voice_question_32">How often do you show your leadership qualities?</string>
+    <string name="voice_question_33">Have you ever performed in front of a large audience?</string>
+    <string name="voice_question_34">What\'s your biggest fear?</string>
+    <string name="voice_question_35">Do you have a secret dream?</string>
+    <string name="voice_question_36">What\'s your most extreme act?</string>
+    <string name="voice_question_37">Do you have a best friend?</string>
+    <string name="voice_question_38">What do you value most in people?</string>
+    <string name="voice_question_39">What do you do when you are sad?</string>
+    <string name="voice_question_40">What is your dress style?</string>
+    <string name="voice_question_41">What genre do you prefer films?</string>
+    <string name="voice_question_42">What is your zodiac sign?</string>
+    <string name="voice_question_43">What are your best character traits?</string>
+    <string name="voice_question_44">How do you imagine your life in 5 years?</string>
+    <string name="voice_question_45">Do you have any talents?</string>
+    <string name="voice_question_46">Would you like to jump with a parachute?</string>
+    <string name="voice_question_47">Do you like logic games?</string>
+    <string name="voice_question_48">How do you feel about unpredictable people?</string>
+    <string name="voice_question_49">Perfect vacation in your mind?</string>
+    <string name="voice_question_50">Could you overcome your fears to achieve your goal?</string>
+    <string name="voice_question_51">If you came across a goldfish, what would you think?</string>
+    <string name="voice_question_52">Imagine that tomorrow is the end of the world. Your actions?</string>
+    <string name="voice_question_53">What\'s your favorite character in history?</string>
+    <string name="voice_question_54">How are you feeling now?</string>
+    <string name="voice_question_55">Are you extroverted or introverted?</string>
+    <string name="voice_question_56">What\'s your favorite time of day?</string>
+    <string name="voice_question_57">Do you have any phobias?</string>
+    <string name="voice_question_58">Your favorite colour?</string>
+    <string name="voice_question_59">Do you like rainy weather?</string>
+    <string name="voice_question_60">What is your education, what do you work?</string>
+
+    <!-- Voice questions ended -->
+
+    <!-- Survey questions begin -->
+
+    <string name="survey_question_1">How often do you have low mood?</string>
+    <string name="survey_question_2">Do you often lose interest in something?</string>
+    <string name="survey_question_3">Do you feel inferior?</string>
+    <string name="survey_question_4">Do you often blame yourself for anything?</string>
+    <string name="survey_question_5">Do you have recurring thoughts of death or suicide?</string>
+    <string name="survey_question_6">How often do you feel lonely?</string>
+    <string name="survey_question_7">How often do you feel hopeless about the future?</string>
+    <string name="survey_question_8">How often are you unable to feel joy?</string>
+    <string name="survey_question_9">Do you get irritated quickly and do you often get angry?</string>
+    <string name="survey_question_10">Are you experiencing feelings of anxiety or fear?</string>
+    <string name="survey_question_11">Are you often stressed and unable to relax?</string>
+    <string name="survey_question_12">How often do you feel that you are overly concerned about different reasons?</string>
+    <string name="survey_question_13">Do you often feel anxious / fidgety and can\'t sit still?</string>
+    <string name="survey_question_14">How often are you easily scared?</string>
+    <string name="survey_question_15">Does it ever happen that fear is the focus of attention?</string>
+    <string name="survey_question_16">Do you experience fear when dealing with strangers?</string>
+    <string name="survey_question_17">Do you often feel sluggish or tired?</string>
+    <string name="survey_question_19">Does it ever happen that rest does not restore your strength?</string>
+    <string name="survey_question_18">Do you often find yourself unable to concentrate and coordinate your thoughts?</string>
+    <string name="survey_question_20">Do you tire quickly?</string>
+    <string name="survey_question_21">Do you have difficulty falling asleep? How often?</string>
+    <string name="survey_question_22">Are you having restless or intermittent sleep patterns?</string>
+    <string name="survey_question_23">How often do you wake up too early?</string>
+
+    <!-- Survey questions ended -->
+
+    <!-- Survey answers begin -->
+
+    <string name="survey_answer_1">Not at all</string>
+    <string name="survey_answer_2">Rarely</string>
+    <string name="survey_answer_3">Sometimes</string>
+    <string name="survey_answer_4">Often</string>
+    <string name="survey_answer_5">Constantly</string>
+    <string name="analytics_result">Результат аналитики</string>
+    <string name="average_mood_items">Результат аналитики</string>
+    <string name="your_average_mood_title">Ваше среднее настроение: %s</string>
+    <string name="happy_wish">Отлично! Так держать!</string>
+    <string name="good_wish">Очень хорошо!</string>
+    <string name="neutral_wish">Неплохой результат!</string>
+    <string name="sad_wish">Надо поработать над настроением! =)</string>
+    <string name="angry_wish">Кажется у вас был тяжелый период в жизни</string>
+    <string name="ten_days_period">10 дней</string>
+    <string name="for_selected_period">За указанный период: %s</string>
+    <string name="ten_days_label">10 days</string>
+    <string name="last_month_label">Last month</string>
+    <string name="last_six_months_label">last 6 months</string>
+    <string name="year_label">last year</string>
+    <string name="go_analyze">Analyze</string>
+    <string name="stored_analytics">History</string>
+    <string name="save_analytics_label">Save analytics</string>
+    <string name="survey_scores_format">Вопросам %s : %d</string>
+    <string name="depression_label">depression</string>
+    <string name="neurosis_label">neurosis</string>
+    <string name="asthenia_label">asthenia</string>
+    <string name="insomnia_label">insomnia</string>
+    <string name="icon_play_cd">Иконка воспроизведения</string>
+    <string name="voice_question_1_label">Question 1:</string>
+    <string name="voice_question_2_label">Question 2:</string>
+    <string name="voice_question_3_label">Question 3:</string>
+    <string name="your_period_label">your specified period</string>
+    <string name="social_phobia_label">social phobia</string>
+    <string name="analytics_option">Analytics</string>
+    <string name="happy_well_being">Я счастливый</string>
+    <string name="good_well_being">Я радостный</string>
+    <string name="neutral_well_being">Я нейтрален</string>
+    <string name="sad_well_being">Я грущу</string>
+    <string name="angry_will_being">Я злой</string>
+    <string name="not_defined_will_being">Не объявлено</string>
+    <string name="happy_feel_adverb">Счастье</string>
+    <string name="good_feel_adverb">Радость</string>
+    <string name="neutral_feel_adverb">Нейтральность</string>
+    <string name="sad_feel_adverb">Грусть</string>
+    <string name="angry_feel_adverb">Злость</string>
+    <string name="not_recognized_feel_adverb">Не распознано</string>
+    <string name="reason_hint">Причина того, почему вы чувствуете себя именно так:</string>
+    <string name="answer_mood_format">Настроение ответа: %s</string>
+    <string name="created_by_voice_label">Создано голосом</string>
+    <string name="feel_time_format">Время самочувствия: %s</string>
+    <string name="feel_adverb_format">Вы ощущали себя %s</string>
+    <string name="question_voice_format">Вопрос: %d / 3</string>
+    <string name="play_answer_label">Воспроизвести ответ</string>
+    <string name="manually_format_reason">Причина: %s</string>
+    <string name="created_manually_label">Создано вручную</string>
+    <string name="created_by_photo_label">Создано с фото</string>
+    <string name="created_by_survey_label">Создано пройдя опрос</string>
+    <string name="summary_scores_format">Суммарное количество баллов: %d</string>
+    <string name="creation_type">Добавить настроение</string>
+
+    <!-- Survey answers ended -->
 
 </resources>

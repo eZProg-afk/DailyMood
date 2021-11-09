@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.feature.analytics.view.AnalyticsFragment">
+
+    <include layout="@layout/view_simple_toolbar" android:id="@+id/analyticsToolbar" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/analyticsTabLayout"
+        android:layout_width="match_parent"
+        app:tabMode="fixed"
+        app:tabIndicatorHeight="5dp"
+        android:layout_marginHorizontal="16dp"
+        app:tabBackground="@color/main_app_background"
+        android:layout_height="wrap_content" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/analyticsViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

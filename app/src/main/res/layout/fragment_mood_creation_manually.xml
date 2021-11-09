@@ -66,6 +66,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/carousel_view_pager" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/reasonEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        ads:layout_constraintTop_toBottomOf="@id/inputNoteEditText"
+        ads:layout_constraintStart_toStartOf="@id/inputNoteEditText"
+        ads:layout_constraintEnd_toEndOf="@id/inputNoteEditText"
+        android:layout_marginTop="20dp"
+        android:hint="@string/reason_hint"
+        android:inputType="textMultiLine"
+        android:padding="20dp"
+        android:textSize="16sp"
+        style="@style/DailyMoodScrollEditText"
+        android:importantForAutofill="no" />
+
     <TextView
         android:id="@+id/addPhotoTextView"
         style="@style/TextAppearance.MaterialComponents.Headline6"
@@ -74,7 +89,7 @@
         android:layout_marginTop="@dimen/bigMargin"
         android:text="@string/you_may_add_photos_label"
         app:layout_constraintStart_toStartOf="@id/inputNoteEditText"
-        app:layout_constraintTop_toBottomOf="@id/inputNoteEditText" />
+        app:layout_constraintTop_toBottomOf="@id/reasonEditText" />
 
     <ImageView
         android:id="@+id/add_photo_image_view"

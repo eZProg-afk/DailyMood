@@ -2,6 +2,7 @@ package spiral.bit.dev.dailymood.ui.feature.main.view
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -42,12 +43,10 @@ import spiral.bit.dev.dailymood.ui.base.extensions.DrawableGravity
 import spiral.bit.dev.dailymood.ui.base.extensions.EditTextConfig
 import spiral.bit.dev.dailymood.ui.base.extensions.textChanges
 import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
-import spiral.bit.dev.dailymood.ui.feature.main.models.MoodItem
-import spiral.bit.dev.dailymood.ui.feature.main.models.diffCallback
-import spiral.bit.dev.dailymood.ui.feature.main.models.emptyDayDelegate
-import spiral.bit.dev.dailymood.ui.feature.main.models.moodItemDelegate
+import spiral.bit.dev.dailymood.ui.feature.main.models.*
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionEffect
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionState
+import spiral.bit.dev.dailymood.ui.feature.main.models.ui.*
 import spiral.bit.dev.dailymood.ui.feature.user.view.UserViewModel
 import java.time.LocalDate
 import java.time.YearMonth
@@ -60,6 +59,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
 ) {
 
     override val viewModel: MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
+    private val audioPlayer = MediaPlayer()
     private val userViewModel: UserViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private val headerBinding: DrawerHeaderBinding by viewBinding(createMethod = CreateMethod.INFLATE)
     private val navController: NavController by lazy { findNavController() }
@@ -69,7 +69,14 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     private val moodAdapter = AsyncListDifferDelegationAdapter(diffCallback, emptyDayDelegate,
         moodItemDelegate { moodItem ->
             viewModel.toDetail(moodItem.moodEntity.id)
-        })
+        }, surveyMoodDelegate { moodItem ->
+
+        }, photoMoodDelegate { moodItem ->
+
+        }, voiceMoodDelegate { moodItem ->
+
+        }
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,9 +84,15 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
         setUpCalendar()
         setUpListeners()
         setUpNavigation()
-        setUpDrawerHeader()
+        setUpDrawer()
         setUpClicks()
         subscribeToObservers()
+    }
+
+    private fun setUpDrawer() = binding {
+        // TODO CHECK FOR PREMIUM and
+        // navView.menu.findItem(R.id.analyticsFragment).isVisible = premiumViewModel.isPremium
+        setUpDrawerHeader()
     }
 
     private fun setUpDrawerHeader() = binding {
@@ -114,16 +127,24 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
-            ) = false
+            ): Boolean {
+                val position = viewHolder.bindingAdapterPosition
+                val item = moodAdapter.items[position]
+                if (item is EmptyDayItem) moodAdapter.notifyItemMoved(position, position)
+                return item !is EmptyDayItem
+            }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val item = moodAdapter.items[position]
-                    if (item is MoodItem) viewModel.emotionSwiped(item)
+                    if (item !is EmptyDayItem) {
+                        viewModel.emotionSwiped(item)
+                    }
                 }
             }
         })
+
         daysRecyclerView.apply {
             itemTouchHelper.attachToRecyclerView(this)
             adapter = moodAdapter

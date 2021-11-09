@@ -130,13 +130,9 @@ class EmailRegFragment : BaseFragment<RegState, RegEffect, FragmentEmailRegBindi
             is RegScreenState.ErrorAuthorized -> {
                 root.toast(state.regScreenState.error.toString())
             }
-            is RegScreenState.SuccessAuthorized -> {
-                EmailRegFragmentDirections.toMain().apply {
-                    findNavController().navigate(this)
-                }
-            }
             is RegScreenState.BootStrapState -> {
             }
+            //TODO REMAKE STATE AND EFFECT
         }
     }
 

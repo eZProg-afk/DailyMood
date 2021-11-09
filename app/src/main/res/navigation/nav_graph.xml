@@ -15,6 +15,9 @@
         <action
             android:id="@+id/toSelect"
             app:destination="@id/selectionTypeCreatingEmotionFragment" />
+        <action
+            android:id="@+id/toAnalyticsFragment"
+            app:destination="@id/analyticsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailEmotionFragment"
@@ -66,15 +69,6 @@
         <action
             android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/statisticFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.statistic.view.StatisticFragment"
-        android:label="fragment_statistic"
-        tools:layout="@layout/fragment_statistic">
-        <action
-            android:id="@+id/toDetail"
-            app:destination="@id/detailEmotionFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectionTypeCreatingEmotionFragment"
@@ -190,4 +184,35 @@
             android:id="@+id/toMain"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/analyticsFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.analytics.view.AnalyticsFragment"
+        android:label="fragment_analytics"
+        tools:layout="@layout/fragment_analytics" >
+        <action
+            android:id="@+id/toMain"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/toDetail"
+            app:destination="@id/detailEmotionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/analyzeFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.analytics.analyze.view.AnalyzeFragment"
+        android:label="fragment_analyze"
+        tools:layout="@layout/fragment_analyze" >
+        <action
+            android:id="@+id/toMain"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/storedAnalyticsFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.analytics.storeAnalytics.view.StoredAnalyticsFragment"
+        android:label="fragment_stored_analytics"
+        tools:layout="@layout/fragment_stored_analytics" >
+        <action
+            android:id="@+id/toDetail"
+            app:destination="@id/detailEmotionFragment" />
+    </fragment>
+    <!-- TODO MAKE NESTED GRAPHS -->
 </navigation>

@@ -142,5 +142,8 @@
 
     <!-- Create emotion styles beginning -->
 
-
+    <style name="CustomBottomSheet" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>

@@ -40,7 +40,7 @@ class ShowMoodRatingCameraFragment :
         }
 
         saveResultButton.setOnClickListener {
-            viewModel.saveMoodEntity(smilingProbabilities)
+            viewModel.saveMoodEntity(smilingProbabilities, photoPath.toString())
         }
     }
 

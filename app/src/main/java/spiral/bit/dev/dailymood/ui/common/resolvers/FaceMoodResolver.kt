@@ -5,7 +5,7 @@ package spiral.bit.dev.dailymood.ui.common.resolvers
 
 class FaceMoodResolver {
 
-    fun resolveEmotionType(moodValue: Float): Float {
-        return moodValue * 2 - 1
+    fun resolveEmotionType(moodValue: Float?): Float? {
+        return moodValue?.times( 2)?.minus( 1)
     }
 }

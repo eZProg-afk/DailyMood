@@ -1,12 +1,18 @@
 package spiral.bit.dev.dailymood.ui.feature.creationMood.manuallyAddMood.view
 
 import android.net.Uri
+import android.util.Patterns
+import androidx.lifecycle.MutableLiveData
+import com.egorblagochinnov.validators.Conditions
+import com.egorblagochinnov.validators.LiveDataValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import spiral.bit.dev.dailymood.R
+import spiral.bit.dev.dailymood.data.models.CreationType
+import spiral.bit.dev.dailymood.data.models.ManuallyData
 import spiral.bit.dev.dailymood.data.mood.MoodEntity
 import spiral.bit.dev.dailymood.data.mood.MoodRepository
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
@@ -18,7 +24,13 @@ import javax.inject.Inject
 @HiltViewModel
 class ManuallyViewModel @Inject constructor(
     private val moodRepository: MoodRepository
-    ) : BaseViewModel<ManuallyState, ManuallyEffect>() {
+) : BaseViewModel<ManuallyState, ManuallyEffect>() {
+
+    val reasonSource = MutableLiveData<String?>()
+
+    val reasonInputValidator = LiveDataValidator(reasonSource).apply {
+        addCondition(Conditions.RequiredField())
+    }
 
     override val container = container<ManuallyState, ManuallyEffect>(
         ManuallyState(
@@ -27,11 +39,14 @@ class ManuallyViewModel @Inject constructor(
         )
     )
 
-    fun insert(moodValue: Float, note: String) = intent {
+    fun insert(moodValue: Float, note: String, reason: String) = intent {
         MoodEntity(
-            note = note,
-            moodType = moodValue,
-            photoPath = state.imageUri.toString()
+            moodValue = moodValue,
+            manuallyData = ManuallyData(
+                manuallyAddedPhotoPath = state.imageUri.toString(),
+                note = note, reason = reason
+            ),
+            creationType = CreationType.MANUALLY
         ).also { emotion ->
             moodRepository.insert(emotion)
             postSideEffect(ManuallyEffect.Toast(R.string.record_added_toast))

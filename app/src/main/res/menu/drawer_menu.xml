@@ -4,11 +4,11 @@
     <item
         android:id="@+id/mainFragment"
         android:icon="@drawable/ic_diary"
-        android:title="@string/diary_menu_option" />
+        android:title="@string/diary_option" />
     <item
-        android:id="@+id/statisticFragment"
+        android:id="@+id/analyticsFragment"
         android:icon="@drawable/ic_analytics"
-        android:title="@string/statistics_label" />
+        android:title="@string/analytics_option" />
     <item android:title="">
         <menu>
             <group android:id="@+id/extra_menu_options">

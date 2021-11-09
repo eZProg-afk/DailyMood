@@ -23,7 +23,7 @@ fun Context.hideKeyboard(view: View) {
 
 //Our api for creating spinner with stub data in default parameters
 
-fun Spinner.createSpinner(
+fun Spinner.configureSpinner(
     @ArrayRes arrayEntries: Int = android.R.array.phoneTypes,
     @LayoutRes customTextViewResource: Int = android.R.layout.simple_spinner_item,
     @LayoutRes dropDownViewResource: Int = android.R.layout.simple_spinner_dropdown_item,

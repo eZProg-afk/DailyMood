@@ -7,114 +7,125 @@
         <item>@string/learning_category</item>
     </string-array>
 
-    <string-array name="type_of_sort">
+    <string-array name="statistics_type_of_sort">
         <item>@string/happy_feel_label</item>
+        <item>@string/good_feel_label</item>
         <item>@string/neutral_feel_label</item>
         <item>@string/sad_feel_label</item>
         <item>@string/angry_feel_label</item>
     </string-array>
 
+    <string-array name="analytics_type_of_sort">
+        <item>@string/last_ten_days_option</item>
+        <item>@string/last_month_option</item>
+        <item>@string/half_year_option</item>
+        <item>@string/year_option</item>
+        <item>@string/select_own_period_option</item>
+    </string-array>
+
     <integer-array name="type_of_emotions">
         <item>@drawable/ic_emotion_happy</item>
+        <item>@drawable/ic_emotion_good</item>
         <item>@drawable/ic_emotion_neutral</item>
         <item>@drawable/ic_emotion_sad</item>
         <item>@drawable/ic_emotion_angry</item>
     </integer-array>
 
-    <string-array name="questions">
-        <item>Какая твоя любимая музыка?</item>
-        <item>Сколько часов ты обычно спишь?</item>
-        <item>Любишь сладости? Какие?</item>
-        <item>Кто твой любимый актёр?</item>
-        <item>Кто твой любимый писатель?</item>
-        <item>Ты любишь свою работу?</item>
-        <item>Как ты относишься к предательствам?</item>
-        <item>Правда ли, что стоит выполнить всё сегодня, и не откладывать на завтра?</item>
-        <item>Хочешь ли ты открыть собственный бизнес?</item>
-        <item>Как ты относишься к видеоиграм?</item>
-        <item>У тебя есть домашний питомец?</item>
-        <item>Как часто ты ссоришься?</item>
-        <item>Айфон или андроид?</item>
-        <item>Каков твой взгляд на жизнь?</item>
-        <item>У тебя есть вредные привычки? Какие?</item>
-        <item>Ты любишь заниматься спортом? Каким?</item>
-        <item>Любишь творческую деятельность?</item>
-        <item>Ты веришь в бога?</item>
-        <item>Ты хотел бы сменить работу? Если да, то на какую?</item>
-        <item>Любишь подраться или решаешь конфликты словами?</item>
-        <item>Что ты не сделаешь ни за что на свете?</item>
-        <item>Ты азартный человек?</item>
-        <item>Какие качества ты больше всего ценишь в людях?</item>
-        <item>Что ты думаешь об интернет-зависимости?</item>
-        <item>Что ты больше любишь: зиму или лето?</item>
-        <item>Ты чаще всего отдыхаешь с друзьями или в семейном кругу?</item>
-        <item>Как прошел твой день?</item>
-        <item>Как планируешь провести остаток дня?</item>
-        <item>Как ты любишь проводить свободное время?</item>
-        <item>Что ты чаще всего вспоминаешь о детстве?</item>
-        <item>Хочешь ли ты быть на кого-то похожим?</item>
-        <item>Как часто ты проявляешь свои лидерские качества?</item>
-        <item>Доводилось ли тебе выступать перед большой аудиторией?</item>
-        <item>Какой твой самый большой страх?</item>
-        <item>Есть ли у тебя сокровенная мечта?</item>
-        <item>Твой самый экстремальный поступок?</item>
-        <item>У тебя есть лучшая подруга?</item>
-        <item>Что ты больше всего ценишь в людях?</item>
-        <item>Что ты делаешь в моменты грусти?</item>
-        <item>Какой у тебя стиль одежды?</item>
-        <item>Фильмам какого жанра ты отдаешь предпочтение?</item>
-        <item>Кто ты по знаку зодиака?</item>
-        <item>Расскажи о своих лучших чертах характера?</item>
-        <item>Как ты представляешь свою жизнь через 5 лет?</item>
-        <item>Есть ли у тебя какие-нибудь таланты?</item>
-        <item>Тебе хотелось бы прыгнуть с парашютом?</item>
-        <item>Ты любишь логические игры?</item>
-        <item>Как ты относишься к непредсказуемым людям?</item>
-        <item>Идеальный отдых в твоем понимании?</item>
-        <item>Ты бы смог преодолеть свои страхи для достижения цели?</item>
-        <item>Если бы тебе попалась золотая рыбка, что бы ты загадал?</item>
-        <item>Представь, что завтра конец света. Твои действия?</item>
-        <item>Твой любимый персонаж в истории?</item>
-        <item>Как ты сейчас себя чувствуешь?</item>
-        <item>Ты относишься к экстравертам или интровертам?</item>
-        <item>Твое любимое время суток?</item>
-        <item>Есть у тебя какие-нибудь фобии?</item>
-        <item>Твой любимый цвет?</item>
-        <item>Ты любишь дождливую погоду?</item>
-        <item>Кто ты по образованию, кем работаешь?</item>
+    <string-array name="voice_questions">
+        <item>@string/voice_question_1</item>
+        <item>@string/voice_question_2</item>
+        <item>@string/voice_question_3</item>
+        <item>@string/voice_question_4</item>
+        <item>@string/voice_question_5</item>
+        <item>@string/voice_question_6</item>
+        <item>@string/voice_question_7</item>
+        <item>@string/voice_question_8</item>
+        <item>@string/voice_question_9</item>
+        <item>@string/voice_question_10</item>
+        <item>@string/voice_question_11</item>
+        <item>@string/voice_question_12</item>
+        <item>@string/voice_question_13</item>
+        <item>@string/voice_question_14</item>
+        <item>@string/voice_question_15</item>
+        <item>@string/voice_question_16</item>
+        <item>@string/voice_question_17</item>
+        <item>@string/voice_question_18</item>
+        <item>@string/voice_question_19</item>
+        <item>@string/voice_question_20</item>
+        <item>@string/voice_question_21</item>
+        <item>@string/voice_question_22</item>
+        <item>@string/voice_question_23</item>
+        <item>@string/voice_question_24</item>
+        <item>@string/voice_question_25</item>
+        <item>@string/voice_question_26</item>
+        <item>@string/voice_question_27</item>
+        <item>@string/voice_question_28</item>
+        <item>@string/voice_question_29</item>
+        <item>@string/voice_question_30</item>
+        <item>@string/voice_question_31</item>
+        <item>@string/voice_question_32</item>
+        <item>@string/voice_question_33</item>
+        <item>@string/voice_question_34</item>
+        <item>@string/voice_question_35</item>
+        <item>@string/voice_question_36</item>
+        <item>@string/voice_question_37</item>
+        <item>@string/voice_question_38</item>
+        <item>@string/voice_question_39</item>
+        <item>@string/voice_question_40</item>
+        <item>@string/voice_question_41</item>
+        <item>@string/voice_question_42</item>
+        <item>@string/voice_question_43</item>
+        <item>@string/voice_question_44</item>
+        <item>@string/voice_question_45</item>
+        <item>@string/voice_question_46</item>
+        <item>@string/voice_question_47</item>
+        <item>@string/voice_question_48</item>
+        <item>@string/voice_question_49</item>
+        <item>@string/voice_question_50</item>
+        <item>@string/voice_question_51</item>
+        <item>@string/voice_question_52</item>
+        <item>@string/voice_question_53</item>
+        <item>@string/voice_question_54</item>
+        <item>@string/voice_question_55</item>
+        <item>@string/voice_question_56</item>
+        <item>@string/voice_question_57</item>
+        <item>@string/voice_question_58</item>
+        <item>@string/voice_question_59</item>
+        <item>@string/voice_question_60</item>
     </string-array>
 
     <string-array name="survey_questions">
-        <item>Насколько часто у вас пониженное настроение?</item>
-        <item>Часто ли вы теряете интерес к чему-либо?</item>
-        <item>Вас посещает чувство неполноценности?</item>
-        <item>Часто ли вы вините сами себя в чём-либо?</item>
-        <item>Вас посещают повторящиеся мысли о смерти, или суициде?</item>
-        <item>Как часто вы испытываете чувство одиночества?</item>
-        <item>Как часто вы чувствуете безнадёжность по отношению к будущему?</item>
-        <item>Как часто вы неспособны чувствовать радость?</item>
-        <item>Быстро ли вы раздражаетесь, и часто ли испытываете гнев?</item>
-        <item>Вас посещают чувства тревоги или страха?</item>
-        <item>Вы часто напряжены и не можете расслабиться?</item>
-        <item>Как часто вы считаете, что чрезмерно озабоченны разными поводами?</item>
-        <item>Часто чувствуете беспокойство / суетливость, и не можете усидеть на месте?</item>
-        <item>Как часто вас легко напугать?</item>
-        <item>Бывает ли такое, что страх находится в центре внимания?</item>
-        <item>Испытываете ли вы страх при общении с незнакомцами?</item>
-        <item>Вас часто песащает чувство вялости или усталости?</item>
-        <item>Вы часто не можете сосредоточиться и скоординировать мысли?</item>
-        <item>Бывает ли такое, что отдых не восстанавливает вам силы?</item>
-        <item>Вы быстро утомляетесь?</item>
-        <item>Имеются ли у вас трудности с засыпанием? Как часто?</item>
-        <item>Посещает ли вас беспокойный или прерывистый сон?</item>
-        <item>Насколько часто вы чрезмерно рано просыпаетесь?</item>
+        <item>@string/survey_question_1</item>
+        <item>@string/survey_question_2</item>
+        <item>@string/survey_question_3</item>
+        <item>@string/survey_question_4</item>
+        <item>@string/survey_question_5</item>
+        <item>@string/survey_question_6</item>
+        <item>@string/survey_question_7</item>
+        <item>@string/survey_question_8</item>
+        <item>@string/survey_question_9</item>
+        <item>@string/survey_question_10</item>
+        <item>@string/survey_question_11</item>
+        <item>@string/survey_question_12</item>
+        <item>@string/survey_question_13</item>
+        <item>@string/survey_question_14</item>
+        <item>@string/survey_question_15</item>
+        <item>@string/survey_question_16</item>
+        <item>@string/survey_question_17</item>
+        <item>@string/survey_question_18</item>
+        <item>@string/survey_question_19</item>
+        <item>@string/survey_question_20</item>
+        <item>@string/survey_question_21</item>
+        <item>@string/survey_question_22</item>
+        <item>@string/survey_question_23</item>
     </string-array>
 
     <string-array name="survey_answers">
-        <item>Вовсе нет</item>
-        <item>Редко</item>
-        <item>Иногда</item>
-        <item>Часто</item>
-        <item>Постоянно</item>
+        <item>@string/survey_answer_1</item>
+        <item>@string/survey_answer_2</item>
+        <item>@string/survey_answer_3</item>
+        <item>@string/survey_answer_4</item>
+        <item>@string/survey_answer_5</item>
     </string-array>
+
 </resources>

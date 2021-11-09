@@ -6,10 +6,12 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import spiral.bit.dev.dailymood.R
+import spiral.bit.dev.dailymood.data.models.CreationType
+import spiral.bit.dev.dailymood.data.models.SurveyData
 import spiral.bit.dev.dailymood.data.mood.MoodEntity
 import spiral.bit.dev.dailymood.data.mood.MoodRepository
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
-import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
+import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
 import spiral.bit.dev.dailymood.ui.common.resolvers.SurveyResolver
 import spiral.bit.dev.dailymood.ui.feature.creationResult.surveyResultMood.models.SurveyResultItem
 import spiral.bit.dev.dailymood.ui.feature.creationResult.surveyResultMood.models.mvi.MoodSurveyEffect
@@ -20,47 +22,47 @@ import javax.inject.Inject
 class SurveyResultViewModel @Inject constructor(
     private val moodRepository: MoodRepository,
     private val surveyResolver: SurveyResolver,
-    private val emotionTypeMapper: EmotionTypeMapper
+    private val moodTypeMapper: MoodTypeMapper
 ) : BaseViewModel<MoodSurveyState, MoodSurveyEffect>() {
 
     override val container =
-        container<MoodSurveyState, MoodSurveyEffect>(MoodSurveyState(emptyList(), null))
+        container<MoodSurveyState, MoodSurveyEffect>(
+            MoodSurveyState(
+                surveyResultList = emptyList(),
+                surveyData = null,
+                moodValue = null
+            )
+        )
 
-    fun createDataForRecyclerView(
-        depressionSectionItems: Int,
-        neurosisSectionItems: Int,
-        socialPhobiaSectionItems: Int,
-        astheniaSectionItems: Int,
-        insomniaSectionItems: Int
-    ) = intent {
+    fun createDataForRecyclerView(surveyData: SurveyData) = intent {
         val surveyResultsList = listOf(
             SurveyResultItem(
                 surveyReason = R.string.depression_reason,
-                scoresInThisSection = depressionSectionItems,
+                scoresInThisSection = surveyData.depressionScores,
                 advicesText = R.string.depression_advices
             ),
             SurveyResultItem(
                 surveyReason = R.string.neurosis_reason,
-                scoresInThisSection = neurosisSectionItems,
+                scoresInThisSection = surveyData.neurosisScores,
                 advicesText = R.string.neurosis_advices
             ),
             SurveyResultItem(
                 surveyReason = R.string.social_phobia_reason,
-                scoresInThisSection = socialPhobiaSectionItems,
+                scoresInThisSection = surveyData.socialPhobiaScores,
                 advicesText = R.string.social_phobia_advices
             ),
             SurveyResultItem(
                 surveyReason = R.string.asthenia_reason,
-                scoresInThisSection = astheniaSectionItems,
+                scoresInThisSection = surveyData.astheniaScores,
                 advicesText = R.string.asthenia_advices
             ),
             SurveyResultItem(
                 surveyReason = R.string.insomnia_reason,
-                scoresInThisSection = insomniaSectionItems,
+                scoresInThisSection = surveyData.insomniaScores,
                 advicesText = R.string.insomnia_advices
             )
         )
-        reduce { state.copy(surveyResultList = surveyResultsList) }
+        reduce { state.copy(surveyResultList = surveyResultsList, surveyData = surveyData) }
     }
 
     fun repeatTest() = intent {
@@ -69,13 +71,16 @@ class SurveyResultViewModel @Inject constructor(
 
     fun getCurrentMood(scores: IntArray) = intent {
         val moodValue = surveyResolver.resolveSurvey(scores)
-        val emotionType = emotionTypeMapper.mapToEmotionType(moodValue)
+        val emotionType = moodTypeMapper.mapToMoodType(moodValue)
         reduce { state.copy(moodValue = emotionType) }
     }
 
     fun saveMood(scores: IntArray) = intent {
         val moodValue = surveyResolver.resolveSurvey(scores)
-        val moodEntity = MoodEntity(moodType = moodValue)
+        val moodEntity = MoodEntity(
+            moodValue = moodValue, surveyData = state.surveyData,
+            creationType = CreationType.BY_SURVEY
+        )
         moodRepository.insert(moodEntity)
         postSideEffect(MoodSurveyEffect.NavigateToMain)
     }

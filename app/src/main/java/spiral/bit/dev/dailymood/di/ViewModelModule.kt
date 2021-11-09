@@ -1,15 +1,19 @@
 package spiral.bit.dev.dailymood.di
 
+import android.content.Context
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import spiral.bit.dev.dailymood.ui.common.adapter.mappers.AdapterTypeMapper
 import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
-import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
+import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
+import spiral.bit.dev.dailymood.ui.common.resolvers.AnalyticsResolver
+import spiral.bit.dev.dailymood.ui.feature.analytics.providers.AnalyticsProvider
 import spiral.bit.dev.dailymood.ui.common.resolvers.FaceMoodResolver
 import spiral.bit.dev.dailymood.ui.common.resolvers.SurveyResolver
 import spiral.bit.dev.dailymood.ui.feature.creationMood.surveyAddMood.providers.AnswerProvider
@@ -51,7 +55,7 @@ object ViewModelModule {
 
     @ViewModelScoped
     @Provides
-    fun provideEmotionTypeMapper() = EmotionTypeMapper()
+    fun provideEmotionTypeMapper() = MoodTypeMapper()
 
     @ViewModelScoped
     @Provides
@@ -60,6 +64,10 @@ object ViewModelModule {
     @ViewModelScoped
     @Provides
     fun provideSurveyResolver() = SurveyResolver()
+
+    @ViewModelScoped
+    @Provides
+    fun provideAnalyticsResolver() = AnalyticsResolver()
 
     @ViewModelScoped
     @Provides
@@ -76,6 +84,15 @@ object ViewModelModule {
     @ViewModelScoped
     @Provides
     fun provideScoreProvider() = ScoreProvider()
+
+    @ViewModelScoped
+    @Provides
+    fun provideAnalyticsProvider(
+        adapterTypeMapper: AdapterTypeMapper,
+        analyticsResolver: AnalyticsResolver,
+        moodTypeMapper: MoodTypeMapper,
+        @ApplicationContext context: Context
+    ) = AnalyticsProvider(adapterTypeMapper, analyticsResolver, moodTypeMapper, context)
 
     @ViewModelScoped
     @Provides

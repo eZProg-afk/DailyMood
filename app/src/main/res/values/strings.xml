@@ -14,6 +14,8 @@
     <string name="realtime_type_title">В реальном времени</string>
     <string name="gallery_type_title">Из галереи</string>
     <string name="empty_day_title">Этот день был пропущен!</string>
+    <string name="empty_day_analytics_title">За этот период не велось аналитики!</string>
+    <string name="your_average_mood_title">Ваше среднее настроение: %s</string>
 
     <!-- Titles ended -->
 
@@ -33,7 +35,8 @@
 
     <!-- Options begin -->
 
-    <string name="diary_menu_option">Дневник</string>
+    <string name="analytics_option">Аналитика</string>
+    <string name="diary_option">Дневник</string>
     <string name="advices_menu_option">Советы</string>
     <string name="progress_menu_option">Статистика</string>
     <string name="settings_menu_option">Настройки</string>
@@ -43,6 +46,11 @@
     <string name="voice_option">Голосом</string>
     <string name="photo_option">По фото</string>
     <string name="survey_option">Пройдя опрос</string>
+    <string name="last_ten_days_option">Последние 10 дней</string>
+    <string name="last_month_option">Последний месяц</string>
+    <string name="half_year_option">Последние полгода</string>
+    <string name="year_option">Последний год</string>
+    <string name="select_own_period_option">Указать свой период</string>
 
     <!-- Options ended -->
 
@@ -58,11 +66,17 @@
     <string name="hint_photo">Вы можете определить своё настроение (или другого человека) и сохранить его</string>
     <string name="empty_day_hint">Когда вы пропускаете день, вы не ведёте никаких записей! Старайтесь возвращаться сюда каждый день :)</string>
     <string name="search_emotion_hint">Поиск эмоции по заметке / дате…</string>
+    <string name="empty_day_analytics_hint">Старайтесь вести ваш дневник настроения постоянно :)</string>
 
     <!-- Hints ended -->
 
     <!-- Labels begin -->
 
+    <string name="save_analytics_label">Сохранить аналитику</string>
+    <string name="voice_question_1_label">Вопрос 1:</string>
+    <string name="voice_question_2_label">Вопрос 2:</string>
+    <string name="voice_question_3_label">Вопрос 3:</string>
+    <string name="mood_analytics_label">Аналитика настроения</string>
     <string name="cancel_label">Отменить</string>
     <string name="add_emotion_label">Добавить эмоцию</string>
     <string name="add_note_label">Добавить заметку</string>
@@ -84,7 +98,7 @@
     <string name="settings_label">Настройки</string>
     <string name="add_tags_label">Добавление тэгов</string>
     <string name="detail_emotion_label">Просмотр эмоции</string>
-    <string name="statistics_label">Статистика</string>
+    <string name="statistics_option">Статистика</string>
     <string name="advices_label">Советы</string>
     <string name="select_icon_label">Выбрать иконку</string>
     <string name="select_month_label">Выберите месяц</string>
@@ -118,12 +132,25 @@
     <string name="mood_detection_label">Определение настроения</string>
     <string name="interrupt_survey_label">Прервать опрос</string>
     <string name="previous_question_label">Предыдущий вопрос</string>
+    <string name="get_analytics_for_label">Получить аналитику за:</string>
+    <string name="detailed_information_label">Подробная информация</string>
+    <string name="ten_days_label">10 дней</string>
+    <string name="last_month_label">Последний месяц</string>
+    <string name="last_six_months_label">последние 6 месяцев</string>
+    <string name="year_label">последний год</string>
+    <string name="your_period_label">ваш указанный период</string>
+    <string name="depression_label">депрессии</string>
+    <string name="neurosis_label">невроза</string>
+    <string name="social_phobia_label">социофобии</string>
+    <string name="asthenia_label">астении</string>
+    <string name="insomnia_label">бессонницы</string>
 
     <!-- Labels ended -->
 
 
     <!-- Content descriptions begin -->
 
+    <string name="icon_play_cd">Иконка воспроизведения</string>
     <string name="open_drawer_cd">Открыть меню</string>
     <string name="close_drawer_cd">Закрыть меню</string>
     <string name="drawer_logo_cd">Логотип бокового меню</string>
@@ -191,8 +218,10 @@
     <string name="select_image_for_emotion_recognition">Выберите картинку для распознавания эмоций</string>
     <string name="faces_too_many">Лиц слишком много! Распознавание работает только на одного человека</string>
     <string name="question_number_format">Вопрос %s из 23</string>
+    <string name="analytics_center_text_format" translatable="false">Daily \n Mood</string>
     <string name="you_not_answer">Пожалуйста, ответьте на вопрос</string>
     <string name="scores_format">Вы набрали %s</string>
+    <string name="survey_scores_format">Вопросам %s : %d</string>
     <string name="depression_reason">Вопросы 1–8 оценивали симптомы депрессии.</string>
     <string name="depression_advices">Если вы набрали больше 11 баллов, то это может указывать на депрессию. В случае депрессии человек обычно страдает от сниженного настроения, потери интереса и жизнерадостности, уменьшения энергии, что в свою очередь приводит к повышенной усталости и снижению активности. Также люди могут ощущать снижение внимания и способности сосредоточиться, нарушение сна и изменение аппетита. Также можно испытывать чувство вины и неполноценности, заниженную самооценку и самоуверенность; человек может проявлять пессимизм и безнадежность в отношении будущего, может уменьшиться воля к жизни.  В случае мыслей о смерти ознакомьтесь с контактами по оказанию быстрой помощи и обязательно свяжитесь с одним из них, чтобы не оставаться одному!</string>
     <string name="neurosis_reason">Вопросы 9–14 оценивали симптомы генерализованного тревожного невроза.</string>
@@ -208,7 +237,149 @@
     <string name="email_is_should_be_smaller">Ваш E-mail слишком длинный!</string>
     <string name="cant_go_to_previous_question_toast">нельзя вернуться к предыдущему вопросу!</string>
     <string name="add_mood_by_photo">Добавление настроения по фото</string>
+    <string name="mood_items">Список настроений</string>
+    <string name="analytics_result">Результат аналитики</string>
+    <string name="average_mood_items">Результат аналитики</string>
+    <string name="happy_wish">Отлично! Так держать!</string>
+    <string name="good_wish">Очень хорошо!</string>
+    <string name="neutral_wish">Неплохой результат!</string>
+    <string name="sad_wish">Надо поработать над настроением! =)</string>
+    <string name="angry_wish">Кажется у вас был тяжелый период в жизни</string>
+    <string name="ten_days_period">10 дней</string>
+    <string name="for_selected_period">За указанный период: %s</string>
+    <string name="go_analyze">Анализ</string>
+    <string name="stored_analytics">История</string>
+    <string name="empty_day_assets_path" translatable="false">animations/lottie_not_filled_day.json</string>
+    <string name="analytics_assets_path" translatable="false">animations/lottie_analytics.json</string>
 
     <!-- Other ended -->
+
+    <!-- Voice questions begin -->
+
+    <string name="voice_question_1">Какая твоя любимая музыка?</string>
+    <string name="voice_question_2">Сколько часов ты обычно спишь?</string>
+    <string name="voice_question_3">Любишь сладости? Какие?</string>
+    <string name="voice_question_4">Кто твой любимый актёр?</string>
+    <string name="voice_question_5">Кто твой любимый писатель?</string>
+    <string name="voice_question_6">Ты любишь свою работу?</string>
+    <string name="voice_question_7">Как ты относишься к предательствам?</string>
+    <string name="voice_question_8">Правда ли, что стоит выполнить всё сегодня, и не откладывать на завтра?</string>
+    <string name="voice_question_9">Хочешь ли ты открыть собственный бизнес?</string>
+    <string name="voice_question_10">Как ты относишься к видеоиграм?</string>
+    <string name="voice_question_11">У тебя есть домашний питомец?</string>
+    <string name="voice_question_12">Как часто ты ссоришься?</string>
+    <string name="voice_question_13">Айфон или андроид?</string>
+    <string name="voice_question_14">Каков твой взгляд на жизнь?</string>
+    <string name="voice_question_15">У тебя есть вредные привычки? Какие?</string>
+    <string name="voice_question_16">Ты любишь заниматься спортом? Каким?</string>
+    <string name="voice_question_17">Любишь творческую деятельность?</string>
+    <string name="voice_question_18">Ты веришь в бога?</string>
+    <string name="voice_question_19">Ты хотел бы сменить работу? Если да, то на какую?</string>
+    <string name="voice_question_20">Любишь подраться или решаешь конфликты словами?</string>
+    <string name="voice_question_21">Что ты не сделаешь ни за что на свете?</string>
+    <string name="voice_question_22">Ты азартный человек?</string>
+    <string name="voice_question_23">Какие качества ты больше всего ценишь в людях?</string>
+    <string name="voice_question_24">Что ты думаешь об интернет-зависимости?</string>
+    <string name="voice_question_25">Что ты больше любишь: зиму или лето?</string>
+    <string name="voice_question_26">Ты чаще всего отдыхаешь с друзьями или в семейном кругу?</string>
+    <string name="voice_question_27">Как прошел твой день?</string>
+    <string name="voice_question_28">Как планируешь провести остаток дня?</string>
+    <string name="voice_question_29">Как ты любишь проводить свободное время?</string>
+    <string name="voice_question_30">Что ты чаще всего вспоминаешь о детстве?</string>
+    <string name="voice_question_31">Хочешь ли ты быть на кого-то похожим?</string>
+    <string name="voice_question_32">Как часто ты проявляешь свои лидерские качества?</string>
+    <string name="voice_question_33">Доводилось ли тебе выступать перед большой аудиторией?</string>
+    <string name="voice_question_34">Какой твой самый большой страх?</string>
+    <string name="voice_question_35">Есть ли у тебя сокровенная мечта?</string>
+    <string name="voice_question_36">Твой самый экстремальный поступок?</string>
+    <string name="voice_question_37">У тебя есть лучшая подруга?</string>
+    <string name="voice_question_38">Что ты больше всего ценишь в людях?</string>
+    <string name="voice_question_39">Что ты делаешь в моменты грусти?</string>
+    <string name="voice_question_40">Какой у тебя стиль одежды?</string>
+    <string name="voice_question_41">Фильмам какого жанра ты отдаешь предпочтение?</string>
+    <string name="voice_question_42">Кто ты по знаку зодиака?</string>
+    <string name="voice_question_43">Расскажи о своих лучших чертах характера?</string>
+    <string name="voice_question_44">Как ты представляешь свою жизнь через 5 лет?</string>
+    <string name="voice_question_45">Есть ли у тебя какие-нибудь таланты?</string>
+    <string name="voice_question_46">Тебе хотелось бы прыгнуть с парашютом?</string>
+    <string name="voice_question_47">Ты любишь логические игры?</string>
+    <string name="voice_question_48">Как ты относишься к непредсказуемым людям?</string>
+    <string name="voice_question_49">Идеальный отдых в твоем понимании?</string>
+    <string name="voice_question_50">Ты бы смог преодолеть свои страхи для достижения цели?</string>
+    <string name="voice_question_51">Если бы тебе попалась золотая рыбка, что бы ты загадал?</string>
+    <string name="voice_question_52">Представь, что завтра конец света. Твои действия?</string>
+    <string name="voice_question_53">Твой любимый персонаж в истории?</string>
+    <string name="voice_question_54">Как ты сейчас себя чувствуешь?</string>
+    <string name="voice_question_55">Ты относишься к экстравертам или интровертам?</string>
+    <string name="voice_question_56">Твое любимое время суток?</string>
+    <string name="voice_question_57">Есть у тебя какие-нибудь фобии?</string>
+    <string name="voice_question_58">Твой любимый цвет?</string>
+    <string name="voice_question_59">Ты любишь дождливую погоду?</string>
+    <string name="voice_question_60">Кто ты по образованию, кем работаешь?</string>
+
+    <!-- Voice questions ended -->
+
+    <!-- Survey questions begin -->
+
+    <string name="survey_question_1">Насколько часто у вас пониженное настроение?</string>
+    <string name="survey_question_2">Часто ли вы теряете интерес к чему-либо?</string>
+    <string name="survey_question_3">Вас посещает чувство неполноценности?</string>
+    <string name="survey_question_4">Часто ли вы вините сами себя в чём-либо?</string>
+    <string name="survey_question_5">Вас посещают повторящиеся мысли о смерти, или суициде?</string>
+    <string name="survey_question_6">Как часто вы испытываете чувство одиночества?</string>
+    <string name="survey_question_7">Как часто вы чувствуете безнадёжность по отношению к будущему?</string>
+    <string name="survey_question_8">Как часто вы неспособны чувствовать радость?</string>
+    <string name="survey_question_9">Быстро ли вы раздражаетесь, и часто ли испытываете гнев?</string>
+    <string name="survey_question_10">Вас посещают чувства тревоги или страха?</string>
+    <string name="survey_question_11">Вы часто напряжены и не можете расслабиться?</string>
+    <string name="survey_question_12">Как часто вы считаете, что чрезмерно озабоченны разными поводами?</string>
+    <string name="survey_question_13">Часто чувствуете беспокойство / суетливость, и не можете усидеть на месте?</string>
+    <string name="survey_question_14">Как часто вас легко напугать?</string>
+    <string name="survey_question_15">Бывает ли такое, что страх находится в центре внимания?</string>
+    <string name="survey_question_16">Испытываете ли вы страх при общении с незнакомцами?</string>
+    <string name="survey_question_17">Вас часто песащает чувство вялости или усталости?</string>
+    <string name="survey_question_18">Вы часто не можете сосредоточиться и скоординировать мысли?</string>
+    <string name="survey_question_19">Бывает ли такое, что отдых не восстанавливает вам силы?</string>
+    <string name="survey_question_20">Вы быстро утомляетесь?</string>
+    <string name="survey_question_21">Имеются ли у вас трудности с засыпанием? Как часто?</string>
+    <string name="survey_question_22">Посещает ли вас беспокойный или прерывистый сон?</string>
+    <string name="survey_question_23">Насколько часто вы чрезмерно рано просыпаетесь?</string>
+
+    <!-- Survey questions ended -->
+
+    <!-- Survey answers begin -->
+
+    <string name="survey_answer_1">Вовсе нет</string>
+    <string name="survey_answer_2">Редко</string>
+    <string name="survey_answer_3">Иногда</string>
+    <string name="survey_answer_4">Часто</string>
+    <string name="survey_answer_5">Постоянно</string>
+    <string name="happy_well_being">счастливо</string>
+    <string name="good_well_being">радостно</string>
+    <string name="neutral_well_being">нейтрально</string>
+    <string name="sad_well_being">грустно</string>
+    <string name="angry_will_being">зло</string>
+    <string name="not_defined_will_being">Не объявлено</string>
+    <string name="happy_feel_adverb">Счастье</string>
+    <string name="good_feel_adverb">Радость</string>
+    <string name="neutral_feel_adverb">Нейтральность</string>
+    <string name="sad_feel_adverb">Грусть</string>
+    <string name="angry_feel_adverb">Злость</string>
+    <string name="not_recognized_feel_adverb">Не распознано</string>
+    <string name="reason_hint">Причина того, почему вы чувствуете себя именно так:</string>
+    <string name="answer_mood_format">Настроение ответа: %s</string>
+    <string name="created_by_voice_label">Создано голосом</string>
+    <string name="feel_time_format">Время самочувствия: %s</string>
+    <string name="feel_adverb_format">Вы ощущали себя %s</string>
+    <string name="question_voice_format">Вопрос: %d / 3</string>
+    <string name="play_answer_label">Воспроизвести ответ</string>
+    <string name="manually_format_reason">Причина: %s</string>
+    <string name="created_manually_label">Создано вручную</string>
+    <string name="created_by_photo_label">Создано с фото</string>
+    <string name="created_by_survey_label">Создано пройдя опрос</string>
+    <string name="summary_scores_format">Суммарное количество баллов: %d</string>
+    <string name="creation_type">Добавить настроение</string>
+
+    <!-- Survey answers ended -->
 
 </resources>

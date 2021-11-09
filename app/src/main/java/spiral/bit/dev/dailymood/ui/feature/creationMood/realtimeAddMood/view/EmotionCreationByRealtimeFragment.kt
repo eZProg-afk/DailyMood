@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -21,7 +22,7 @@ import spiral.bit.dev.dailymood.ui.base.Logger
 import spiral.bit.dev.dailymood.ui.base.binding
 import spiral.bit.dev.dailymood.ui.base.extensions.hasPermissions
 import spiral.bit.dev.dailymood.ui.base.toast
-import spiral.bit.dev.dailymood.ui.common.mappers.EmotionTypeMapper
+import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
 import spiral.bit.dev.dailymood.ui.common.resolvers.FaceMoodResolver
 import spiral.bit.dev.dailymood.ui.feature.creationMood.photoAddMood.view.EmotionCreationByPhotoFragmentDirections
 import spiral.bit.dev.dailymood.ui.feature.creationMood.realtimeAddMood.models.mvi.RealtimeEffect
@@ -34,7 +35,9 @@ class EmotionCreationByRealtimeFragment :
         FragmentMoodCreationByRealtimeBinding::inflate
     ) {
 
-    private val emotionTypeMapper = EmotionTypeMapper()
+    private val imageCapture by lazy { ImageCapture.Builder().build() }
+    private val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+    private val emotionTypeMapper = MoodTypeMapper()
     private val faceMoodResolver = FaceMoodResolver()
     override val viewModel: RealtimeViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private val permission = registerForActivityResult(RequestPermission()) { granted ->
@@ -85,14 +88,14 @@ class EmotionCreationByRealtimeFragment :
                                     mediaImage,
                                     imageProxy.imageInfo.rotationDegrees
                                 ).run {
-                                    viewModel.detectFace(this) { imageProxy.close() }
+                                    viewModel.detectFace(requireActivity(), imageCapture, this) {
+                                        imageProxy.close()
+                                    }
                                 }
                             }
                         }
                     })
                 }
-
-            val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
 
             runCatching {
                 cameraProvider.apply {
@@ -101,7 +104,8 @@ class EmotionCreationByRealtimeFragment :
                         viewLifecycleOwner,
                         cameraSelector,
                         preview,
-                        imageFaceEmotionAnalyzer
+                        imageFaceEmotionAnalyzer,
+                        imageCapture
                     )
                 }
             }.onFailure { throwable ->
@@ -112,8 +116,8 @@ class EmotionCreationByRealtimeFragment :
 
     override fun renderState(state: RealtimeState) = binding {
         val moodValue = faceMoodResolver.resolveEmotionType(state.smileProbability)
-        val emotionType = emotionTypeMapper.mapToEmotionType(moodValue)
-        smileyRatingView.setCurrentRateStatus(emotionType.smileyRating)
+        val emotionType = moodValue?.let { emotionTypeMapper.mapToMoodType(it) }
+        emotionType?.smileyRating?.let { smileyRatingView.setCurrentRateStatus(it) }
     }
 
     override fun handleSideEffect(sideEffect: RealtimeEffect) = binding {

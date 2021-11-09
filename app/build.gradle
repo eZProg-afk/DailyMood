@@ -43,6 +43,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src/main/assets'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -69,6 +76,9 @@ dependencies {
     implementation("org.orbit-mvi:orbit-viewmodel:${orbitVersion}")
     implementation("org.orbit-mvi:orbit-core:${orbitVersion}")
 
+    // Gson
+    implementation("com.google.code.gson:gson:${gsonVersion}")
+
     // UI
     implementation("androidx.appcompat:appcompat:${appCompatVersion}")
     implementation("com.google.android.material:material:${materialVersion}")
@@ -82,6 +92,9 @@ dependencies {
     implementation("androidx.camera:camera-view:${cameraViewVersion}")
     implementation("com.github.CanHub:Android-Image-Cropper:${cropperVersion}")
     implementation("com.airbnb.android:lottie:$lottieVersion")
+    implementation("com.github.PhilJay:MPAndroidChart:${mpChartVersion}")
+    implementation("com.makeramen:roundedimageview:${roundedImageView}")
+    implementation("com.gauravk.audiovisualizer:audiovisualizer:${audioVisualiserVersion}")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:${hiltVersion}")
