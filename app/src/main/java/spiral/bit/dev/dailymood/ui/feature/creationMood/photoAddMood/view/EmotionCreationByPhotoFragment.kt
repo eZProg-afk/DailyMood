@@ -71,7 +71,7 @@ class EmotionCreationByPhotoFragment :
     }
 
     private fun setUpToolbar() = binding {
-        photoToolbar.titleTextView.text = getString(R.string.add_mood_by_photo)
+        photoToolbar.titleTextView.text = getString(R.string.creation_type)
     }
 
     private fun setUpRecyclerView() = binding {

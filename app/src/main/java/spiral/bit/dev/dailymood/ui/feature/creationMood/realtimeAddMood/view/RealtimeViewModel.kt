@@ -19,6 +19,7 @@ import spiral.bit.dev.dailymood.data.mood.MoodEntity
 import spiral.bit.dev.dailymood.data.mood.MoodRepository
 import spiral.bit.dev.dailymood.di.FaceDetectorOptionsRealtime
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
+import spiral.bit.dev.dailymood.ui.base.Logger
 import spiral.bit.dev.dailymood.ui.base.extensions.safeLet
 import spiral.bit.dev.dailymood.ui.base.extensions.takePictureAwait
 import spiral.bit.dev.dailymood.ui.base.listenAwait
@@ -51,11 +52,9 @@ class RealtimeViewModel @Inject constructor(
     ) = intent {
         val photoFile = appDateTimeFormatter.formatFile(activity.filesDir)
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-
-        imageCapture.takePictureAwait(outputOptions, ContextCompat.getMainExecutor(activity))
         val savedUri = photoFile.toUri()
-
         runCatching {
+            imageCapture.takePictureAwait(outputOptions, ContextCompat.getMainExecutor(activity))
             return@runCatching faceDetector.process(image).listenAwait()
                 .also<List<Face>> { listener.invoke() }
         }.onFailure {
@@ -85,6 +84,7 @@ class RealtimeViewModel @Inject constructor(
 
     fun takeEmotion() = intent {
         val moodValue = faceDetectionMoodResolver.resolveEmotionType(state.smileProbability)
+        Logger.logDebug(state.currentInputImage.toString())
         safeLet(moodValue, state.currentInputImage) { nonNullMoodValue, inputImage ->
             val emotionItem = MoodEntity(
                 moodValue = nonNullMoodValue,

@@ -2,10 +2,12 @@ package spiral.bit.dev.dailymood.ui.feature.creationMood.cameraAddMood.view
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
+import androidx.camera.core.impl.PreviewConfig
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
@@ -28,7 +30,9 @@ class EmotionCreationByCameraFragment :
     ) {
 
     private var cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
-    private val imageCapture by lazy { ImageCapture.Builder().build() }
+    private val imageCapture by lazy {
+        ImageCapture.Builder().setFlashMode(ImageCapture.FLASH_MODE_ON).build()
+    }
     private lateinit var camera: Camera
     override val viewModel: CameraViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private val cameraPermission =
@@ -44,9 +48,8 @@ class EmotionCreationByCameraFragment :
 
     private fun setUpClicks() = binding {
         switchCameraImageView.setOnClickListener {
-            cameraSelector.switchLens().run {
-                setUpCamera()
-            }
+            cameraSelector = cameraSelector.switchLens()
+            setUpCamera()
         }
 
         takePhotoImageView.setOnClickListener {
@@ -54,7 +57,9 @@ class EmotionCreationByCameraFragment :
         }
 
         flashToggleImageView.setOnClickListener {
-            viewModel.toggleFlash(requireContext(), camera)
+            if (camera.cameraInfo.hasFlashUnit()) {
+                camera.cameraControl.enableTorch(true)
+            }
         }
     }
 
@@ -76,9 +81,8 @@ class EmotionCreationByCameraFragment :
                     unbindAll()
                     camera = bindToLifecycle(
                         viewLifecycleOwner,
-                        cameraSelector,
-                        preview,
-                        imageCapture
+                        this@EmotionCreationByCameraFragment.cameraSelector,
+                        preview, imageCapture
                     )
                 }
             }.onFailure { throwable ->
@@ -96,6 +100,7 @@ class EmotionCreationByCameraFragment :
         }
 
     override fun renderState(state: CameraState) = binding {
+        setUpCamera()
         safeLet(state.smileProbability, state.capturedSelfieUri) { _, _ ->
             viewModel.showResultPhoto()
         }

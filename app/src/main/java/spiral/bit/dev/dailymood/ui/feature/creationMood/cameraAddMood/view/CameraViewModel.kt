@@ -32,13 +32,16 @@ class CameraViewModel @Inject constructor(
     private val appDateTimeFormatter: AppDateTimeFormatter
 ) : BaseViewModel<CameraState, CameraEffect>() {
 
-    override val container = container<CameraState, CameraEffect>(CameraState(null, null))
+    override val container = container<CameraState, CameraEffect>(CameraState(null, null, 1))
 
     fun toggleFlash(context: Context, camera: Camera) = intent {
         if (context.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-            camera.cameraControl.enableTorch(false)
+            if (camera.cameraInfo.hasFlashUnit()) {
+                camera.cameraControl.enableTorch(true)
+            }
         } else {
-            camera.cameraControl.enableTorch(true)
+            camera.cameraControl.enableTorch(false)
+            Logger.logDebug("FLASH FALSE")
         }
     }
 
