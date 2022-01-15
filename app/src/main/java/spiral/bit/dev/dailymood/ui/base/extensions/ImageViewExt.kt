@@ -1,4 +1,4 @@
-package spiral.bit.dev.dailymood.ui.base
+package spiral.bit.dev.dailymood.ui.base.extensions
 
 import android.net.Uri
 import android.widget.ImageView

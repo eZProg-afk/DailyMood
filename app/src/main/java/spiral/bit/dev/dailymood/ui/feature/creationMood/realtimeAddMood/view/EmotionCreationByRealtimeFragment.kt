@@ -21,7 +21,7 @@ import spiral.bit.dev.dailymood.ui.base.BaseFragment
 import spiral.bit.dev.dailymood.ui.base.Logger
 import spiral.bit.dev.dailymood.ui.base.binding
 import spiral.bit.dev.dailymood.ui.base.extensions.hasPermissions
-import spiral.bit.dev.dailymood.ui.base.toast
+import spiral.bit.dev.dailymood.ui.base.extensions.toast
 import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
 import spiral.bit.dev.dailymood.ui.common.resolvers.FaceMoodResolver
 import spiral.bit.dev.dailymood.ui.feature.creationMood.photoAddMood.view.EmotionCreationByPhotoFragmentDirections

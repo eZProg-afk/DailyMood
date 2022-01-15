@@ -2,12 +2,10 @@ package spiral.bit.dev.dailymood.ui.feature.creationMood.cameraAddMood.view
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
-import androidx.camera.core.impl.PreviewConfig
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
@@ -20,7 +18,7 @@ import spiral.bit.dev.dailymood.ui.base.binding
 import spiral.bit.dev.dailymood.ui.base.extensions.hasPermissions
 import spiral.bit.dev.dailymood.ui.base.extensions.safeLet
 import spiral.bit.dev.dailymood.ui.base.extensions.switchLens
-import spiral.bit.dev.dailymood.ui.base.toast
+import spiral.bit.dev.dailymood.ui.base.extensions.toast
 import spiral.bit.dev.dailymood.ui.feature.creationMood.cameraAddMood.models.mvi.CameraEffect
 import spiral.bit.dev.dailymood.ui.feature.creationMood.cameraAddMood.models.mvi.CameraState
 

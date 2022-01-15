@@ -1,8 +1,7 @@
 package spiral.bit.dev.dailymood.ui.feature.creationMood.voiceAddMood.models.mvi
 
-import spiral.bit.dev.dailymood.ui.base.SideEffectMarker
-
-sealed class VoiceEffect : SideEffectMarker {
+sealed class VoiceEffect {
     object NavigateToMain : VoiceEffect()
+    object NavigateBack : VoiceEffect()
     object TooQuiet : VoiceEffect()
 }

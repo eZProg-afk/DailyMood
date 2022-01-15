@@ -2,7 +2,6 @@ package spiral.bit.dev.dailymood.ui.feature.detail.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.navArgs
@@ -11,6 +10,9 @@ import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.data.mood.MoodEntity
 import spiral.bit.dev.dailymood.databinding.FragmentDetailMoodBinding
 import spiral.bit.dev.dailymood.ui.base.*
+import spiral.bit.dev.dailymood.ui.base.extensions.loadByDrawable
+import spiral.bit.dev.dailymood.ui.base.extensions.loadByUri
+import spiral.bit.dev.dailymood.ui.base.extensions.observe
 import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
 import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
 import spiral.bit.dev.dailymood.ui.feature.detail.models.mvi.DetailEffect
@@ -41,12 +43,12 @@ class DetailEmotionFragment :
     private fun setUpViews(moodEntity: MoodEntity) = binding {
         var emotionTypeFeel = ""
 
-        moodEntity.manuallyData?.manuallyAddedPhotoPath?.let { photoPath ->
-            emotionImage.loadByUri(photoPath.toUri())
-            emotionImage.isVisible = true
-        } ?: run {
-            emotionImage.isVisible = false
-        }
+//        moodEntity.manuallyData?.manuallyAddedPhotoPath?.let { photoPath ->
+//            emotionImage.loadByUri(photoPath.toUri())
+//            emotionImage.isVisible = true
+//        } ?: run {
+//            emotionImage.isVisible = false
+//        }
 
         moodEntity.manuallyData?.note?.let { note ->
             emotionNote.text = String.format(getString(R.string.your_note, note))

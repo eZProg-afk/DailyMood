@@ -18,8 +18,8 @@ import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.di.FaceDetectorOptionsStatic
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
 import spiral.bit.dev.dailymood.ui.base.Logger
+import spiral.bit.dev.dailymood.ui.base.callbackConverters.listenAwait
 import spiral.bit.dev.dailymood.ui.base.extensions.takePictureAwait
-import spiral.bit.dev.dailymood.ui.base.listenAwait
 import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
 import spiral.bit.dev.dailymood.ui.feature.creationMood.cameraAddMood.models.mvi.CameraEffect
 import spiral.bit.dev.dailymood.ui.feature.creationMood.cameraAddMood.models.mvi.CameraState

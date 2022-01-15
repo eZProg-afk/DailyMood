@@ -1,4 +1,4 @@
-package spiral.bit.dev.dailymood.ui.base
+package spiral.bit.dev.dailymood.ui.base.extensions
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.ContainerHost
 
-fun <STATE : Any, SIDE_EFFECT : Any> ContainerHost<STATE, SIDE_EFFECT>.observe(
+fun <STATE: Any, SIDE_EFFECT: Any> ContainerHost<STATE, SIDE_EFFECT>.observe(
     lifecycleOwner: LifecycleOwner,
     state: (suspend (state: STATE) -> Unit)? = null,
     sideEffect: (suspend (sideEffect: SIDE_EFFECT) -> Unit)? = null

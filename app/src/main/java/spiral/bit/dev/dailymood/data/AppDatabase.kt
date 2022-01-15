@@ -13,7 +13,7 @@ import spiral.bit.dev.dailymood.data.mood.MoodDao
 
 //TODO CHANGE BD VERSION TO 1
 @TypeConverters(MoodEntitiesTypeConverter::class, AudioTypeConverter::class, QuestionsTypeConverter::class)
-@Database(entities = [MoodEntity::class, AnalyticsEntity::class], version = 1, exportSchema = false)
+@Database(entities = [MoodEntity::class, AnalyticsEntity::class], version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun emotionDao(): MoodDao
     abstract fun analyticsDao(): AnalyticsDao

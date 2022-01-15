@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 
-abstract class BaseViewModel<STATE : StateMarker, SIDE_EFFECT : SideEffectMarker> :
+abstract class BaseViewModel<STATE: Any, SIDE_EFFECT: Any> :
     ContainerHost<STATE, SIDE_EFFECT>,
     ViewModel() {
 

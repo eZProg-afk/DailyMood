@@ -93,4 +93,8 @@ class SurveyViewModel @SuppressLint("StaticFieldLeak") //this is application con
     fun navigateBack() = intent {
         postSideEffect(SurveyEffect.NavigateBack)
     }
+
+    fun interruptSurvey() = intent {
+        postSideEffect(SurveyEffect.NavigateToMain)
+    }
 }

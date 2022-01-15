@@ -5,7 +5,9 @@
     style="@style/DailyMoodDefaultBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.registration.email_reg.view.EmailRegFragment">
+    tools:context=".ui.feature.registration.emailRegistration.view.EmailRegFragment">
+
+    <include layout="@layout/view_main_toolbar" android:id="@+id/emailRegistrationToolbar" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registrationInputNameLayout"
@@ -17,7 +19,7 @@
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/emailRegistrationToolbar">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/user_name_input_edit_text"
@@ -109,16 +111,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonRegistration"
-        style="@style/DailyMoodRegistrationButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:visibility="invisible"
-        android:paddingHorizontal="40dp"
-        android:paddingVertical="10dp"
+        android:textColor="@color/white"
+        app:cornerRadius="16dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
         android:text="@string/reg_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/registrationPhoneTextInputLayout"
+        app:layout_constraintStart_toStartOf="@id/registrationPhoneTextInputLayout"
         app:layout_constraintTop_toBottomOf="@id/registrationPhoneTextInputLayout" />
 
     <TextView

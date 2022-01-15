@@ -5,32 +5,22 @@
     style="@style/DailyMoodDefaultBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.registration.view.RegistrationFragment">
+    tools:context=".ui.feature.registration.registrationTypes.view.RegistrationTypeFragment">
+
+    <include
+        android:id="@+id/registrationTypesToolbar"
+        layout="@layout/view_simple_toolbar" />
 
     <ImageView
+        android:id="@+id/pictureRegistrationImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/icon_registration_cd"
         android:src="@drawable/reg_label_img"
-        app:layout_constraintBottom_toTopOf="@id/facebookRegistrationButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/facebookRegistrationButton"
-        style="@style/DailyMoodLoginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/bigMargin"
-        android:paddingVertical="15dp"
-        android:paddingStart="11dp"
-        android:backgroundTint="?colorAccent"
-        android:text="@string/reg_through_fb"
-        app:layout_constraintBottom_toTopOf="@id/emailRegistrationButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="RtlSymmetry" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/registrationTypesToolbar" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/emailRegistrationButton"
@@ -42,9 +32,36 @@
         android:paddingHorizontal="15dp"
         android:paddingVertical="10dp"
         android:text="@string/reg_through_email"
-        app:layout_constraintBottom_toTopOf="@id/alreadyHasAccountTextView"
-        app:layout_constraintEnd_toEndOf="@id/facebookRegistrationButton"
-        app:layout_constraintStart_toStartOf="@id/facebookRegistrationButton" />
+        android:textColor="@color/white"
+        app:iconTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pictureRegistrationImageView" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleSignInButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_rounded_16"
+        app:layout_constraintEnd_toEndOf="@id/emailRegistrationButton"
+        app:layout_constraintStart_toStartOf="@id/emailRegistrationButton"
+        app:layout_constraintTop_toBottomOf="@id/emailRegistrationButton" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebookRegistrationButton"
+        style="@style/DailyMoodLoginButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?colorAccent"
+        android:paddingVertical="15dp"
+        android:layout_marginTop="16dp"
+        android:paddingStart="11dp"
+        android:text="@string/reg_through_fb"
+        app:layout_constraintEnd_toEndOf="@id/googleSignInButton"
+        app:layout_constraintStart_toStartOf="@id/googleSignInButton"
+        app:layout_constraintTop_toBottomOf="@id/googleSignInButton"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/alreadyHasAccountTextView"

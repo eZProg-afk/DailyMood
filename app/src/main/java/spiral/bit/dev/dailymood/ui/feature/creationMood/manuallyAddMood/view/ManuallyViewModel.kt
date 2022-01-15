@@ -1,14 +1,8 @@
 package spiral.bit.dev.dailymood.ui.feature.creationMood.manuallyAddMood.view
 
-import android.net.Uri
-import android.util.Patterns
-import androidx.lifecycle.MutableLiveData
-import com.egorblagochinnov.validators.Conditions
-import com.egorblagochinnov.validators.LiveDataValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
-import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.data.models.CreationType
@@ -26,12 +20,6 @@ class ManuallyViewModel @Inject constructor(
     private val moodRepository: MoodRepository
 ) : BaseViewModel<ManuallyState, ManuallyEffect>() {
 
-    val reasonSource = MutableLiveData<String?>()
-
-    val reasonInputValidator = LiveDataValidator(reasonSource).apply {
-        addCondition(Conditions.RequiredField())
-    }
-
     override val container = container<ManuallyState, ManuallyEffect>(
         ManuallyState(
             imageUri = null,
@@ -42,11 +30,11 @@ class ManuallyViewModel @Inject constructor(
     fun insert(moodValue: Float, note: String, reason: String) = intent {
         MoodEntity(
             moodValue = moodValue,
+            creationType = CreationType.MANUALLY,
             manuallyData = ManuallyData(
-                manuallyAddedPhotoPath = state.imageUri.toString(),
-                note = note, reason = reason
-            ),
-            creationType = CreationType.MANUALLY
+                note = note,
+                reason = reason
+            )
         ).also { emotion ->
             moodRepository.insert(emotion)
             postSideEffect(ManuallyEffect.Toast(R.string.record_added_toast))
@@ -54,13 +42,14 @@ class ManuallyViewModel @Inject constructor(
         }
     }
 
-    fun onImageSelect(uri: Uri?) = intent {
-        reduce { state.copy(imageUri = uri) }
+    fun navigateBack() = intent {
+        postSideEffect(ManuallyEffect.NavigateBack)
     }
 
     companion object {
         private val sliderItems = listOf(
             SliderItem(R.drawable.ic_emotion_happy),
+            SliderItem(R.drawable.ic_emotion_good),
             SliderItem(R.drawable.ic_emotion_neutral),
             SliderItem(R.drawable.ic_emotion_sad),
             SliderItem(R.drawable.ic_emotion_angry)

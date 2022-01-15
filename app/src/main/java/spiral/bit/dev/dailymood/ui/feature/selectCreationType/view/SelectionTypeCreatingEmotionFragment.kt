@@ -10,7 +10,7 @@ import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.databinding.FragmentSelectionCreationMoodTypeBinding
 import spiral.bit.dev.dailymood.ui.base.BaseFragment
 import spiral.bit.dev.dailymood.ui.base.binding
-import spiral.bit.dev.dailymood.ui.base.observe
+import spiral.bit.dev.dailymood.ui.base.extensions.observe
 import spiral.bit.dev.dailymood.ui.feature.selectCreationType.models.mvi.SelectEffect
 import spiral.bit.dev.dailymood.ui.feature.selectCreationType.models.mvi.SelectState
 import spiral.bit.dev.dailymood.ui.feature.selectCreationType.models.selectionTypeDelegate

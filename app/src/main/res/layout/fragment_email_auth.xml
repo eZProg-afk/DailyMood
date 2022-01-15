@@ -5,7 +5,9 @@
     style="@style/DailyMoodDefaultBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feature.registration.email_auth.view.EmailAuthFragment">
+    tools:context=".ui.feature.registration.emailAuthenticate.view.EmailAuthFragment">
+
+    <include layout="@layout/view_main_toolbar" android:id="@+id/emailAuthenticateToolbar" />
 
     <ImageView
         android:id="@+id/registrationLabelImageView"
@@ -16,7 +18,7 @@
         android:src="@drawable/reg_label_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/emailAuthenticateToolbar" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/registrationEnterEmailTextInputLayout"
@@ -68,16 +70,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAuthenticate"
-        style="@style/DailyMoodLoginButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/bigMargin"
-        android:layout_marginTop="@dimen/mediumMargin"
-        android:paddingHorizontal="30dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
         android:text="@string/authorization_label"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textColor="@color/white"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="@id/registrationEnterPasswordTextInputLayout"
+        app:layout_constraintStart_toStartOf="@id/registrationEnterPasswordTextInputLayout"
         app:layout_constraintTop_toBottomOf="@id/registrationEnterPasswordTextInputLayout" />
 
     <TextView

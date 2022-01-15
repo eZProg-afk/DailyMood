@@ -19,7 +19,7 @@ import spiral.bit.dev.dailymood.ui.base.BaseFragment
 import spiral.bit.dev.dailymood.ui.base.binding
 import spiral.bit.dev.dailymood.ui.base.extensions.hasPermissions
 import spiral.bit.dev.dailymood.ui.base.extensions.safeLet
-import spiral.bit.dev.dailymood.ui.base.toast
+import spiral.bit.dev.dailymood.ui.base.extensions.toast
 import spiral.bit.dev.dailymood.ui.feature.creationMood.photoAddMood.models.mvi.PhotoEffect
 import spiral.bit.dev.dailymood.ui.feature.creationMood.photoAddMood.models.mvi.PhotoState
 import spiral.bit.dev.dailymood.ui.feature.creationMood.photoAddMood.models.photoTypesDelegate
@@ -71,7 +71,7 @@ class EmotionCreationByPhotoFragment :
     }
 
     private fun setUpToolbar() = binding {
-        photoToolbar.titleTextView.text = getString(R.string.creation_type)
+        photoToolbar.titleTextView.text = getString(R.string.create_emotion_label)
     }
 
     private fun setUpRecyclerView() = binding {

@@ -13,7 +13,7 @@ import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.di.FaceDetectorOptionsStatic
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
 import spiral.bit.dev.dailymood.ui.base.Logger
-import spiral.bit.dev.dailymood.ui.base.listenAwait
+import spiral.bit.dev.dailymood.ui.base.callbackConverters.listenAwait
 import spiral.bit.dev.dailymood.ui.feature.creationMood.photoAddMood.models.PhotoTypeItem
 import spiral.bit.dev.dailymood.ui.feature.creationMood.photoAddMood.models.mvi.PhotoEffect
 import spiral.bit.dev.dailymood.ui.feature.creationMood.photoAddMood.models.mvi.PhotoState
@@ -26,20 +26,7 @@ class PhotoViewModel @Inject constructor(
 
     override val container = container<PhotoState, PhotoEffect>(
         PhotoState(
-            photoTypes = listOf(
-                PhotoTypeItem(
-                    0, R.drawable.ic_camera, R.string.camera_type_title,
-                    R.string.camera_type_description
-                ),
-                PhotoTypeItem(
-                    1, R.drawable.ic_gallery, R.string.gallery_type_title,
-                    R.string.gallery_type_description
-                ),
-                PhotoTypeItem(
-                    2, R.drawable.ic_realtime, R.string.realtime_type_title,
-                    R.string.realtime_type_description
-                ),
-            ),
+            photoTypes = photoTypes,
             galleryImage = null,
             galleryImageUri = null,
             smileProbability = null
@@ -100,5 +87,22 @@ class PhotoViewModel @Inject constructor(
 
     fun navigateBack() = intent {
         postSideEffect(PhotoEffect.NavigateBack)
+    }
+
+    companion object {
+        private val photoTypes = listOf(
+            PhotoTypeItem(
+                0, R.drawable.ic_camera, R.string.camera_type_title,
+                R.string.camera_type_description
+            ),
+            PhotoTypeItem(
+                1, R.drawable.ic_gallery, R.string.gallery_type_title,
+                R.string.gallery_type_description
+            ),
+            PhotoTypeItem(
+                2, R.drawable.ic_realtime, R.string.realtime_type_title,
+                R.string.realtime_type_description
+            ),
+        )
     }
 }

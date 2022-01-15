@@ -6,7 +6,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs")
     id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+  //  id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -25,9 +25,12 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
+            debuggable true
+            shrinkResources false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -40,14 +43,27 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     sourceSets {
         main {
             assets {
                 srcDirs 'src/main/assets'
             }
+        }
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+
+        unitTests.all {
+            useJUnitPlatform()
         }
     }
 }
@@ -83,7 +99,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:${appCompatVersion}")
     implementation("com.google.android.material:material:${materialVersion}")
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
-    implementation("com.github.Egor-Blagochinnov:Validation:${textValidationVersion}")
     implementation("com.github.kizitonwose:CalendarView:${calendarVersion}")
     implementation("com.kirich1409.viewbindingpropertydelegate:viewbindingpropertydelegate:${viewBindingVersion}")
     implementation("com.github.unaisulhadi:emojiratingbar:${emojiRatingBarVersion}")
@@ -130,8 +145,42 @@ dependencies {
     implementation platform("com.google.firebase:firebase-bom:${firebaseBomVersion}")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-core")
+    //implementation("com.google.firebase:firebase-crashlytics")
 
     // FaceBook
-    implementation("com.facebook.android:facebook-android-sdk:${facebookVersion}")
+    implementation("com.facebook.android:facebook-login:${facebookVersion}")
+
+    //Google Authenticate
+    implementation("com.google.android.gms:play-services-auth:${googleAuthenticateVersion}")
+
+    // Unit Tests
+    testImplementation("junit:junit:$junitVersion")
+    testImplementation("org.mockito:mockito-core:$mockitoCoreVersion")
+    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+    testImplementation("androidx.arch.core:core-testing:$archCoreTesting")
+    testImplementation("org.robolectric:robolectric:$robolectricVersion")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion")
+    testImplementation("com.google.truth:truth:$truthVersion")
+
+    // Instrumented Unit Tests
+    androidTestImplementation("junit:junit:$junitVersion")
+//    androidTestImplementation("com.linkedin.dexmaker:dexmaker-mockito:$dexmakerMockitoVersion")
+//    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion")
+//    androidTestImplementation("androidx.arch.core:core-testing:$archCoreTesting")
+//    androidTestImplementation("com.google.truth:truth:$truthVersion")
+    androidTestImplementation("androidx.test.ext:junit:$junitExtVersion")
+//    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoCoreVersion")
+//    androidTestImplementation("org.mockito:mockito-core:$mockitoCoreVersion")
+//    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltTestingVersion")
+   // androidTestImplementation("androidx.test.espresso:espresso-contrib:$espressoCoreVersion")
+    androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
+
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltCompilerTestVersion")
+    debugImplementation("androidx.fragment:fragment-testing:$fragmentTestingVersion")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+
 }
+

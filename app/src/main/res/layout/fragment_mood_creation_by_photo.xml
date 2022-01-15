@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/photoToolbar"
-        layout="@layout/view_simple_toolbar" />
+        layout="@layout/view_main_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/addByPhotoTypesRecyclerView"

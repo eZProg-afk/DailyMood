@@ -1,27 +1,32 @@
 package spiral.bit.dev.dailymood.ui.common.view
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
-import spiral.bit.dev.dailymood.R
+import kotlinx.coroutines.delay
 import spiral.bit.dev.dailymood.databinding.FragmentLoadingDialogBinding
 
 class LoadingDialogFragment : DialogFragment() {
 
     private val binding: FragmentLoadingDialogBinding by viewBinding()
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(getString(R.string.loading_label))
-            .setView(binding.root)
-            .create()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return FragmentLoadingDialogBinding.inflate(inflater, container, false).root
+    }
 
-        dialog.show()
-        return dialog
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launchWhenResumed {
+            delay(LOADING_DELAY)
+            dismiss()
+        }
+    }
+
+    companion object {
+        private const val LOADING_DELAY = 2000L
     }
 }

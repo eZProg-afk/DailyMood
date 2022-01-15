@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import spiral.bit.dev.dailymood.ui.base.extensions.observe
 
-abstract class BaseFragment<STATE : StateMarker, SIDE_EFFECT : SideEffectMarker, BINDING :  ViewBinding>(
-    private val inflateBinding: (LayoutInflater, ViewGroup?, Boolean) -> BINDING,
+abstract class BaseFragment<STATE: Any, SIDE_EFFECT: Any, BINDING : ViewBinding>(
+    private val inflateBinding: (LayoutInflater, ViewGroup?, Boolean) -> BINDING
 ) : Fragment() {
 
     var binding: BINDING? = null
@@ -36,7 +37,6 @@ abstract class BaseFragment<STATE : StateMarker, SIDE_EFFECT : SideEffectMarker,
     protected abstract fun handleSideEffect(sideEffect: SIDE_EFFECT)
 }
 
-fun <STATE : StateMarker, SIDE_EFFECT : SideEffectMarker, BINDING : ViewBinding>
-        BaseFragment<STATE, SIDE_EFFECT, BINDING>.binding(block: BINDING.() -> Unit) {
+fun <STATE: Any, SIDE_EFFECT: Any, BINDING : ViewBinding> BaseFragment<STATE, SIDE_EFFECT, BINDING>.binding(block: BINDING.() -> Unit) {
     binding?.apply(block)
 }

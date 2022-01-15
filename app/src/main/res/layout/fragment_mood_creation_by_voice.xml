@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/voiceToolbar"
-        layout="@layout/view_simple_toolbar" />
+        layout="@layout/view_main_toolbar" />
 
     <ImageView
         android:id="@+id/questionImageView"

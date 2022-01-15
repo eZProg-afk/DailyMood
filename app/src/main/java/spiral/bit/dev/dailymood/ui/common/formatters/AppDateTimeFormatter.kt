@@ -27,8 +27,8 @@ class AppDateTimeFormatter {
     }
 
     companion object {
-        private const val FILE_NAME_FORMAT = "yy-MM-dd"
-        private const val FILE_EXTENSION = ".jpg"
-        private const val MONTH_FORMAT = "MMMM"
+        const val FILE_NAME_FORMAT = "yy-MM-dd"
+        const val FILE_EXTENSION = ".jpg"
+        const val MONTH_FORMAT = "MMMM"
     }
 }

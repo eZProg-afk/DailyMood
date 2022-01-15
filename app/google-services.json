@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "509392711416",
-    "project_id": "dailymood-7136b",
-    "storage_bucket": "dailymood-7136b.appspot.com"
+    "project_number": "742810802025",
+    "project_id": "dailymood-2ec40",
+    "storage_bucket": "dailymood-2ec40.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:509392711416:android:213ee244dabca36649550d",
+        "mobilesdk_app_id": "1:742810802025:android:f443003bc531ad6b310ff8",
         "android_client_info": {
           "package_name": "spiral.bit.dev.dailymood"
         }
       },
       "oauth_client": [
         {
-          "client_id": "509392711416-fmadrum2n1aj48fg1lhprtg0irvjud8f.apps.googleusercontent.com",
+          "client_id": "742810802025-ar3rl814n5rt7vb9aatuhchd7bc80q7u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "spiral.bit.dev.dailymood",
-            "certificate_hash": "c2aa37de8c4cebd5bed0470eb8135fe24ae5bb03"
+            "certificate_hash": "aa86b0ff1750d1979279ed0d94e93c50bca90cad"
           }
         },
         {
-          "client_id": "509392711416-48nmiib5sda6gahlmm9teet7nmh42nj8.apps.googleusercontent.com",
+          "client_id": "742810802025-bui3e579tgjhblsbe9eaej8nntterh1j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDyYJyVfJqaf0J7VNH2ix1DwqfyFgasD3o"
+          "current_key": "AIzaSyB8tvT1NfDMPhL7n7wLLBs7PavCVUgqhJM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "509392711416-48nmiib5sda6gahlmm9teet7nmh42nj8.apps.googleusercontent.com",
+              "client_id": "742810802025-bui3e579tgjhblsbe9eaej8nntterh1j.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

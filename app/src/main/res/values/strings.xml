@@ -93,7 +93,7 @@
     <string name="sad_feel_label">грустно</string>
     <string name="angry_feel_label">злым</string>
     <string name="select_tag_category_label">Выберите категорию тэга</string>
-    <string name="create_emotion_label">Создание эмоции</string>
+    <string name="create_emotion_label">Создание настроения</string>
     <string name="pro_sub_label">Pro-подписка</string>
     <string name="settings_label">Настройки</string>
     <string name="add_tags_label">Добавление тэгов</string>
@@ -251,6 +251,7 @@
     <string name="stored_analytics">История</string>
     <string name="empty_day_assets_path" translatable="false">animations/lottie_not_filled_day.json</string>
     <string name="analytics_assets_path" translatable="false">animations/lottie_analytics.json</string>
+    <string name="task_done_path" translatable="false">animations/done_task.json</string>
 
     <!-- Other ended -->
 
@@ -379,6 +380,12 @@
     <string name="created_by_survey_label">Создано пройдя опрос</string>
     <string name="summary_scores_format">Суммарное количество баллов: %d</string>
     <string name="creation_type">Добавить настроение</string>
+    <string name="note_fomat">Заметка: %s</string>
+    <string name="reason_format">Причина: %s</string>
+    <string name="select_your_mood_label">Выберите ваше настроение</string>
+    <string name="google_client_id">AIzaSyBJJBbtbCDm0aTd7Eq2F-kxdeQUvu38PX8</string>
+    <string name="period_format">За указанный период: %s</string>
+    <string name="created_date_format">Дата создания: %s</string>
 
     <!-- Survey answers ended -->
 

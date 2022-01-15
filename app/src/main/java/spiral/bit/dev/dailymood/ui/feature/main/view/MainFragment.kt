@@ -15,13 +15,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.snackbar.Snackbar
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.kizitonwose.calendarview.model.CalendarDay
+import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.model.InDateStyle
 import com.kizitonwose.calendarview.ui.DayBinder
@@ -42,8 +40,11 @@ import spiral.bit.dev.dailymood.ui.base.*
 import spiral.bit.dev.dailymood.ui.base.extensions.DrawableGravity
 import spiral.bit.dev.dailymood.ui.base.extensions.EditTextConfig
 import spiral.bit.dev.dailymood.ui.base.extensions.textChanges
+import spiral.bit.dev.dailymood.ui.base.extensions.toast
+import spiral.bit.dev.dailymood.ui.base.helperFunctions.daysOfWeekFromLocale
+import spiral.bit.dev.dailymood.ui.base.helperFunctions.getEndOfDay
+import spiral.bit.dev.dailymood.ui.base.helperFunctions.getStartOfDay
 import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
-import spiral.bit.dev.dailymood.ui.feature.main.models.*
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionEffect
 import spiral.bit.dev.dailymood.ui.feature.main.models.mvi.EmotionState
 import spiral.bit.dev.dailymood.ui.feature.main.models.ui.*
@@ -119,36 +120,7 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     }
 
     private fun setUpRecyclerView() = binding {
-        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                val position = viewHolder.bindingAdapterPosition
-                val item = moodAdapter.items[position]
-                if (item is EmptyDayItem) moodAdapter.notifyItemMoved(position, position)
-                return item !is EmptyDayItem
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val item = moodAdapter.items[position]
-                    if (item !is EmptyDayItem) {
-                        viewModel.emotionSwiped(item)
-                    }
-                }
-            }
-        })
-
-        daysRecyclerView.apply {
-            itemTouchHelper.attachToRecyclerView(this)
-            adapter = moodAdapter
-        }
+        daysRecyclerView.adapter = moodAdapter
     }
 
     private fun setUpNavigation() = binding {
@@ -180,50 +152,9 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
         val endMonth = currentMonth.plusMonths(ONE_YEAR)
 
         with(calendarView) {
-            calendarView.setup(currentMonth, endMonth, daysOfWeek.first())
-            calendarView.scrollToMonth(currentMonth)
-
-            calendarView.updateMonthConfiguration(
-                inDateStyle = InDateStyle.FIRST_MONTH,
-                maxRowCount = 1,
-                hasBoundaries = false
-            )
-
-            class DayViewContainer(view: View) : ViewContainer(view) {
-                lateinit var day: CalendarDay
-                val tvDay = ItemCalendarBinding.bind(view).tvDayCalendarItem
-                val tvDayName = ItemCalendarBinding.bind(view).tvDayNameCalendarItem
-                val background = ItemCalendarBinding.bind(view).clCalendarItem
-
-                init {
-                    view.setOnClickListener {
-                        viewModel.getAllEmotionsByDate(
-                            getStartOfDay(day.date),
-                            getEndOfDay(day.date)
-                        )
-                        if (day.owner == DayOwner.THIS_MONTH) {
-                            when (val currentSelection = selectedDate) {
-                                day.date -> {
-                                    selectedDate = null
-                                    calendarView.notifyDateChanged(currentSelection)
-                                }
-                                today -> {
-                                    selectedDate = day.date
-                                    calendarView.notifyDateChanged(day.date)
-                                    if (currentSelection != null)
-                                        calendarView.notifyDateChanged(currentSelection)
-                                }
-                                else -> {
-                                    selectedDate = day.date
-                                    calendarView.notifyDateChanged(day.date)
-                                    if (currentSelection != null)
-                                        calendarView.notifyDateChanged(currentSelection)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            setup(currentMonth, endMonth, daysOfWeek.first())
+            scrollToMonth(currentMonth)
+            updateMonthConfiguration(inDateStyle = InDateStyle.FIRST_MONTH, maxRowCount = 1, hasBoundaries = false)
 
             calendarView.dayBinder = object : DayBinder<DayViewContainer> {
                 override fun create(view: View) = DayViewContainer(view)
@@ -233,65 +164,96 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
                     val tvDayName = container.tvDayName
                     tvDay.text = day.date.dayOfMonth.toString()
                     tvDayName.text = day.date.dayOfWeek.name.substring(0, 2)
-                    if (day.owner == DayOwner.THIS_MONTH) {
-                        when (day.date) {
-                            selectedDate -> {
-                                container.background.backgroundTintList = ColorStateList.valueOf(
-                                    ContextCompat.getColor(
-                                        context,
-                                        R.color.purple
-                                    )
-                                )
-                                tvDay.setTextColor(Color.WHITE)
-                                tvDayName.setTextColor(Color.WHITE)
-                            }
-                            today -> {
-                                container.background.backgroundTintList = ColorStateList.valueOf(
-                                    ContextCompat.getColor(
-                                        context,
-                                        R.color.yellow
-                                    )
-                                )
-                                tvDay.setTextColor(Color.BLACK)
-                                tvDayName.setTextColor(Color.BLACK)
-                            }
-                            else -> {
-                                container.background.backgroundTintList = ColorStateList.valueOf(
-                                    ContextCompat.getColor(
-                                        context,
-                                        R.color.veryLightGrey
-                                    )
-                                )
-                                tvDay.setTextColor(Color.DKGRAY)
-                                tvDayName.setTextColor(Color.DKGRAY)
-                            }
-                        }
-                    }
+                    bindDayView(day, container)
                 }
             }
 
             calendarView.monthScrollListener = { month ->
-                val firstDate = month.weekDays.first().first().date
-                val lastDate = month.weekDays.last().last().date
-                if (firstDate.yearMonth == lastDate.yearMonth) {
-                    dateTextView.text = firstDate.yearMonth.year.toString()
-                    monthTextView.text = appDateTimeFormatter.formatCalendar(firstDate)
-                } else {
-                    monthTextView.text = context?.getString(
-                        R.string.date_string_pattern,
-                        appDateTimeFormatter.formatCalendar(firstDate),
-                        appDateTimeFormatter.formatCalendar(lastDate)
-                    )
-                    dateTextView.text = if (firstDate.year == lastDate.year) {
-                        firstDate.yearMonth.year.toString()
-                    } else {
-                        context?.getString(
-                            R.string.date_string_pattern,
-                            firstDate.yearMonth.year.toString(),
-                            lastDate.yearMonth.year.toString()
-                        )
-                    }
+               onMonthScroll(month)
+            }
+        }
+    }
+
+    private fun onDayClicked(day: CalendarDay) = binding {
+        if (day.owner == DayOwner.THIS_MONTH) {
+            when (val currentSelection = selectedDate) {
+                day.date -> {
+                    selectedDate = null
+                    calendarView.notifyDateChanged(currentSelection)
                 }
+                today -> {
+                    selectedDate = day.date
+                    calendarView.notifyDateChanged(day.date)
+                    if (currentSelection != null)
+                        calendarView.notifyDateChanged(currentSelection)
+                }
+                else -> {
+                    selectedDate = day.date
+                    calendarView.notifyDateChanged(day.date)
+                    if (currentSelection != null)
+                        calendarView.notifyDateChanged(currentSelection)
+                }
+            }
+        }
+    }
+
+    private fun bindDayView(day: CalendarDay, container: DayViewContainer) = with(container) {
+        if (day.owner == DayOwner.THIS_MONTH) {
+            when (day.date) {
+                selectedDate -> {
+                    container.background.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.purple
+                        )
+                    )
+                    tvDay.setTextColor(Color.WHITE)
+                    tvDayName.setTextColor(Color.WHITE)
+                }
+                today -> {
+                    container.background.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.yellow
+                        )
+                    )
+                    tvDay.setTextColor(Color.BLACK)
+                    tvDayName.setTextColor(Color.BLACK)
+                }
+                else -> {
+                    container.background.backgroundTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.veryLightGrey
+                        )
+                    )
+                    tvDay.setTextColor(Color.DKGRAY)
+                    tvDayName.setTextColor(Color.DKGRAY)
+                }
+            }
+        }
+    }
+
+    private fun onMonthScroll(month: CalendarMonth) = binding {
+        val firstDate = month.weekDays.first().first().date
+        val lastDate = month.weekDays.last().last().date
+        if (firstDate.yearMonth == lastDate.yearMonth) {
+            dateTextView.text = firstDate.yearMonth.year.toString()
+            monthTextView.text = appDateTimeFormatter.formatCalendar(firstDate)
+        } else {
+            monthTextView.text = context?.getString(
+                R.string.date_string_pattern,
+                appDateTimeFormatter.formatCalendar(firstDate),
+                appDateTimeFormatter.formatCalendar(lastDate)
+            )
+            dateTextView.text = if (firstDate.year == lastDate.year) {
+                firstDate.yearMonth.year.toString()
+            } else {
+                context?.getString(
+                    R.string.date_string_pattern,
+                    firstDate.yearMonth.year.toString(),
+                    lastDate.yearMonth.year.toString()
+                )
             }
         }
     }
@@ -303,16 +265,11 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     override fun onResume() = binding {
         super.onResume()
         calendarView.scrollToDate(today)
+        viewModel.getAllEmotionsByDate(getStartOfDay(today), getEndOfDay(today))
     }
 
     override fun handleSideEffect(sideEffect: EmotionEffect) = binding {
         when (sideEffect) {
-            is EmotionEffect.ShowSnackbar ->
-                addEmotionManuallyFab.snack(sideEffect.msg, Snackbar.LENGTH_LONG) {
-                    action(R.string.cancel_label) {
-                        viewModel.onUndoDelete(sideEffect.moodEntity)
-                    }
-                }
             is EmotionEffect.NavigateToDetail -> {
                 MainFragmentDirections.toDetail(sideEffect.emotionId)
                     .apply {
@@ -333,11 +290,36 @@ class MainFragment : BaseFragment<EmotionState, EmotionEffect, FragmentMainBindi
     }
 
     override fun renderState(state: EmotionState) {
-        moodAdapter.items = state.moodEntities
+        if (selectedDate != today) {
+            moodAdapter.items = emptyDayItems
+        } else {
+            moodAdapter.items = state.moodEntities
+        }
+    }
+
+    inner class DayViewContainer(view: View) : ViewContainer(view) {
+        lateinit var day: CalendarDay
+        val tvDay = ItemCalendarBinding.bind(view).tvDayCalendarItem
+        val tvDayName = ItemCalendarBinding.bind(view).tvDayNameCalendarItem
+        val background = ItemCalendarBinding.bind(view).clCalendarItem
+
+        init {
+            view.setOnClickListener {
+                viewModel.getAllEmotionsByDate(getStartOfDay(day.date), getEndOfDay(day.date))
+                onDayClicked(day)
+            }
+        }
     }
 
     companion object {
         private const val ONE_YEAR = 12L
         private const val DEBOUNCE_TIMEOUT = 400L
+        private val emptyDayItems = listOf(
+            EmptyDayItem(
+                R.string.empty_day_assets_path,
+                R.string.empty_day_title,
+                R.string.empty_day_hint
+            )
+        )
     }
 }

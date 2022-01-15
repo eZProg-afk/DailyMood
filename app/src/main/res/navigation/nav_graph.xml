@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.registration.view.RegistrationFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.registration.registrationTypes.view.RegistrationTypeFragment"
         android:label="@string/registration_label"
         tools:layout="@layout/fragment_registration">
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/emailAuthFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.registration.email_auth.view.EmailAuthFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.registration.emailAuthenticate.view.EmailAuthFragment"
         android:label="@string/email_auth_label"
         tools:layout="@layout/fragment_email_auth">
         <action
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/emailRegFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.registration.email_reg.view.EmailRegFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.registration.emailRegistration.view.EmailRegFragment"
         android:label="@string/email_reg_label"
         tools:layout="@layout/fragment_email_reg">
         <action
@@ -123,6 +123,9 @@
         <action
             android:id="@+id/toSurveyResultMoodFragment"
             app:destination="@id/surveyResultMoodFragment" />
+        <action
+            android:id="@+id/toMain"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/voiceAddEmotionFragment"
@@ -186,9 +189,9 @@
     </fragment>
     <fragment
         android:id="@+id/analyticsFragment"
-        android:name="spiral.bit.dev.dailymood.ui.feature.analytics.view.AnalyticsFragment"
+        android:name="spiral.bit.dev.dailymood.ui.feature.analytics.analyticsContainer.view.AnalyticsFragment"
         android:label="fragment_analytics"
-        tools:layout="@layout/fragment_analytics" >
+        tools:layout="@layout/fragment_analytics">
         <action
             android:id="@+id/toMain"
             app:destination="@id/mainFragment" />

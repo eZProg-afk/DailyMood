@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.feature.analytics.view.AnalyticsFragment">
+    tools:context=".ui.feature.analytics.analyticsContainer.view.AnalyticsFragment">
 
-    <include layout="@layout/view_simple_toolbar" android:id="@+id/analyticsToolbar" />
+    <include layout="@layout/view_main_toolbar" android:id="@+id/analyticsToolbar" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/analyticsTabLayout"

@@ -7,9 +7,9 @@ import spiral.bit.dev.dailymood.ui.common.adapter.mappers.AdapterTypeMapper
 import spiral.bit.dev.dailymood.ui.common.adapter.models.ListItem
 import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
 import spiral.bit.dev.dailymood.ui.common.resolvers.AnalyticsResolver
-import spiral.bit.dev.dailymood.ui.feature.analytics.models.AverageAnalyticsItem
-import spiral.bit.dev.dailymood.ui.feature.analytics.models.AnalyticsSortOrder
-import spiral.bit.dev.dailymood.ui.feature.analytics.models.SectionItem
+import spiral.bit.dev.dailymood.ui.feature.analytics.analyticsContainer.models.AverageAnalyticsItem
+import spiral.bit.dev.dailymood.ui.feature.analytics.analyticsContainer.models.AnalyticsSortOrder
+import spiral.bit.dev.dailymood.ui.feature.analytics.analyticsContainer.models.SectionItem
 import spiral.bit.dev.dailymood.ui.feature.main.models.MoodType
 import spiral.bit.dev.dailymood.ui.feature.main.models.ui.EmptyDayItem
 import spiral.bit.dev.dailymood.ui.feature.main.models.ui.ManuallyMoodItem

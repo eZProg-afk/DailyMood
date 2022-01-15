@@ -8,7 +8,7 @@ import spiral.bit.dev.dailymood.R
 import spiral.bit.dev.dailymood.databinding.FragmentMoodCreationBySurveyBinding
 import spiral.bit.dev.dailymood.ui.base.BaseFragment
 import spiral.bit.dev.dailymood.ui.base.binding
-import spiral.bit.dev.dailymood.ui.base.toast
+import spiral.bit.dev.dailymood.ui.base.extensions.toast
 import spiral.bit.dev.dailymood.ui.feature.creationMood.surveyAddMood.models.mvi.SurveyEffect
 import spiral.bit.dev.dailymood.ui.feature.creationMood.surveyAddMood.models.mvi.SurveyState
 
@@ -28,10 +28,15 @@ class EmotionCreationBySurveyFragment :
 
     private fun setUpViews() = binding {
         setUpToolbar()
+        setUpProgressBar()
+    }
+
+    private fun setUpProgressBar() = binding {
+        questionProgressBar.max = 92
     }
 
     private fun setUpToolbar() = binding {
-        surveyToolbar.titleTextView.text = getString(R.string.survey_label)
+        surveyToolbar.titleTextView.text = getString(R.string.create_emotion_label)
     }
 
     private fun setUpClicks() = binding {
@@ -51,7 +56,7 @@ class EmotionCreationBySurveyFragment :
         }
 
         interruptSurveyButton.setOnClickListener {
-            //TODO INTERRUPT SURVEY BUTTON
+            viewModel.interruptSurvey()
         }
 
         previousQuestionButton.setOnClickListener {
@@ -82,6 +87,11 @@ class EmotionCreationBySurveyFragment :
             is SurveyEffect.Toast -> {
                 root.toast(sideEffect.msg)
             }
+            is SurveyEffect.NavigateToMain -> {
+                EmotionCreationBySurveyFragmentDirections.toMain().apply {
+                    findNavController().navigate(this)
+                }
+            }
         }
     }
 
@@ -96,14 +106,11 @@ class EmotionCreationBySurveyFragment :
             answer3RadioButton.text = state.answers[2]
             answer4RadioButton.text = state.answers[3]
             answer5RadioButton.text = state.answers[4]
-            questionProgressBar.progress = state.questionCounter * PROGRESS_FORMULA
+            questionProgressBar.progress += 4
         }
     }
 
     companion object {
         private const val NOT_CLICKED = -1
-        private const val MAX_PROGRESS = 100
-        private const val COUNT_OF_QUESTIONS = 23
-        private const val PROGRESS_FORMULA = MAX_PROGRESS / COUNT_OF_QUESTIONS + 1
     }
 }

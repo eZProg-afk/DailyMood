@@ -1,6 +1,7 @@
 package spiral.bit.dev.dailymood.di
 
 import android.content.Context
+import com.facebook.CallbackManager
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import dagger.Module
@@ -13,9 +14,9 @@ import spiral.bit.dev.dailymood.ui.common.adapter.mappers.AdapterTypeMapper
 import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
 import spiral.bit.dev.dailymood.ui.common.mappers.MoodTypeMapper
 import spiral.bit.dev.dailymood.ui.common.resolvers.AnalyticsResolver
-import spiral.bit.dev.dailymood.ui.feature.analytics.providers.AnalyticsProvider
 import spiral.bit.dev.dailymood.ui.common.resolvers.FaceMoodResolver
 import spiral.bit.dev.dailymood.ui.common.resolvers.SurveyResolver
+import spiral.bit.dev.dailymood.ui.feature.analytics.providers.AnalyticsProvider
 import spiral.bit.dev.dailymood.ui.feature.creationMood.surveyAddMood.providers.AnswerProvider
 import spiral.bit.dev.dailymood.ui.feature.creationMood.surveyAddMood.providers.QuestionProvider
 import spiral.bit.dev.dailymood.ui.feature.creationMood.surveyAddMood.providers.ScoreProvider
@@ -97,4 +98,8 @@ object ViewModelModule {
     @ViewModelScoped
     @Provides
     fun provideAdapterTypeMapper() = AdapterTypeMapper()
+
+    @ViewModelScoped
+    @Provides
+    fun provideCallbackManager(): CallbackManager = CallbackManager.Factory.create()
 }

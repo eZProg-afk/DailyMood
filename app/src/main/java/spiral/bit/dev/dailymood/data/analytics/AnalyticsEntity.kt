@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import spiral.bit.dev.dailymood.data.mood.MoodEntity
-import spiral.bit.dev.dailymood.ui.feature.analytics.models.AnalyticsSortOrder
+import spiral.bit.dev.dailymood.ui.feature.analytics.analyticsContainer.models.AnalyticsSortOrder
 
 @Entity(tableName = "analytics")
 data class AnalyticsEntity(

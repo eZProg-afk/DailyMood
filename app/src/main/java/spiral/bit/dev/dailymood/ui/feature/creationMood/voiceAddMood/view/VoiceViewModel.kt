@@ -143,6 +143,10 @@ class VoiceViewModel @SuppressLint("StaticFieldLeak") //this is application cont
         postSideEffect(VoiceEffect.NavigateToMain)
     }
 
+    fun navigateBack() = intent {
+        postSideEffect(VoiceEffect.NavigateBack)
+    }
+
     companion object {
         private const val QUESTION_SUMMARY_COUNT = 3
         private const val QUESTION_ARRAY_SIZE = 60

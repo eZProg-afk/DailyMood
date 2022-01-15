@@ -4,9 +4,9 @@ import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import spiral.bit.dev.dailymood.ui.base.updateUserEmail
-import spiral.bit.dev.dailymood.ui.base.updateUserNameAndPhoto
-import spiral.bit.dev.dailymood.ui.base.updateUserPassword
+import spiral.bit.dev.dailymood.ui.base.callbackConverters.updateUserEmail
+import spiral.bit.dev.dailymood.ui.base.callbackConverters.updateUserNameAndPhoto
+import spiral.bit.dev.dailymood.ui.base.callbackConverters.updateUserPassword
 import spiral.bit.dev.dailymood.ui.feature.user.models.User
 import javax.inject.Inject
 

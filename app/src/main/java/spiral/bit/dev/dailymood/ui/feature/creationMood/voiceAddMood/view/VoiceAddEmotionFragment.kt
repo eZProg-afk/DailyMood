@@ -13,7 +13,7 @@ import spiral.bit.dev.dailymood.databinding.FragmentMoodCreationByVoiceBinding
 import spiral.bit.dev.dailymood.ui.base.BaseFragment
 import spiral.bit.dev.dailymood.ui.base.binding
 import spiral.bit.dev.dailymood.ui.base.extensions.hasPermissions
-import spiral.bit.dev.dailymood.ui.base.toast
+import spiral.bit.dev.dailymood.ui.base.extensions.toast
 import spiral.bit.dev.dailymood.ui.feature.creationMood.voiceAddMood.models.mvi.VoiceEffect
 import spiral.bit.dev.dailymood.ui.feature.creationMood.voiceAddMood.models.mvi.VoiceState
 
@@ -33,7 +33,12 @@ class VoiceAddEmotionFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpClicks()
+        setUpViews()
         initApi()
+    }
+
+    private fun setUpViews() = binding {
+        voiceToolbar.titleTextView.text = getString(R.string.create_emotion_label)
     }
 
     private fun initApi() = viewModel.initVokaturiApi()
@@ -43,6 +48,10 @@ class VoiceAddEmotionFragment :
             if (checkPermissions()) {
                 viewModel.onRecordClick()
             }
+        }
+
+        voiceToolbar.iconBackImageView.setOnClickListener {
+            viewModel.navigateBack()
         }
     }
 
@@ -83,6 +92,9 @@ class VoiceAddEmotionFragment :
             }
             VoiceEffect.TooQuiet -> {
                 root.toast(R.string.too_quiet_toast)
+            }
+            VoiceEffect.NavigateBack -> {
+                findNavController().popBackStack()
             }
         }
     }

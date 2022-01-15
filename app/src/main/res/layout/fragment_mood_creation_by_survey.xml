@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/surveyToolbar"
-        layout="@layout/view_simple_toolbar" />
+        layout="@layout/view_main_toolbar" />
 
     <ProgressBar
         android:id="@+id/questionProgressBar"

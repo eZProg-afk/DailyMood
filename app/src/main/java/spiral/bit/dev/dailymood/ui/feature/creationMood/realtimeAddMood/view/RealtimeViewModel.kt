@@ -20,9 +20,9 @@ import spiral.bit.dev.dailymood.data.mood.MoodRepository
 import spiral.bit.dev.dailymood.di.FaceDetectorOptionsRealtime
 import spiral.bit.dev.dailymood.ui.base.BaseViewModel
 import spiral.bit.dev.dailymood.ui.base.Logger
+import spiral.bit.dev.dailymood.ui.base.callbackConverters.listenAwait
 import spiral.bit.dev.dailymood.ui.base.extensions.safeLet
 import spiral.bit.dev.dailymood.ui.base.extensions.takePictureAwait
-import spiral.bit.dev.dailymood.ui.base.listenAwait
 import spiral.bit.dev.dailymood.ui.common.formatters.AppDateTimeFormatter
 import spiral.bit.dev.dailymood.ui.common.resolvers.FaceMoodResolver
 import spiral.bit.dev.dailymood.ui.feature.creationMood.realtimeAddMood.models.mvi.RealtimeEffect
